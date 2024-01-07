@@ -1,4 +1,5 @@
 {
+  "Id": "7106c1ab-d17c-4ceb-98ae-b8bf53696a78",
   "GameObjects": [
     {
       "Id": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
@@ -21,14 +22,14 @@
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
           "ZFar": 20000,
-          "ZNear": 2
+          "ZNear": 1
         },
         {
           "__type": "Tonemapping",
           "__enabled": true,
           "ExposureCompensation": 0,
-          "MaximumExposure": 2,
-          "MinimumExposure": 1,
+          "MaximumExposure": 3,
+          "MinimumExposure": 0,
           "Rate": 1
         },
         {
@@ -48,17 +49,40 @@
           },
           "BloomCurve": [
             {
-              "y": 0.5
+              "in": -1.6799997,
+              "out": 1.6799997
             },
             {
               "x": 1,
-              "y": 1
+              "y": 1,
+              "in": -0.57142836,
+              "out": 0.57142836
             }
           ],
           "Mode": "Additive",
-          "Strength": 1,
-          "Threshold": 0.5,
-          "ThresholdWidth": 0
+          "Strength": 0.2,
+          "Threshold": 0.2,
+          "ThresholdWidth": 0.2
+        },
+        {
+          "__type": "Sharpen",
+          "__enabled": true,
+          "Scale": 0.2
+        },
+        {
+          "__type": "FilmGrain",
+          "__enabled": true,
+          "Intensity": 0.02,
+          "Response": 2
+        },
+        {
+          "__type": "Vignette",
+          "__enabled": true,
+          "Center": "0.5,0.5",
+          "Color": "0,0,0,1",
+          "Intensity": 0.51,
+          "Roundness": 0,
+          "Smoothness": 1
         }
       ]
     },
