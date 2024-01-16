@@ -8,6 +8,7 @@
       "Enabled": true,
       "Components": [
         {
+          "__version": 0,
           "__type": "CameraComponent",
           "__enabled": true,
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
@@ -25,6 +26,7 @@
           "ZNear": 1
         },
         {
+          "__version": 0,
           "__type": "Tonemapping",
           "__enabled": true,
           "ExposureCompensation": 0,
@@ -33,6 +35,7 @@
           "Rate": 1
         },
         {
+          "__version": 0,
           "__type": "Bloom",
           "__enabled": true,
           "BloomColor": {
@@ -65,17 +68,20 @@
           "ThresholdWidth": 0.2
         },
         {
+          "__version": 0,
           "__type": "Sharpen",
           "__enabled": true,
           "Scale": 0.2
         },
         {
+          "__version": 0,
           "__type": "FilmGrain",
           "__enabled": true,
           "Intensity": 0.02,
           "Response": 2
         },
         {
+          "__version": 0,
           "__type": "Vignette",
           "__enabled": true,
           "Center": "0.5,0.5",
@@ -93,6 +99,7 @@
       "Enabled": true,
       "Components": [
         {
+          "__version": 0,
           "__type": "MapInstance",
           "__enabled": true,
           "MapName": "facepunch.datacore",
@@ -101,6 +108,7 @@
           "UseMapFromLaunch": true
         },
         {
+          "__version": 0,
           "__type": "MapPlayerSpawner",
           "__enabled": true
         }
@@ -108,84 +116,18 @@
       "Children": []
     },
     {
-      "Id": "ecab56e9-aed9-40fd-9963-373b524d06a0",
-      "Name": "Player",
-      "Position": "-1102.415,68.83928,942.4136",
+      "Id": "16a25c20-b8c5-436f-9cbd-27cebb20402c",
+      "Name": "Network System",
+      "Position": "-1089.84,230.1391,983.1465",
       "Enabled": true,
       "Components": [
         {
-          "__type": "CharacterController",
+          "__version": 0,
+          "__type": "NetworkHelper",
           "__enabled": true,
-          "Acceleration": 32,
-          "GroundAngle": 45,
-          "Height": 64,
-          "IgnoreLayers": "trigger",
-          "Radius": 16,
-          "StepHeight": 18
-        },
-        {
-          "__type": "PlayerController",
-          "__enabled": true,
-          "AnimationHelper": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
-          "CharacterController": "ecab56e9-aed9-40fd-9963-373b524d06a0",
-          "CrouchMoveSpeed": 64,
-          "RunMoveSpeed": 190,
-          "SprintMoveSpeed": 320,
-          "WalkMoveSpeed": 190
-        }
-      ],
-      "Children": [
-        {
-          "Id": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
-          "Name": "Player Body",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "__enabled": true,
-              "BodyGroups": 341,
-              "BoneMergeTarget": null,
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/citizen/citizen.vmdl",
-              "RenderType": "ShadowsOnly",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "CitizenAnimationHelper",
-              "__enabled": true,
-              "BodyWeight": 1,
-              "EyeSource": null,
-              "EyesWeight": 1,
-              "HeadWeight": 1,
-              "Height": 1,
-              "IkLeftFoot": null,
-              "IkLeftHand": null,
-              "IkRightFoot": null,
-              "IkRightHand": null,
-              "LookAt": null,
-              "LookAtEnabled": false,
-              "Target": "230cde41-6498-4e6c-8777-28f4a8ea7ec3"
-            }
-          ]
-        },
-        {
-          "Id": "4e1e269f-d342-49a8-ad35-b355dc792fb2",
-          "Name": "Physics Pusher",
-          "Position": "0,0,22.68671",
-          "Components": [
-            {
-              "__type": "BoxCollider",
-              "__enabled": true,
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "36,36,40",
-              "Static": false,
-              "Surface": null
-            }
-          ]
+          "PlayerPrefab": "player.prefab",
+          "SpawnPoints": [],
+          "StartServer": true
         }
       ]
     }

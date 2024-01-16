@@ -16,21 +16,25 @@ public sealed class PlayerController : Component
 
 	[Property] public CitizenAnimationHelper AnimationHelper { get; set; }
 
-	public bool Crouching;
+	[Sync]
+	public bool Crouching { get; set; }
 
-	public Angles EyeAngles;
-	public Vector3 WishVelocity;
+	[Sync]
+	public Angles EyeAngles { get; set; }
+
+	[Sync]
+	public Vector3 WishVelocity { get; set; }
+
 	public bool WishCrouch;
 	public float EyeHeight = 64;
 
 	protected override void OnUpdate()
 	{
-		if ( IsProxy )
-			return;
-
-		MouseInput();
-
-		Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
+		if ( !IsProxy )
+		{
+			MouseInput();
+			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
+		}
 
 		UpdateAnimation();
 	}
@@ -46,9 +50,11 @@ public sealed class PlayerController : Component
 
 	private void MouseInput()
 	{
-		EyeAngles += Input.AnalogLook;
-		EyeAngles.pitch = EyeAngles.pitch.Clamp( -90, 90 );
-		EyeAngles.roll = 0.0f;
+		var e = EyeAngles;
+		e += Input.AnalogLook;
+		e.pitch = e.pitch.Clamp( -90, 90 );
+		e.roll = 0.0f;
+		EyeAngles = e;
 	}
 
 	float CurrentMoveSpeed
@@ -95,7 +101,7 @@ public sealed class PlayerController : Component
 		if ( !WishVelocity.IsNearlyZero() )
 		{
 			WishVelocity = new Angles( 0, EyeAngles.yaw, 0 ).ToRotation() * WishVelocity;
-			WishVelocity.z = 0;
+			WishVelocity = WishVelocity.WithZ( 0 );
 			WishVelocity = WishVelocity.ClampLength( 1 );
 			WishVelocity *= CurrentMoveSpeed;
 
@@ -212,6 +218,11 @@ public sealed class PlayerController : Component
 
 	protected override void OnPreRender()
 	{
+		UpdateBodyVisibility();
+
+		if ( IsProxy )
+			return;
+
 		UpdateCamera();
 	}
 
@@ -225,7 +236,18 @@ public sealed class PlayerController : Component
 		AnimationHelper.DuckLevel = Crouching ? 1.0f : 0.0f;
 
 		var lookDir = EyeAngles.ToRotation().Forward * 1024;
-		AnimationHelper.WithLook( lookDir );
+		AnimationHelper.WithLook( lookDir, 1, 0.5f, 0.25f );
+	}
+
+	private void UpdateBodyVisibility()
+	{
+		if ( AnimationHelper is null )
+			return;
+
+		var renderMode = ModelRenderer.ShadowRenderType.On;
+		if ( !IsProxy ) renderMode = ModelRenderer.ShadowRenderType.ShadowsOnly;
+
+		AnimationHelper.Target.RenderType = renderMode;
 	}
 
 }

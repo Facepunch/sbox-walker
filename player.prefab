@@ -1,0 +1,112 @@
+{
+  "RootObject": {
+    "Id": "ecab56e9-aed9-40fd-9963-373b524d06a0",
+    "Name": "player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__version": 0,
+        "__type": "CharacterController",
+        "__enabled": true,
+        "Acceleration": 32,
+        "GroundAngle": 45,
+        "Height": 64,
+        "IgnoreLayers": "trigger",
+        "Radius": 16,
+        "StepHeight": 18
+      },
+      {
+        "__version": 0,
+        "__type": "PlayerController",
+        "__enabled": true,
+        "AnimationHelper": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
+        "CharacterController": "ecab56e9-aed9-40fd-9963-373b524d06a0",
+        "CrouchMoveSpeed": 64,
+        "RunMoveSpeed": 190,
+        "SprintMoveSpeed": 320,
+        "WalkMoveSpeed": 190
+      }
+    ],
+    "Children": [
+      {
+        "Id": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
+        "Name": "Player Body",
+        "Enabled": true,
+        "Components": [
+          {
+            "__version": 0,
+            "__type": "SkinnedModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 341,
+            "BoneMergeTarget": null,
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/citizen/citizen.vmdl",
+            "RenderType": "ShadowsOnly",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__version": 0,
+            "__type": "CitizenAnimationHelper",
+            "__enabled": true,
+            "BodyWeight": 1,
+            "EyeSource": null,
+            "EyesWeight": 1,
+            "HeadWeight": 1,
+            "Height": 1,
+            "IkLeftFoot": null,
+            "IkLeftHand": null,
+            "IkRightFoot": null,
+            "IkRightHand": null,
+            "LookAt": null,
+            "LookAtEnabled": false,
+            "Target": "230cde41-6498-4e6c-8777-28f4a8ea7ec3"
+          }
+        ]
+      },
+      {
+        "Id": "4e1e269f-d342-49a8-ad35-b355dc792fb2",
+        "Name": "Physics Pusher",
+        "Position": "0,0,22.68671",
+        "Components": [
+          {
+            "__version": 0,
+            "__type": "BoxCollider",
+            "__enabled": true,
+            "Center": "0,0,0",
+            "IsTrigger": false,
+            "Scale": "36,36,40",
+            "Static": false,
+            "Surface": null
+          }
+        ]
+      },
+      {
+        "Id": "f253b0ee-70b0-49b6-8fc9-25549bab8645",
+        "Name": "Voice",
+        "Position": "42.0599,39.05991,-23.23907",
+        "Enabled": true,
+        "Components": [
+          {
+            "__version": 0,
+            "__type": "Voice",
+            "__enabled": true,
+            "Loopback": false,
+            "Mode": "PushToTalk",
+            "MorphFadeSpeed": 50,
+            "MorphScale": 2,
+            "PushToTalkInput": "voice",
+            "Renderer": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
+            "Volume": 1,
+            "WorldspacePlayback": true
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
