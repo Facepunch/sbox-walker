@@ -62,6 +62,12 @@
             "LookAt": null,
             "LookAtEnabled": false,
             "Target": "230cde41-6498-4e6c-8777-28f4a8ea7ec3"
+          },
+          {
+            "__version": 0,
+            "__type": "PlayerDresser",
+            "__enabled": true,
+            "BodyRenderer": "230cde41-6498-4e6c-8777-28f4a8ea7ec3"
           }
         ]
       },

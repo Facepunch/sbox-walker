@@ -6,9 +6,7 @@ using System.Linq;
 [Title( "Walker - Player Controller" )]
 public sealed class PlayerController : Component
 {
-	[Property]
-	public CharacterController CharacterController { get; set; }
-
+	[Property] public CharacterController CharacterController { get; set; }
 	[Property] public float CrouchMoveSpeed { get; set; } = 64.0f;
 	[Property] public float WalkMoveSpeed { get; set; } = 190.0f;
 	[Property] public float RunMoveSpeed { get; set; } = 190.0f;
@@ -248,6 +246,14 @@ public sealed class PlayerController : Component
 		if ( !IsProxy ) renderMode = ModelRenderer.ShadowRenderType.ShadowsOnly;
 
 		AnimationHelper.Target.RenderType = renderMode;
+
+		foreach ( var clothing in AnimationHelper.Target.Components.GetAll<ModelRenderer>( FindMode.InChildren ) )
+		{
+			if ( !clothing.Tags.Has( "clothing" ) )
+				continue;
+
+			clothing.RenderType = renderMode;
+		}
 	}
 
 }
