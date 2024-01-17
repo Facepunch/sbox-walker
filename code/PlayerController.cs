@@ -1,6 +1,4 @@
-using Sandbox;
 using Sandbox.Citizen;
-using System.Linq;
 
 [Group( "Walker" )]
 [Title( "Walker - Player Controller" )]
@@ -14,14 +12,9 @@ public sealed class PlayerController : Component
 
 	[Property] public CitizenAnimationHelper AnimationHelper { get; set; }
 
-	[Sync]
-	public bool Crouching { get; set; }
-
-	[Sync]
-	public Angles EyeAngles { get; set; }
-
-	[Sync]
-	public Vector3 WishVelocity { get; set; }
+	[Sync] public bool Crouching { get; set; }
+	[Sync] public Angles EyeAngles { get; set; }
+	[Sync] public Vector3 WishVelocity { get; set; }
 
 	public bool WishCrouch;
 	public float EyeHeight = 64;
@@ -120,7 +113,7 @@ public sealed class PlayerController : Component
 		{
 			cc.Velocity += halfGravity;
 			cc.Accelerate( WishVelocity );
-			
+
 		}
 
 		cc.Move();
@@ -195,7 +188,7 @@ public sealed class PlayerController : Component
 
 	private void UpdateCamera()
 	{
-		var camera = Scene.GetAllComponents<CameraComponent>().Where(x => x.IsMainCamera ).FirstOrDefault();
+		var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
 		if ( camera is null ) return;
 
 		var targetEyeHeight = Crouching ? 28 : 64;
@@ -228,10 +221,14 @@ public sealed class PlayerController : Component
 	{
 		if ( AnimationHelper is null ) return;
 
+		var wv = WishVelocity.Length;
+
 		AnimationHelper.WithWishVelocity( WishVelocity );
 		AnimationHelper.WithVelocity( CharacterController.Velocity );
 		AnimationHelper.IsGrounded = CharacterController.IsOnGround;
 		AnimationHelper.DuckLevel = Crouching ? 1.0f : 0.0f;
+
+		AnimationHelper.MoveStyle = wv < 160f ? CitizenAnimationHelper.MoveStyles.Walk : CitizenAnimationHelper.MoveStyles.Run;
 
 		var lookDir = EyeAngles.ToRotation().Forward * 1024;
 		AnimationHelper.WithLook( lookDir, 1, 0.5f, 0.25f );

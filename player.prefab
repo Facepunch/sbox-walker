@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "ecab56e9-aed9-40fd-9963-373b524d06a0",
+    "Id": "90754f26-804e-4f64-91f0-753646515fd7",
     "Name": "player",
     "Enabled": true,
     "Components": [
@@ -19,17 +19,17 @@
         "__version": 0,
         "__type": "PlayerController",
         "__enabled": true,
-        "AnimationHelper": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
-        "CharacterController": "ecab56e9-aed9-40fd-9963-373b524d06a0",
+        "AnimationHelper": "84eac77c-7533-4278-bce4-db040bb75022",
+        "CharacterController": "90754f26-804e-4f64-91f0-753646515fd7",
         "CrouchMoveSpeed": 64,
         "RunMoveSpeed": 190,
         "SprintMoveSpeed": 320,
-        "WalkMoveSpeed": 190
+        "WalkMoveSpeed": 110
       }
     ],
     "Children": [
       {
-        "Id": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
+        "Id": "84eac77c-7533-4278-bce4-db040bb75022",
         "Name": "Player Body",
         "Enabled": true,
         "Components": [
@@ -61,18 +61,18 @@
             "IkRightHand": null,
             "LookAt": null,
             "LookAtEnabled": false,
-            "Target": "230cde41-6498-4e6c-8777-28f4a8ea7ec3"
+            "Target": "84eac77c-7533-4278-bce4-db040bb75022"
           },
           {
             "__version": 0,
             "__type": "PlayerDresser",
             "__enabled": true,
-            "BodyRenderer": "230cde41-6498-4e6c-8777-28f4a8ea7ec3"
+            "BodyRenderer": "84eac77c-7533-4278-bce4-db040bb75022"
           }
         ]
       },
       {
-        "Id": "4e1e269f-d342-49a8-ad35-b355dc792fb2",
+        "Id": "aac0e2f0-bd76-4883-a217-0f89cb1aed27",
         "Name": "Physics Pusher",
         "Position": "0,0,22.68671",
         "Components": [
@@ -89,7 +89,7 @@
         ]
       },
       {
-        "Id": "f253b0ee-70b0-49b6-8fc9-25549bab8645",
+        "Id": "385a7e67-6ccf-4e50-9601-dc1b64a850d7",
         "Name": "Voice",
         "Position": "42.0599,39.05991,-23.23907",
         "Enabled": true,
@@ -100,10 +100,10 @@
             "__enabled": true,
             "Loopback": false,
             "Mode": "PushToTalk",
-            "MorphFadeSpeed": 50,
             "MorphScale": 2,
+            "MorphSmoothTime": 0.1,
             "PushToTalkInput": "voice",
-            "Renderer": "230cde41-6498-4e6c-8777-28f4a8ea7ec3",
+            "Renderer": "84eac77c-7533-4278-bce4-db040bb75022",
             "Volume": 1,
             "WorldspacePlayback": true
           }
