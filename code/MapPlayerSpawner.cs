@@ -31,11 +31,13 @@ public sealed class MapPlayerSpawner : Component
 
 	void RespawnPlayers()
 	{
-
 		var spawnPoints = Scene.GetAllComponents<SpawnPoint>().ToArray();
 
 		foreach ( var player in Scene.GetAllComponents<PlayerController>().ToArray() )
 		{
+			if ( player.IsProxy )
+				continue;
+
 			var randomSpawnPoint = Random.Shared.FromArray( spawnPoints );
 			if ( randomSpawnPoint is null ) continue;
 
