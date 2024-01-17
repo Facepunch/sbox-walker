@@ -68,6 +68,12 @@
             "__type": "PlayerDresser",
             "__enabled": true,
             "BodyRenderer": "84eac77c-7533-4278-bce4-db040bb75022"
+          },
+          {
+            "__version": 0,
+            "__type": "PlayerFootsteps",
+            "__enabled": true,
+            "Source": "84eac77c-7533-4278-bce4-db040bb75022"
           }
         ]
       },
@@ -128,9 +134,7 @@
           {
             "__version": 0,
             "__type": "NameTagPanel",
-            "__enabled": true,
-            "Name": "My Name",
-            "TargetObject": null
+            "__enabled": true
           }
         ]
       }
