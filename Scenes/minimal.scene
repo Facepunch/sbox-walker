@@ -130,6 +130,39 @@
           "StartServer": true
         }
       ]
+    },
+    {
+      "Id": "66cee047-c868-48ac-a5c2-ec230a2274e3",
+      "Name": "Screen",
+      "Position": "55.4256,-387.476,1046.537",
+      "Enabled": true,
+      "Components": [
+        {
+          "__version": 0,
+          "__type": "ScreenPanel",
+          "__enabled": true,
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        }
+      ],
+      "Children": [
+        {
+          "Id": "5c673de9-a7fd-43fa-98e2-dd28a882bd68",
+          "Name": "Chat",
+          "Position": "0,0,0",
+          "Networked": true,
+          "Enabled": true,
+          "Components": [
+            {
+              "__version": 0,
+              "__type": "Chat",
+              "__enabled": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "SceneProperties": {
