@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "90754f26-804e-4f64-91f0-753646515fd7",
+    "Id": "2c6d6454-6f08-4d43-858b-5eec6d4c4791",
     "Name": "player",
     "Enabled": true,
     "Components": [
@@ -19,8 +19,8 @@
         "__version": 0,
         "__type": "PlayerController",
         "__enabled": true,
-        "AnimationHelper": "84eac77c-7533-4278-bce4-db040bb75022",
-        "CharacterController": "90754f26-804e-4f64-91f0-753646515fd7",
+        "AnimationHelper": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+        "CharacterController": "2c6d6454-6f08-4d43-858b-5eec6d4c4791",
         "CrouchMoveSpeed": 64,
         "RunMoveSpeed": 190,
         "SprintMoveSpeed": 320,
@@ -29,7 +29,7 @@
     ],
     "Children": [
       {
-        "Id": "84eac77c-7533-4278-bce4-db040bb75022",
+        "Id": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
         "Name": "Player Body",
         "Enabled": true,
         "Components": [
@@ -61,24 +61,24 @@
             "IkRightHand": null,
             "LookAt": null,
             "LookAtEnabled": false,
-            "Target": "84eac77c-7533-4278-bce4-db040bb75022"
+            "Target": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
           },
           {
             "__version": 0,
             "__type": "PlayerDresser",
             "__enabled": true,
-            "BodyRenderer": "84eac77c-7533-4278-bce4-db040bb75022"
+            "BodyRenderer": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
           },
           {
             "__version": 0,
             "__type": "PlayerFootsteps",
             "__enabled": true,
-            "Source": "84eac77c-7533-4278-bce4-db040bb75022"
+            "Source": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
           }
         ]
       },
       {
-        "Id": "aac0e2f0-bd76-4883-a217-0f89cb1aed27",
+        "Id": "95477550-0a10-434c-a33f-da8fea48e91b",
         "Name": "Physics Pusher",
         "Position": "0,0,22.68671",
         "Components": [
@@ -95,7 +95,7 @@
         ]
       },
       {
-        "Id": "385a7e67-6ccf-4e50-9601-dc1b64a850d7",
+        "Id": "10aa0a3b-77e3-4f4c-97e7-8ee7bc26895f",
         "Name": "Voice",
         "Position": "42.0599,39.05991,-23.23907",
         "Enabled": true,
@@ -109,14 +109,14 @@
             "MorphScale": 2,
             "MorphSmoothTime": 0.1,
             "PushToTalkInput": "voice",
-            "Renderer": "84eac77c-7533-4278-bce4-db040bb75022",
+            "Renderer": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
             "Volume": 1,
             "WorldspacePlayback": true
           }
         ]
       },
       {
-        "Id": "cc741102-4c4f-4260-96e9-f512aca9ddec",
+        "Id": "b54de67a-8348-4473-a163-b630f43b0534",
         "Name": "World",
         "Position": "0,0,77.72417",
         "Enabled": true,
@@ -135,6 +135,20 @@
             "__version": 0,
             "__type": "NameTagPanel",
             "__enabled": true
+          }
+        ]
+      },
+      {
+        "Id": "4400351a-2ebc-41fc-8991-14b537cec521",
+        "Name": "Player Pusher",
+        "Position": "0,0,32",
+        "Enabled": true,
+        "Components": [
+          {
+            "__version": 0,
+            "__type": "PlayerPusher",
+            "__enabled": true,
+            "Radius": 32
           }
         ]
       }
