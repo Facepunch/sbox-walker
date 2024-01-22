@@ -1,0 +1,61 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	
+    <div class="table">
+
+        <div class="header row">
+            <div class="name">Name</div>
+            <div class="stat">⏲️</div>
+        </div>
+
+        @foreach ( var entry in Networking.Connections )
+        {
+            string specialClass = "";
+            if (entry == Connection.Local) specialClass = "me";
+
+            <div class="row @specialClass">
+                <div class="name">
+
+                    @if ( entry.IsHost )
+                    {
+                        <div>👑</div>
+                    }
+
+                    @entry.DisplayName
+
+
+                </div>
+                <div class="stat">@GetTime( entry )</div>
+            </div>
+        }
+
+    </div>
+
+</root>
+
+@code
+{
+
+    string GetTime( Connection c )
+    {
+        TimeSpan time = DateTime.UtcNow - c.ConnectionTime;
+
+        if (time.TotalMinutes < 60)
+            return time.ToString("mm\\m\\ s\\s");
+
+        return time.ToString("hh\\h\\ \\m\\m");
+    }
+
+    protected override void OnUpdate()
+    {
+        SetClass( "hidden", !Input.Down( "score" )  );
+    }
+
+    /// <summary>
+    /// update every second
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine( RealTime.Now.CeilToInt() );
+}
