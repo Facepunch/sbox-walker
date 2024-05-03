@@ -6,9 +6,8 @@
 .vs/*
 .vscode/*
 *.csproj
-obj/*
+obj
 Properties/*
-code/obj/*
 code/Properties/*
 
 # Auto-generated asset related files

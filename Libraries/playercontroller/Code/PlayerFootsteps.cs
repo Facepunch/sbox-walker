@@ -1,3 +1,4 @@
+
 public sealed class PlayerFootsteps : Component
 {
 	[Property] SkinnedModelRenderer Source { get; set; }

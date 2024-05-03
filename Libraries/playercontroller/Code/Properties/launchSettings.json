@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "playercontroller": {
+      "commandName": "Executable",
+      "executablePath": "C:\\git\\sbox\\game\\sbox.exe",
+      "commandLineArgs": "\u002Bdeveloper 1 -w 1920 -h 1080 -noassert -tools"
+    }
+  }
+}
