@@ -5,12 +5,7 @@
   "Ident": "walker",
   "Tags": null,
   "Schema": 1,
-  "HasAssets": true,
-  "AssetsPath": "",
   "Resources": null,
-  "MenuResources": "*",
-  "HasCode": true,
-  "CodePath": "/code/",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
