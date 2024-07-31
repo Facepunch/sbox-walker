@@ -182,7 +182,7 @@ public sealed class PlayerController : Component
 			if ( !CharacterController.IsOnGround )
 			{
 				CharacterController.MoveTo( Transform.Position += Vector3.Up * DuckHeight, false );
-				Transform.ClearLerp();
+				Transform.ClearInterpolation();
 				EyeHeight -= DuckHeight;
 			}
 

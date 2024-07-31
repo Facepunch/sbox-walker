@@ -11,7 +11,7 @@
             <div class="stat">⏲️</div>
         </div>
 
-        @foreach ( var entry in Networking.Connections )
+        @foreach ( var entry in Connection.All )
         {
             string specialClass = "";
             if (entry == Connection.Local) specialClass = "me";
