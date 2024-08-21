@@ -57,6 +57,12 @@ Chat
 	.input
 	{
 		color: white;
+
+		.textentry
+		{
+			align-items: flex-start;
+			white-space: normal;
+		}
 	}
 
 	&.open
