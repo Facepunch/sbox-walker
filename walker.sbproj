@@ -3,11 +3,12 @@
   "Type": "game",
   "Org": "facepunch",
   "Ident": "walker",
-  "Tags": null,
   "Schema": 1,
+  "IncludeSourceFiles": false,
   "Resources": null,
   "PackageReferences": [],
   "EditorReferences": null,
+  "IsWhitelistDisabled": false,
   "Metadata": {
     "MaxPlayers": 64,
     "MinPlayers": 1,
