@@ -1,14 +1,13 @@
 {
-  "__guid": "7106c1ab-d17c-4ceb-98ae-b8bf53696a78",
+  "__guid": "cd285893-d0ab-4423-9b5f-9a94f46ce96c",
   "GameObjects": [
     {
       "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+      "Flags": 0,
       "Name": "Camera",
       "Position": "1206.468,-103.4652,1041.78",
       "Rotation": "-0.1174543,0.03891734,0.9419548,0.3121076",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -30,9 +29,14 @@
         {
           "__type": "Sandbox.Tonemapping",
           "__guid": "bb1d4e00-68b9-4153-b1ed-499d0521de51",
+          "__version": 1,
+          "AutoExposureEnabled": true,
+          "ExposureBias": 2,
           "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
           "MaximumExposure": 3,
           "MinimumExposure": 0,
+          "Mode": "Legacy",
           "Rate": 1
         },
         {
@@ -91,16 +95,20 @@
     },
     {
       "__guid": "c2e2b2e8-62e8-4ef3-8336-002a3a68f88e",
+      "Flags": 0,
       "Name": "Map Loader",
       "Position": "22.10468,10.23383,11.85129",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "053b9354-3f9b-4cbf-837b-932a5a04f3ae",
+          "__version": 1,
+          "EnableCollision": true,
           "MapName": "facepunch.datacore",
+          "NoOrigin": true,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
           "UseMapFromLaunch": true
         },
         {
@@ -112,11 +120,10 @@
     },
     {
       "__guid": "16a25c20-b8c5-436f-9cbd-27cebb20402c",
+      "Flags": 0,
       "Name": "Network System",
       "Position": "-1089.84,230.1391,983.1465",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.NetworkHelper",
@@ -132,11 +139,10 @@
     },
     {
       "__guid": "66cee047-c868-48ac-a5c2-ec230a2274e3",
+      "Flags": 0,
       "Name": "Screen",
       "Position": "55.4256,-387.476,1046.537",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.ScreenPanel",
@@ -144,17 +150,18 @@
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
           "ZIndex": 100
         }
       ],
       "Children": [
         {
           "__guid": "5c673de9-a7fd-43fa-98e2-dd28a882bd68",
+          "Flags": 0,
           "Name": "Chat",
           "Position": "0,0,0",
           "Enabled": true,
           "NetworkMode": 1,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Chat",
@@ -164,27 +171,31 @@
         },
         {
           "__guid": "de8144e0-9097-4d00-8cff-f13b67233318",
+          "Flags": 0,
           "Name": "Scoreboard",
           "Position": "0,0,0",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Scoreboard",
               "__guid": "f78202da-066b-4ebb-8273-d63c9b59cc4a"
             }
           ]
+        },
+        {
+          "__guid": "9ca25d97-bab9-4eb9-8622-fc4111cb8adf",
+          "Flags": 0,
+          "Name": "Hud",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Hud",
+              "__guid": "f3159882-fc04-4b93-a652-1ccd9b1cf6a4"
+            }
+          ]
         }
       ]
-    },
-    {
-      "__guid": "918ed353-6c4e-4992-89f5-8e27e684ca29",
-      "Name": "Object",
-      "Position": "821.764,-12.33399,935.8649",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true
     }
   ],
   "SceneProperties": {
@@ -210,8 +221,7 @@
   },
   "Title": "minimal",
   "Description": "",
-  "LastSaved": "2024-05-03T17:27:53.0024183\u002B01:00",
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

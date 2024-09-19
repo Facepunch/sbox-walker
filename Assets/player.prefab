@@ -1,161 +1,215 @@
 {
   "RootObject": {
-    "Id": "2c6d6454-6f08-4d43-858b-5eec6d4c4791",
+    "__guid": "2c6d6454-6f08-4d43-858b-5eec6d4c4791",
+    "Flags": 0,
     "Name": "player",
     "Enabled": true,
     "Components": [
       {
-        "__version": 0,
-        "__type": "CharacterController",
-        "__enabled": true,
+        "__type": "Sandbox.CharacterController",
+        "__guid": "ac62574b-e6f6-41b8-84a8-347605654a73",
         "Acceleration": 32,
+        "Bounciness": 0.3,
         "GroundAngle": 45,
         "Height": 64,
-        "IgnoreLayers": "trigger",
+        "IgnoreLayers": "trigger,ragdoll",
         "Radius": 16,
-        "StepHeight": 18
+        "StepHeight": 18,
+        "UseCollisionRules": false
       },
       {
-        "__version": 0,
         "__type": "PlayerController",
-        "__enabled": true,
-        "AnimationHelper": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
-        "CharacterController": "2c6d6454-6f08-4d43-858b-5eec6d4c4791",
+        "__guid": "78006d12-fbf5-498a-bb13-ec808d8c2834",
+        "AnimationHelper": {
+          "_type": "component",
+          "component_id": "ba892b57-90de-43da-9da7-f9bd9389b2ac",
+          "go": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+          "component_type": "CitizenAnimationHelper"
+        },
+        "CharacterController": {
+          "_type": "component",
+          "component_id": "ac62574b-e6f6-41b8-84a8-347605654a73",
+          "go": "2c6d6454-6f08-4d43-858b-5eec6d4c4791",
+          "component_type": "CharacterController"
+        },
         "CrouchMoveSpeed": 64,
         "RunMoveSpeed": 190,
         "SprintMoveSpeed": 320,
         "WalkMoveSpeed": 110
+      },
+      {
+        "__type": "PlayerInventory",
+        "__guid": "7a0edd28-8894-48d5-8ba4-ba5aadaef5be"
+      },
+      {
+        "__type": "Player",
+        "__guid": "083c291c-8def-40c0-9eaa-495bef276d23",
+        "Body": {
+          "_type": "gameobject",
+          "go": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
+        }
+      },
+      {
+        "__type": "PlayerFallDamage",
+        "__guid": "e2cad285-157a-42b4-b039-8b6918efbc0b",
+        "DamageMultiplier": 1,
+        "DeathFallDistance": 800,
+        "MinimumFallDistance": 200
       }
     ],
     "Children": [
       {
-        "Id": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+        "__guid": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+        "Flags": 0,
         "Name": "Player Body",
         "Enabled": true,
         "Components": [
           {
-            "__version": 0,
-            "__type": "SkinnedModelRenderer",
-            "__enabled": true,
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "088ccdf7-7a51-47f6-be5c-88081217e16e",
             "BodyGroups": 341,
-            "BoneMergeTarget": null,
             "CreateBoneObjects": false,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
             "Model": "models/citizen/citizen.vmdl",
-            "RenderType": "ShadowsOnly",
-            "Tint": "1,1,1,1"
+            "Morphs": {},
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
           },
           {
-            "__version": 0,
-            "__type": "CitizenAnimationHelper",
-            "__enabled": true,
+            "__type": "Sandbox.Citizen.CitizenAnimationHelper",
+            "__guid": "ba892b57-90de-43da-9da7-f9bd9389b2ac",
             "BodyWeight": 1,
-            "EyeSource": null,
             "EyesWeight": 1,
             "HeadWeight": 1,
             "Height": 1,
-            "IkLeftFoot": null,
-            "IkLeftHand": null,
-            "IkRightFoot": null,
-            "IkRightHand": null,
-            "LookAt": null,
             "LookAtEnabled": false,
-            "Target": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
+            "Target": {
+              "_type": "component",
+              "component_id": "088ccdf7-7a51-47f6-be5c-88081217e16e",
+              "go": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+              "component_type": "SkinnedModelRenderer"
+            }
           },
           {
-            "__version": 0,
             "__type": "PlayerDresser",
-            "__enabled": true,
-            "BodyRenderer": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
+            "__guid": "38d6748b-677d-452f-a522-a3ecf5d41d5a",
+            "BodyRenderer": {
+              "_type": "component",
+              "component_id": "088ccdf7-7a51-47f6-be5c-88081217e16e",
+              "go": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+              "component_type": "SkinnedModelRenderer"
+            }
           },
           {
-            "__version": 0,
             "__type": "PlayerFootsteps",
-            "__enabled": true,
-            "Source": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8"
+            "__guid": "fd0262ea-441e-448f-9c22-d1f7f0fd61d6",
+            "Source": {
+              "_type": "component",
+              "component_id": "088ccdf7-7a51-47f6-be5c-88081217e16e",
+              "go": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+              "component_type": "SkinnedModelRenderer"
+            }
           }
         ]
       },
       {
-        "Id": "95477550-0a10-434c-a33f-da8fea48e91b",
+        "__guid": "95477550-0a10-434c-a33f-da8fea48e91b",
+        "Flags": 0,
         "Name": "Physics Pusher",
         "Position": "0,0,22.68671",
         "Components": [
           {
-            "__version": 0,
-            "__type": "BoxCollider",
-            "__enabled": true,
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "58f333dd-89c5-47d2-8ecb-89f385084519",
             "Center": "0,0,0",
             "IsTrigger": false,
             "Scale": "36,36,40",
-            "Static": false,
-            "Surface": null
+            "Static": false
           }
         ]
       },
       {
-        "Id": "10aa0a3b-77e3-4f4c-97e7-8ee7bc26895f",
+        "__guid": "10aa0a3b-77e3-4f4c-97e7-8ee7bc26895f",
+        "Flags": 0,
         "Name": "Voice",
         "Position": "42.0599,39.05991,-23.23907",
         "Enabled": true,
         "Components": [
           {
-            "__version": 0,
-            "__type": "Voice",
-            "__enabled": true,
+            "__type": "Sandbox.Voice",
+            "__guid": "aa6208fe-389c-47f8-aa83-2170663c1b8a",
             "Loopback": false,
             "Mode": "PushToTalk",
             "MorphScale": 2,
             "MorphSmoothTime": 0.1,
             "PushToTalkInput": "voice",
-            "Renderer": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+            "Renderer": {
+              "_type": "component",
+              "component_id": "088ccdf7-7a51-47f6-be5c-88081217e16e",
+              "go": "d0a8e1e1-bce2-477a-908c-3cfc0ac57de8",
+              "component_type": "SkinnedModelRenderer"
+            },
             "Volume": 1,
             "WorldspacePlayback": true
           }
         ]
       },
       {
-        "Id": "b54de67a-8348-4473-a163-b630f43b0534",
+        "__guid": "b54de67a-8348-4473-a163-b630f43b0534",
+        "Flags": 0,
         "Name": "World",
         "Position": "0,0,77.72417",
         "Enabled": true,
         "Components": [
           {
-            "__version": 0,
-            "__type": "WorldPanel",
-            "__enabled": true,
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "4bc3a44d-1cb1-40d4-8533-5d6a81f03b63",
             "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
             "LookAtCamera": true,
             "PanelSize": "512,512",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },
           {
-            "__version": 0,
             "__type": "NameTagPanel",
-            "__enabled": true
+            "__guid": "24dfc4e0-5cf6-4f25-8bf0-79b64616ef54"
           }
         ]
       },
       {
-        "Id": "4400351a-2ebc-41fc-8991-14b537cec521",
+        "__guid": "4400351a-2ebc-41fc-8991-14b537cec521",
+        "Flags": 0,
         "Name": "Player Pusher",
         "Position": "0,0,32",
         "Enabled": true,
         "Components": [
           {
-            "__version": 0,
             "__type": "PlayerPusher",
-            "__enabled": true,
+            "__guid": "4db940e9-0a48-4e06-9c66-c734566b2e39",
             "Radius": 32
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "__references": []
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
 }
