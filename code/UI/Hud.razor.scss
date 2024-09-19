@@ -1,0 +1,105 @@
+
+.vitals
+{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: white;
+    font-size: 64px;
+    font-family: Poppins;
+    font-weight: 450;
+    padding: 8vh 10vw;
+
+}
+
+.health
+{
+    color: #f80;
+    mix-blend-mode: lighten;
+    text-shadow: 0px 0px 6px #f506;
+    width: 100px;
+    justify-content: flex-end;
+}
+
+Hud
+{
+    background-color: #6210;
+    width: 100%;
+    transition: all 0.5s ease-out;
+}
+
+@keyframes damaged
+{
+    0%
+    {
+        background-color: transparent;
+    }
+
+    10%
+    {
+        background-color: red;
+    }
+
+    100%
+    {
+        background-color: transparent;
+    }
+}
+
+.jump
+{
+    transition: all 0.08s ease-out;
+    transform: translateY( -30px ) scaleY(1.2);
+}
+
+.land
+{
+    transition: all 0.08s ease-out;
+    transform: translateY( 50px ) scaleY(0.8);
+}
+
+.damage
+{
+    background-color: #9435;
+    transition: all 0.03s ease-out;
+    transform: translateY( 10px ) scale( 1.01 );
+}
+
+.is-dying .vitals .health
+{
+    color: red;
+}
+
+.is-almost-dead .vitals .health
+{
+    animation: redalert 0.3s linear infinite alternate;
+}
+
+.is-dead .vitals .health
+{
+    animation: none;
+    opacity: 0.4;
+    color: #aaa;
+    text-shadow: none;
+}
+
+@keyframes redalert
+{
+    0%
+    {
+        color: #f000;
+        text-shadow: 0px 0px 6px #f60a;
+    }
+
+    50%
+    {
+        color: red;
+        text-shadow: 0px 0px 10px #f60a;
+    }
+
+    100%
+    {
+        color: #f000;
+        text-shadow: 0px 0px 6px #f60a;
+    }
+}

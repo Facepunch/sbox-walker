@@ -1,0 +1,59 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@implements IPlayerEvent
+
+<root>
+
+    <div class="vitals">
+        <div class="health">@HealthValue()</div>
+    </div>
+
+</root>
+
+@code
+{
+    public int HealthValue()
+    {
+        var p = Player.FindLocalPlayer();
+        if (p is null) return 0;
+        return p.Health.FloorToInt();
+    }
+
+    protected override int BuildHash() => HashCode.Combine( HealthValue() );
+
+    void IPlayerEvent.OnJump(Player player)
+    {
+        if (player != Player.FindLocalPlayer()) return;
+
+        Panel.FlashClass("jump", 0.1f);
+    }
+
+    void IPlayerEvent.OnLand(Player player, float distance, Vector3 velocity)
+    {
+        if (player != Player.FindLocalPlayer()) return;
+        if (distance < 32) return;
+
+        Panel.FlashClass("land", 0.1f);
+    }
+
+    void IPlayerEvent.OnTakeDamage( Player player, float damage )
+    {
+        if (player != Player.FindLocalPlayer()) return;
+
+        Panel.FlashClass( "damage", 0.1f );
+    }
+
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        var player = Player.FindLocalPlayer();
+        Panel.SetClass("is-dead", player is null);
+        Panel.SetClass("is-dying", (player?.Health ?? 0 ) < 40.0f );
+        Panel.SetClass("is-almost-dead", (player?.Health ?? 0 ) < 11.0f );
+
+        
+    }
+}
