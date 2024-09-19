@@ -1,5 +1,8 @@
 using Sandbox.Citizen;
 
+/// <summary>
+/// Responsible for taking inputs from the player and moving them.
+/// </summary>
 [Group( "Walker" )]
 [Title( "Walker - Player Controller" )]
 public sealed class PlayerController : Component
@@ -9,7 +12,6 @@ public sealed class PlayerController : Component
 	[Property] public float WalkMoveSpeed { get; set; } = 190.0f;
 	[Property] public float RunMoveSpeed { get; set; } = 190.0f;
 	[Property] public float SprintMoveSpeed { get; set; } = 320.0f;
-
 	[Property] public CitizenAnimationHelper AnimationHelper { get; set; }
 
 	[Sync] public bool Crouching { get; set; }
@@ -63,6 +65,7 @@ public sealed class PlayerController : Component
 	RealTimeSince lastGrounded;
 	RealTimeSince lastUngrounded;
 	RealTimeSince lastJump;
+	float fallDistance;
 
 	float GetFriction()
 	{
@@ -79,6 +82,9 @@ public sealed class PlayerController : Component
 
 		var cc = CharacterController;
 
+		Vector3 startPosition = Transform.Position;
+		Vector3 startVelocity = cc.Velocity;
+
 		Vector3 halfGravity = Scene.PhysicsWorld.Gravity * Time.Delta * 0.5f;
 
 		WishVelocity = Input.AnalogMove;
@@ -87,6 +93,7 @@ public sealed class PlayerController : Component
 		{
 			lastJump = 0;
 			cc.Punch( Vector3.Up * 300 );
+			IPlayerEvent.Post( x => x.OnJump( Components.Get<Player>() ) );
 		}
 
 		if ( !WishVelocity.IsNearlyZero() )
@@ -134,6 +141,8 @@ public sealed class PlayerController : Component
 
 		cc.Move();
 
+		Vector3 delta = startPosition - Transform.Position;
+
 		if ( !cc.IsOnGround )
 		{
 			cc.Velocity += halfGravity;
@@ -145,11 +154,20 @@ public sealed class PlayerController : Component
 
 		if ( cc.IsOnGround )
 		{
+			if ( fallDistance > 0 )
+			{
+				IPlayerEvent.Post( x => x.OnLand( Components.Get<Player>(), fallDistance, startVelocity ) );
+				fallDistance = 0;
+			}
+
 			lastGrounded = 0;
 		}
 		else
 		{
 			lastUngrounded = 0;
+
+
+			fallDistance += MathF.Max( 0, delta.z );
 		}
 	}
 	float DuckHeight = (64 - 36);
@@ -210,10 +228,11 @@ public sealed class PlayerController : Component
 		var targetEyeHeight = Crouching ? 28 : 64;
 		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 10.0f );
 
+		//var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
 		var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
 
 		// smooth view z, so when going up and down stairs or ducking, it's smooth af
-		if ( lastUngrounded > 0.2f )
+		if ( lastUngrounded > 0.1f )
 		{
 			targetCameraPos.z = camera.Transform.Position.z.LerpTo( targetCameraPos.z, RealTime.Delta * 25.0f );
 		}
