@@ -119,25 +119,6 @@
       "Children": []
     },
     {
-      "__guid": "16a25c20-b8c5-436f-9cbd-27cebb20402c",
-      "Flags": 0,
-      "Name": "Network System",
-      "Position": "-1089.84,230.1391,983.1465",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.NetworkHelper",
-          "__guid": "abcadfe2-ecd9-4238-88fa-f38ca1198944",
-          "PlayerPrefab": {
-            "_type": "gameobject",
-            "prefab": "player.prefab"
-          },
-          "SpawnPoints": [],
-          "StartServer": true
-        }
-      ]
-    },
-    {
       "__guid": "66cee047-c868-48ac-a5c2-ec230a2274e3",
       "Flags": 0,
       "Name": "Screen",
@@ -150,7 +131,7 @@
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
-          "ScaleStrategy": "ConsistentHeight",
+          "ScaleStrategy": "FollowDesktopScaling",
           "ZIndex": 100
         }
       ],
@@ -192,6 +173,24 @@
             {
               "__type": "Hud",
               "__guid": "f3159882-fc04-4b93-a652-1ccd9b1cf6a4"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "941e6cbd-c42d-41a1-9cdb-e6bbbbcc30f8",
+              "Flags": 0,
+              "Name": "Inventory",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Inventory",
+                  "__guid": "17161ed8-5572-4448-a8c2-94d34804e22f",
+                  "CancelSound": "audio/ui/inventory-cancel.sound",
+                  "SelectSound": "audio/ui/inventory-select.sound",
+                  "SwitchSound": "audio/ui/inventory-switch.sound"
+                }
+              ]
             }
           ]
         }

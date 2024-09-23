@@ -1,7 +1,3 @@
-using Sandbox;
-using System;
-using System.Linq;
-
 public sealed class MapPlayerSpawner : Component
 {
 	protected override void OnEnabled()
@@ -33,7 +29,7 @@ public sealed class MapPlayerSpawner : Component
 	{
 		var spawnPoints = Scene.GetAllComponents<SpawnPoint>().ToArray();
 
-		foreach ( var player in Scene.GetAllComponents<PlayerController>().ToArray() )
+		foreach ( var player in Scene.GetAllComponents<Player>().ToArray() )
 		{
 			if ( player.IsProxy )
 				continue;

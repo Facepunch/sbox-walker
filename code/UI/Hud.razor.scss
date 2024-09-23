@@ -1,4 +1,6 @@
 
+$text-color: #f80;
+
 .vitals
 {
     position: absolute;
@@ -14,7 +16,7 @@
 
 .health
 {
-    color: #f80;
+    color: $text-color;
     mix-blend-mode: lighten;
     text-shadow: 0px 0px 6px #f506;
     width: 100px;
@@ -25,7 +27,7 @@ Hud
 {
     background-color: #6210;
     width: 100%;
-    transition: all 0.5s ease-out;
+    transition: all 0.6s ease-out;
 }
 
 @keyframes damaged
@@ -48,14 +50,14 @@ Hud
 
 .jump
 {
-    transition: all 0.08s ease-out;
-    transform: translateY( -30px ) scaleY(1.2);
+    transition: all 0.1s ease;
+    transform: translateY( -30px );
 }
 
 .land
 {
-    transition: all 0.08s ease-out;
-    transform: translateY( 50px ) scaleY(0.8);
+    transition: all 0.1s ease;
+    transform: translateY( 30px );
 }
 
 .damage
@@ -102,4 +104,10 @@ Hud
         color: #f000;
         text-shadow: 0px 0px 6px #f60a;
     }
+}
+
+Hud.cameramode > *:not( Inventory )
+{
+    opacity: 0;
+    transition: all 0.8s linear;
 }

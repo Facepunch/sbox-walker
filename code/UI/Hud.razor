@@ -44,7 +44,6 @@
         Panel.FlashClass( "damage", 0.1f );
     }
 
-
     protected override void OnUpdate()
     {
         base.OnUpdate();
@@ -53,7 +52,5 @@
         Panel.SetClass("is-dead", player is null);
         Panel.SetClass("is-dying", (player?.Health ?? 0 ) < 40.0f );
         Panel.SetClass("is-almost-dead", (player?.Health ?? 0 ) < 11.0f );
-
-        
     }
 }

@@ -1,0 +1,123 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@implements IPlayerEvent
+
+<root>
+    @for ( int i=0; i<5; i++ )
+    {
+        <InventorySlot Index=@i Inventory=@inventory Hovered=@hovered Active=@active></InventorySlot>
+    }
+</root>
+
+@code
+{
+    [Property] public SoundEvent SwitchSound { get; set; }
+    [Property] public SoundEvent SelectSound { get; set; }
+    [Property] public SoundEvent CancelSound { get; set; }
+
+    PlayerInventory inventory;
+    BaseWeapon hovered;
+    BaseWeapon active;
+
+    protected override int BuildHash() => HashCode.Combine(inventory, hovered, active);
+
+    void IPlayerEvent.OnWeaponAdded(Player player, BaseWeapon weapon)
+    {
+        StateHasChanged();
+    }
+
+    protected override void OnUpdate()
+    {
+        inventory = Game.ActiveScene.GetAllComponents<PlayerInventory>().Where(x => x.Network.IsOwner).FirstOrDefault();
+
+        Panel.SetClass("hidden", hovered is null);
+
+        DoInventoryInput();
+    }
+
+    RealTimeSince timeSinceInteraction;
+
+    void DoInventoryInput()
+    {
+        if ( inventory is null ) 
+            return;
+
+        MoveSlot( (int)Input.MouseWheel.y );
+
+        if ( Input.Down( "SlotNext" ) ) MoveSlot( 1 );
+        if ( Input.Pressed( "SlotPrev" ) ) MoveSlot( -1 );
+
+        if ( Input.Pressed( "Slot1" ) ) IterateSlot( 0 );
+        if ( Input.Pressed( "Slot2" ) ) IterateSlot( 1 );
+        if ( Input.Pressed( "Slot3" ) ) IterateSlot( 2 );
+        if ( Input.Pressed( "Slot4" ) ) IterateSlot( 3 );
+        if ( Input.Pressed( "Slot5" ) ) IterateSlot( 4 );
+
+        if ( hovered is null )
+            return;
+
+        if ( Input.Pressed( "Attack1" ) )
+        {
+            Input.ReleaseAction("Attack1");
+            inventory.SwitchWeapon(hovered);
+            active = hovered;
+            hovered = null;
+            Sound.Play( SelectSound );
+        }
+
+        if (Input.Pressed("Attack2") || timeSinceInteraction > 2)
+        {
+            Input.ReleaseAction("Attack2");
+            hovered = null;
+            active = null;
+            Sound.Play( CancelSound );
+        }
+    }
+
+    public void MoveSlot( int delta )
+    {
+        if ( delta == 0 )
+            return;
+
+        if (inventory.Weapons.Count == 0)
+            return;
+
+        var currentHover = hovered ?? active ?? inventory.Weapons.FirstOrDefault();
+
+        int currentSlot = inventory.Weapons.IndexOf(currentHover);
+
+        currentSlot += delta;
+        currentSlot %= inventory.Weapons.Count;
+        if ( currentSlot < 0 )
+            currentSlot = inventory.Weapons.Count + currentSlot;
+
+        active = null;
+        hovered = inventory.Weapons[currentSlot];
+        timeSinceInteraction = 0;
+
+        Sound.Play( SwitchSound );
+    }
+
+    public void IterateSlot(int slot)
+    {
+        var slotWeapons = inventory.Weapons.Where(x => x.InventorySlot == slot).OrderBy( x => x.InventoryOrder ).ToList();
+        if (slotWeapons.Count == 0)
+            return;
+
+        var currentHover = hovered ?? active ?? slotWeapons.FirstOrDefault();
+
+        int currentSlot = slotWeapons.IndexOf(currentHover);
+
+        currentSlot += 1;
+        currentSlot %= slotWeapons.Count;
+        if ( currentSlot < 0 )
+            currentSlot = slotWeapons.Count + currentSlot;
+
+        active = null;
+        hovered = slotWeapons[currentSlot];
+        timeSinceInteraction = 0;
+
+        Sound.Play( SwitchSound );
+    }
+}

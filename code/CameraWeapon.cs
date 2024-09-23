@@ -1,0 +1,116 @@
+﻿
+using Sandbox.Utility;
+
+public class CameraWeapon : BaseWeapon, IPlayerEvent
+{
+	float fov = 50;
+	float roll = 0;
+
+	DepthOfField dof;
+	bool focusing;
+	Vector3 focusPoint;
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+
+		if ( this.IsProxy )
+			return;
+
+		dof = Scene.Camera.Components.GetOrCreate<DepthOfField>();
+		dof.Flags |= ComponentFlags.NotNetworked;
+
+		focusing = false;
+
+		Scene.RunEvent<Hud>( x => x.Panel.SetClass( "cameramode", true ) );
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+
+		if ( this.IsProxy )
+			return;
+
+		dof?.Destroy();
+		dof = default;
+
+		Scene.RunEvent<Hud>( x => x.Panel.SetClass( "cameramode", false ) );
+	}
+
+	/// <summary>
+	/// We want to control the camera fov
+	/// </summary>
+	void IPlayerEvent.OnCameraSetup( Player player, Sandbox.CameraComponent camera )
+	{
+		//Log.Info( $"{player.Network.IsOwner} {Network.IsOwner}" );
+		if ( !player.Network.IsOwner || !Network.IsOwner ) return;
+
+		camera.FieldOfView = fov;
+		camera.Transform.Rotation = camera.Transform.Rotation * new Angles( 0, 0, roll );
+
+		var t = 20.0f;
+		var s = 1.0f;
+
+		var x = Noise.Perlin( Time.Now * t, 3, 5 ).Remap( 0, 1, -1, 1 ) * s;
+		var y = Noise.Perlin( Time.Now * t * 0.8f, 3, 4 ).Remap( 0, 1, -1, 1 ) * s;
+
+		camera.Transform.Rotation *= new Angles( x, y, 0 );
+
+	}
+
+	void IPlayerEvent.OnCameraMove( Player player, ref Angles angles )
+	{
+		// We're zooming
+		if ( Input.Down( "attack2" ) )
+		{
+			angles = default;
+		}
+
+		float sensitivity = fov.Remap( 1, 70, 0.01f, 1 );
+		angles *= sensitivity;
+	}
+
+	public override void OnControl( Player player )
+	{
+		base.OnControl( player );
+
+		if ( Input.Down( "attack2" ) )
+		{
+			fov += Input.AnalogLook.pitch;
+			fov = fov.Clamp( 1, 150 );
+			roll -= Input.AnalogLook.yaw;
+		}
+
+		if ( dof.IsValid() )
+		{
+			UpdateDepthOfField( dof );
+		}
+
+		if ( focusing && Input.Released( "attack1" ) )
+		{
+			Game.TakeScreenshot();
+			Sandbox.Services.Stats.Increment( "photos", 1 );
+		}
+
+		focusing = Input.Down( "attack1" );
+	}
+
+	private void UpdateDepthOfField( DepthOfField dof )
+	{
+		if ( !focusing )
+		{
+			dof.BlurSize = 200;
+			dof.FrontBlur = true;
+
+			var tr = Scene.Trace.Ray( Scene.Camera.Transform.World.ForwardRay, 5000 )
+								.IgnoreGameObjectHierarchy( GameObject.Root )
+								.Run();
+
+			focusPoint = tr.EndPosition;
+		}
+
+		dof.FocalDistance = Scene.Camera.Transform.Position.Distance( focusPoint ) + 32;
+
+	}
+}

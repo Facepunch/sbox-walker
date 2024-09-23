@@ -19,23 +19,10 @@ public sealed class Player : Component
 
 	public bool IsDead => Health <= 0;
 
-	protected override void OnUpdate()
-	{
-		base.OnUpdate();
-
-		if ( IsProxy ) return;
-
-		if ( Input.Pressed( "attack2" ) )
-		{
-			TakeDamage( 150 );
-		}
-
-	}
-
 	/// <summary>
 	/// Creates a ragdoll but it isn't enabled
 	/// </summary>
-	[Authority]
+	[Broadcast]
 	void CreateRagdoll()
 	{
 		var originalBody = Body.Components.Get<SkinnedModelRenderer>();
@@ -82,6 +69,7 @@ public sealed class Player : Component
 	public void TakeDamage( float amount )
 	{
 		if ( IsProxy ) return;
+		if ( Health < 0 ) return;
 
 		Health -= amount;
 
@@ -90,13 +78,35 @@ public sealed class Player : Component
 		if ( Health < 0 )
 		{
 			Health = 0;
+			Death();
+		}
+	}
 
-			CreateRagdoll();
-			CreateRagdollAndGhost();
+	void Death()
+	{
+		CreateRagdoll();
+		CreateRagdollAndGhost();
 
-			IPlayerEvent.Post( x => x.OnDied( this ) );
+		IPlayerEvent.Post( x => x.OnDied( this ) );
 
-			GameObject.Destroy();
+		GameObject.Destroy();
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		if ( !IsProxy )
+			OnControl();
+	}
+
+	void OnControl()
+	{
+		if ( Input.Pressed( "die" ) )
+		{
+			IPlayerEvent.Post( x => x.OnSuicide( this ) );
+			Health = 0;
+			Death();
 		}
 	}
 }

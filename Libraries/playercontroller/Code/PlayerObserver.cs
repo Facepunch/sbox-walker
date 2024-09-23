@@ -1,8 +1,3 @@
-using Sandbox;
-using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Channels;
-
 public sealed class PlayerObserver : Component
 {
 	Angles EyeAngles;
@@ -40,13 +35,8 @@ public sealed class PlayerObserver : Component
 	public void Respawn()
 	{
 		if ( !Networking.IsHost ) return;
-		Log.Info( $"Respawning Player {Network.OwnerId}" );
 
-		var player = GameObject.Clone( "player.prefab" );
-		player.Name = $"Player - {Network.Owner.DisplayName}";
-		player.Transform.World = FindSpawnPoint();
-		player.NetworkSpawn( Network.Owner );
-
+		GameManager.Current.SpawnPlayerForConnection( Network.Owner );
 		GameObject.Destroy();
 	}
 

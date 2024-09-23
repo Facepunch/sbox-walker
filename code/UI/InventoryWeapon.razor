@@ -1,0 +1,23 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+
+<root>
+    <div class="icon">@Weapon.DisplayIcon</div>
+</root>
+
+@code
+{
+    public BaseWeapon Weapon { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsHovered { get; set; }
+
+    public override void Tick()
+    {
+        if (!Weapon.IsValid()) return;
+
+        SetClass("active", IsHovered);
+        SetClass("selected", IsActive);
+    }
+
+}

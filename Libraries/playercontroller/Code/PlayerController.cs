@@ -43,8 +43,15 @@ public sealed class PlayerController : Component
 
 	private void MouseInput()
 	{
+		var player = Components.Get<Player>();
+
+		var input = Input.AnalogLook;
+
+		// allow listeners to modify the input eye angles
+		Scene.RunEvent<IPlayerEvent>( x => x.OnCameraMove( player, ref input ) );
+
 		var e = EyeAngles;
-		e += Input.AnalogLook;
+		e += input;
 		e.pitch = e.pitch.Clamp( -90, 90 );
 		e.roll = 0.0f;
 		EyeAngles = e;
@@ -109,7 +116,6 @@ public sealed class PlayerController : Component
 			}
 		}
 
-
 		cc.ApplyFriction( GetFriction() );
 
 		if ( cc.IsOnGround )
@@ -150,6 +156,7 @@ public sealed class PlayerController : Component
 		else
 		{
 			cc.Velocity = cc.Velocity.WithZ( 0 );
+
 		}
 
 		if ( cc.IsOnGround )
@@ -216,8 +223,6 @@ public sealed class PlayerController : Component
 			Crouching = WishCrouch;
 			return;
 		}
-
-
 	}
 
 	private void UpdateCamera()
@@ -231,6 +236,8 @@ public sealed class PlayerController : Component
 		//var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
 		var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
 
+		//	targetCameraPos += EyeAngles.Forward * -100;
+
 		// smooth view z, so when going up and down stairs or ducking, it's smooth af
 		if ( lastUngrounded > 0.1f )
 		{
@@ -240,6 +247,11 @@ public sealed class PlayerController : Component
 		camera.Transform.Position = targetCameraPos;
 		camera.Transform.Rotation = EyeAngles;
 		camera.FieldOfView = Preferences.FieldOfView;
+
+		// allow hooks
+		var player = Components.Get<Player>();
+		IPlayerEvent.Post( x => x.OnCameraSetup( player, camera ) );
+		IPlayerEvent.Post( x => x.OnCameraPostSetup( player, camera ) );
 	}
 
 	protected override void OnPreRender()
