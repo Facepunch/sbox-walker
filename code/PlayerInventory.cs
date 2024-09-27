@@ -51,10 +51,7 @@ public sealed class PlayerInventory : Component, IPlayerEvent
 	void IPlayerEvent.OnSpawned( Player player )
 	{
 		if ( player != Player )
-		{
-			Log.Info( $"{player?.GameObject} != {Player?.GameObject}" );
 			return;
-		}
 
 		GiveDefaultWeapons();
 	}

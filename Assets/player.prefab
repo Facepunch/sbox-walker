@@ -64,6 +64,10 @@
       {
         "__type": "PlayerStats",
         "__guid": "4bae6484-751b-47f2-8a10-50066416f125"
+      },
+      {
+        "__type": "PlayerUse",
+        "__guid": "bd3a46b0-19ab-4ee9-9622-04087fd1a8ee"
       }
     ],
     "Children": [
@@ -977,6 +981,24 @@
         ]
       },
       {
+        "__guid": "f7a1fac3-52bd-45a8-b964-47fdf7f24b2c",
+        "Flags": 0,
+        "Name": "PlayerTrigger",
+        "Position": "0,0,22.68671",
+        "Tags": "playertrigger",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "31a432b8-17fc-4cfa-96ce-14798d233d5c",
+            "Center": "0,0,3.666667",
+            "IsTrigger": false,
+            "Scale": "10.19996,20.53324,53.73336",
+            "Static": false
+          }
+        ]
+      },
+      {
         "__guid": "10aa0a3b-77e3-4f4c-97e7-8ee7bc26895f",
         "Flags": 0,
         "Name": "Voice",
@@ -1054,5 +1076,6 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
+  "IsValid": true,
   "__version": 1
 }

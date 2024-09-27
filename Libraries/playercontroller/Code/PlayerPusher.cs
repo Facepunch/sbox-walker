@@ -1,4 +1,7 @@
 
+/// <summary>
+/// Players push away from these spheres
+/// </summary>
 public sealed class PlayerPusher : Component
 {
 	[Property] public float Radius { get; set; } = 100;

@@ -1,3 +1,6 @@
+/// <summary>
+/// Dead players become these. They try to observe their last corpse. 
+/// </summary>
 public sealed class PlayerObserver : Component
 {
 	Angles EyeAngles;
@@ -25,7 +28,12 @@ public sealed class PlayerObserver : Component
 			RotateAround( corpse );
 		}
 
-		if ( Input.Pressed( "jump" ) )
+		// Don't allow immediate respawn
+		if ( timeSinceStarted < 1 )
+			return;
+
+		// If pressed a button, or has been too long
+		if ( Input.Pressed( "attack1" ) || Input.Pressed( "jump" ) || timeSinceStarted > 4 )
 		{
 			Respawn();
 		}
@@ -38,17 +46,6 @@ public sealed class PlayerObserver : Component
 
 		GameManager.Current.SpawnPlayerForConnection( Network.Owner );
 		GameObject.Destroy();
-	}
-
-	Transform FindSpawnPoint()
-	{
-		var spawnPoints = Scene.GetAllComponents<SpawnPoint>().ToArray();
-		if ( spawnPoints.Length > 0 )
-		{
-			return Random.Shared.FromArray( spawnPoints ).Transform.World;
-		}
-
-		return global::Transform.Zero;
 	}
 
 	private void RotateAround( PlayerCorpse target )
