@@ -1,7 +1,9 @@
+using static Sandbox.Component;
+
 /// <summary>
 /// Holds player information like health
 /// </summary>
-public sealed class Player : Component
+public sealed class Player : Component, IDamageable
 {
 	public static Player FindLocalPlayer()
 	{
@@ -108,5 +110,10 @@ public sealed class Player : Component
 			Health = 0;
 			Death();
 		}
+	}
+
+	void IDamageable.OnDamage( in DamageInfo damage )
+	{
+		TakeDamage( damage.Damage );
 	}
 }
