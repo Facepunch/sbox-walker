@@ -1,16 +1,33 @@
-public sealed class GameManager : GameObjectSystem<GameManager>, IPlayerEvent, Component.INetworkListener
+public sealed class GameManager : GameObjectSystem<GameManager>, IPlayerEvent, Component.INetworkListener, ISceneStartup
 {
 	public GameManager( Scene scene ) : base( scene )
 	{
-		Listen( Stage.SceneLoaded, 0, OnSceneLoaded, "SceneLoaded" );
 	}
 
-	void OnSceneLoaded()
+	void ISceneStartup.OnHostPreInitialize( SceneFile scene )
 	{
-		if ( !Networking.IsActive )
-		{
-			Networking.CreateLobby();
-		}
+		Log.Info( $"Walker: Loading scene {scene.ResourceName}" );
+	}
+
+	void ISceneStartup.OnHostInitialize()
+	{
+		//
+		// TODO: We don't have a menu, but if we did we could put a special component in the menu
+		// scene that we'd now be able to detect, and skip doing the stuff below.
+		//
+
+		//
+		// Spawn the engine scene.
+		// This scene is sent to clients when they join.
+		//
+		var slo = new SceneLoadOptions();
+		slo.IsAdditive = true;
+		slo.SetScene( "scenes/engine.scene" );
+		Scene.Load( slo );
+
+		// If we're not hosting a lobby, start hosting one
+		// so that people can join this game.
+		Networking.CreateLobby();
 	}
 
 	void Component.INetworkListener.OnActive( Connection channel )
