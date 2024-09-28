@@ -4,6 +4,8 @@ public sealed class PlayerUse : Component
 	[RequireComponent] public PlayerController PlayerController { get; set; }
 	[RequireComponent] public Player Player { get; set; }
 
+	IPressable pressed;
+
 	protected override void DrawGizmos()
 	{
 		base.DrawGizmos();
@@ -24,11 +26,27 @@ public sealed class PlayerUse : Component
 
 		if ( Input.Pressed( "use" ) )
 		{
-			button.Press( GameObject );
+			button.Press( new IPressable.Event( this ) );
+			pressed = button;
+		}
+
+		if ( Input.Released( "use" ) )
+		{
+			pressed.Release( new IPressable.Event( this ) );
 		}
 	}
 
-	Button TryGetLookedAt( float radius )
+	protected override void OnDisabled()
+	{
+		if ( pressed is not null )
+		{
+			pressed.Release( new IPressable.Event( this ) );
+		}
+
+		base.OnDisabled();
+	}
+
+	IPressable TryGetLookedAt( float radius )
 	{
 		var eyeTrace = Scene.Trace
 						.Ray( Scene.Camera.Transform.World.ForwardRay, 200 )
@@ -39,8 +57,8 @@ public sealed class PlayerUse : Component
 		if ( !eyeTrace.Hit ) return default;
 		if ( !eyeTrace.GameObject.IsValid() ) return default;
 
-		var button = eyeTrace.GameObject.Components.Get<Button>();
-		if ( !button.IsValid() ) return default;
+		var button = eyeTrace.GameObject.Components.Get<IPressable>();
+		if ( button is null ) return default;
 
 		return button;
 	}
