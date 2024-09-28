@@ -1,0 +1,21 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "scenemap",
+      "Type": "map",
+      "Org": "garry",
+      "Ident": "scenemap",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": [],
+      "EditorReferences": null,
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "scenes/scenemap.scene",
+        "ParentPackage": "facepunch.walker"
+      }
+    }
+  }
+}
