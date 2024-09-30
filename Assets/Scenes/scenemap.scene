@@ -454,15 +454,15 @@
       "__guid": "22fb55fc-a527-4943-9c1d-fdd22d5831a3",
       "Flags": 0,
       "Name": "Text",
-      "Position": "-52.22074,93.24733,58.86209",
-      "Rotation": "0,0,0.6340173,0.773319",
+      "Position": "-69.76474,127.2281,110.5634",
+      "Rotation": "0,0,0.7071068,0.7071068",
       "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.TextRenderer",
           "__guid": "d9690d19-2f77-4bb6-bc1f-080bf6062869",
           "BlendMode": "Lighten",
-          "Color": "0,1,0,1",
+          "Color": "1,0,0.86667,1",
           "FontFamily": "Poppins",
           "FontSize": 64,
           "FontWeight": 800,
@@ -472,8 +472,8 @@
             "BloomLayer": true,
             "AfterUILayer": false
           },
-          "Scale": 0.1,
-          "Text": "Welcome to the first \never Scene Map!",
+          "Scale": 0.16,
+          "Text": "FLAMING MOES",
           "TextAlignment": "Center"
         }
       ]
@@ -607,12 +607,21 @@
         {
           "__type": "FuncButton",
           "__guid": "da94674c-0d17-4e19-afce-bfc4d9847ef5",
+          "AutoReset": false,
+          "CloseDuration": 1,
+          "CloseMovementCurve": [
+            {},
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
           "Move": true,
           "MoveDelta": "5,0,0",
           "OnButtonPressed": {
             "__version": 8,
             "__guid": "5f80ee60-0721-4c00-b59e-7c826225781a",
-            "__changeId": 40,
+            "__changeId": 53,
             "UserData": {
               "Title": "On Button Pressed",
               "ReferencedComponentTypes": [
@@ -645,14 +654,14 @@
                   "_type": "Sandbox.GameObject"
                 },
                 "UserData": {
-                  "Position": "256,-144"
+                  "Position": "252,-144"
                 }
               },
               {
                 "Id": 4,
                 "Type": "op.not",
                 "UserData": {
-                  "Position": "448,-144"
+                  "Position": "444,-144"
                 }
               },
               {
@@ -670,7 +679,7 @@
                 "Id": 13,
                 "Type": "scene.ref",
                 "UserData": {
-                  "Position": "448,224"
+                  "Position": "444,228"
                 }
               },
               {
@@ -680,7 +689,7 @@
                   "T": "Sandbox.ParticleBoxEmitter"
                 },
                 "UserData": {
-                  "Position": "624,224"
+                  "Position": "624,228"
                 }
               },
               {
@@ -691,7 +700,7 @@
                   "_type": "Sandbox.Component"
                 },
                 "UserData": {
-                  "Position": "1120,32"
+                  "Position": "1116,36"
                 }
               },
               {
@@ -701,7 +710,7 @@
                   "_var": "State"
                 },
                 "UserData": {
-                  "Position": "560,-144"
+                  "Position": "564,-144"
                 }
               },
               {
@@ -711,7 +720,7 @@
                   "_var": "State"
                 },
                 "UserData": {
-                  "Position": "576,80"
+                  "Position": "576,84"
                 }
               },
               {
@@ -721,7 +730,14 @@
                   "_var": "State"
                 },
                 "UserData": {
-                  "Position": "976,64"
+                  "Position": "972,60"
+                }
+              },
+              {
+                "Id": 20,
+                "Type": "services.stats.map.set",
+                "UserData": {
+                  "Position": "252,48"
                 }
               }
             ],
@@ -781,7 +797,7 @@
                 "DstName": "_value"
               },
               {
-                "SrcId": 0,
+                "SrcId": 20,
                 "SrcName": "_signal",
                 "DstId": 17,
                 "DstName": "_signal"
@@ -791,6 +807,24 @@
                 "SrcName": "_result",
                 "DstId": 17,
                 "DstName": "_value"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "_signal",
+                "DstId": 20,
+                "DstName": "_signal"
+              },
+              {
+                "Id": 21,
+                "Value": 1,
+                "DstId": 20,
+                "DstName": "amount"
+              },
+              {
+                "Id": 22,
+                "Value": "pink",
+                "DstId": 20,
+                "DstName": "name"
               }
             ],
             "Defaults": {
@@ -804,32 +838,160 @@
               }
             }
           },
-          "PressCurve": [
-            {
-              "in": -2.9433951,
-              "out": 2.9433951
-            },
+          "OpenDuration": 1,
+          "OpenMovementCurve": [
+            {},
             {
               "x": 1,
               "y": 1
             }
           ],
-          "PressSound": "sounds/impacts/bullets/impact-bullet-wood.sound",
-          "PressTime": 0.1,
-          "ReleaseCurve": [
+          "ResetTime": 5
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "bc5889a0-3f14-42d0-ae1b-2933839a687f",
+          "Flags": 0,
+          "Name": "Text",
+          "Position": "0,0,24",
+          "Enabled": true,
+          "Components": [
             {
-              "in": 0.6478869,
-              "out": -0.6478869
+              "__type": "Sandbox.TextRenderer",
+              "__guid": "bd3a8e5d-0493-4347-a26f-7d0d89961705",
+              "BlendMode": "Lighten",
+              "Color": "0.06667,1,0,1",
+              "FontFamily": "Roboto",
+              "FontSize": 64,
+              "FontWeight": 800,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": true,
+                "AfterUILayer": false
+              },
+              "Scale": 0.2,
+              "Text": "-",
+              "TextAlignment": "Center"
             },
             {
-              "x": 1,
-              "y": 1,
-              "in": 0.8615385,
-              "out": -0.8615385
+              "__type": "Sandbox.ActionGraphs.ActionsInvoker",
+              "__guid": "9e77439b-582a-4935-91d8-059cf1ac5588",
+              "OnUpdateAction": {
+                "__version": 8,
+                "__guid": "99379638-1985-42b1-b943-cfb73e1f706d",
+                "__changeId": 21,
+                "UserData": {
+                  "Title": "On Update Action",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input",
+                    "UserData": {
+                      "Position": "-24,-60"
+                    }
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "services.stats.map.getlocal",
+                    "UserData": {
+                      "Position": "120,144"
+                    }
+                  },
+                  {
+                    "Id": 6,
+                    "Type": "property",
+                    "Properties": {
+                      "_name": "Sum",
+                      "_type": {
+                        "$type": "Nested",
+                        "DeclaringType": "Sandbox.Services.Stats",
+                        "Name": "PlayerStat"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "264,84"
+                    }
+                  },
+                  {
+                    "Id": 7,
+                    "Type": "sys.tostring",
+                    "UserData": {
+                      "Position": "264,-48"
+                    }
+                  },
+                  {
+                    "Id": 9,
+                    "Type": "scene.ref",
+                    "UserData": {
+                      "Position": "216,-156"
+                    }
+                  },
+                  {
+                    "Id": 10,
+                    "Type": "property",
+                    "Properties": {
+                      "_name": "Text",
+                      "_type": "Sandbox.TextRenderer"
+                    },
+                    "UserData": {
+                      "Position": "492,-144"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "Id": 11,
+                    "Value": "pink",
+                    "DstId": 1,
+                    "DstName": "name"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 6,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 6,
+                    "SrcName": "_result",
+                    "DstId": 7,
+                    "DstName": "input"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 10,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 9,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 7,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "_value"
+                  }
+                ],
+                "Defaults": {
+                  "$9.component": {
+                    "_type": "component",
+                    "component_id": "bd3a8e5d-0493-4347-a26f-7d0d89961705",
+                    "go": "bc5889a0-3f14-42d0-ae1b-2933839a687f",
+                    "component_type": "TextRenderer"
+                  }
+                }
+              }
             }
-          ],
-          "ReleaseTime": 0.1,
-          "ResetTime": 5
+          ]
         }
       ]
     },
@@ -1362,6 +1524,674 @@
           "Rate": 0.1
         }
       ]
+    },
+    {
+      "__guid": "ad6ea959-44e6-489f-9e1f-0a55ef045d4a",
+      "Flags": 0,
+      "Name": "Box",
+      "Position": "-160,132,64.00154",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "660587bd-461f-472d-a1d7-2612ec51d3f1",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-64,-4,64",
+              "72.00018,-4.000015,64",
+              "72.0002,11.99997,64",
+              "-63.99997,11.99998,64",
+              "-63.99997,11.99998,-64",
+              "72.0002,11.99997,-64",
+              "72.00018,-4.000015,-64",
+              "-64,-4,-64"
+            ],
+            "TextureCoord": [
+              "-0.6874986,0.125",
+              "-1.75,0",
+              "-0.6874985,0.0000001192093",
+              "0.9999999,0",
+              "-1.75,0",
+              "0.6874985,0",
+              "-1.75,0.1249999",
+              "-1.125,0",
+              "-0.6874985,0.0000001192093",
+              "1.75,1",
+              "-0.6874986,0.125",
+              "1.125,1",
+              "-1.75,0.1249999",
+              "-0.6874986,1",
+              "-1.75,0",
+              "-1,1",
+              "-1,0",
+              "-1.75,1",
+              "-1.125,1",
+              "1.75,0",
+              "0.9999999,1",
+              "-0.6874986,0",
+              "1.125,0",
+              "0.6874985,1"
+            ],
+            "TextureUAxis": [
+              "1,0,0",
+              "1,-0,0",
+              "-0.00000190735,-1,0",
+              "0.0000009536752,1,0",
+              "-1,0.0000001121968,0",
+              "1,-0.0000001121968,0"
+            ],
+            "TextureVAxis": [
+              "-0.00000002103691,-1,-0",
+              "-0.00000002103691,-1,-0",
+              "0,0,-1",
+              "-0,0,-1",
+              "0,0,-1",
+              "0,0,-1"
+            ],
+            "TextureScale": [
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.2499998,0.25",
+              "0.2499995,0.25",
+              "0.25,0.25",
+              "0.25,0.25"
+            ],
+            "TextureOffset": [
+              "512,63.99994",
+              "512,63.99994",
+              "511.9988,0.006164551",
+              "511.9993,0.006164551",
+              "511.9999,0.006164551",
+              "0.00003051758,0.006164551"
+            ],
+            "MaterialIndex": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat",
+              "materials/painterly/bricks/bricks01.vmat",
+              "materials/generic/wall_brick_e.vmat",
+              "materials/walls/wall_1.vmat",
+              "materials/dev/orange/dev_orange_12.vmat",
+              "materials/brick wall 02.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": true
+        }
+      ]
+    },
+    {
+      "__guid": "37d0503b-aa9f-4652-9afb-c7bd49f0c6e8",
+      "Flags": 0,
+      "Name": "Box",
+      "Position": "80,132,64.00311",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "1216eece-2c68-49ac-897b-dde0c06d66fb",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-127.9998,-3.999969,64",
+              "80,-4,64",
+              "80.00003,11.99998,64",
+              "-127.9998,12.00002,64",
+              "-127.9998,12.00002,-64",
+              "80.00003,11.99998,-64",
+              "80,-4,-64",
+              "-127.9998,-3.999969,-64"
+            ],
+            "TextureCoord": [
+              "1.25,0.1249999",
+              "-0.3749986,0",
+              "1.25,0",
+              "1,0",
+              "-0.3749984,-0.0000002384186",
+              "-1.25,0",
+              "-0.3749986,0.1249996",
+              "-1.125,0",
+              "1.25,0",
+              "0.3749984,1",
+              "1.25,0.1249999",
+              "1.125,1",
+              "-0.3749986,0.1249996",
+              "1.25,1",
+              "-0.3749984,-0.0000002384186",
+              "-1,1",
+              "-1,0",
+              "-0.3749986,1",
+              "-1.125,1",
+              "0.3749984,0",
+              "1,1",
+              "1.25,0",
+              "1.125,0",
+              "-1.25,1"
+            ],
+            "TextureUAxis": [
+              "1,0.000001668932,0",
+              "1,0.000001668932,0",
+              "0,-1,0",
+              "0.00000190735,1,0",
+              "-1,0.0000001467192,0",
+              "1,-0.0000001467193,0"
+            ],
+            "TextureVAxis": [
+              "0.00000000000006996128,-1,0",
+              "0.00000000000006996128,-1,0",
+              "0,0,-1",
+              "-0,0,-1",
+              "0,0,-1",
+              "0,0,-1"
+            ],
+            "TextureScale": [
+              "0.2500001,0.2500001",
+              "0.2500001,0.2500001",
+              "0.2499998,0.25",
+              "0.2499998,0.25",
+              "0.2500001,0.25",
+              "0.25,0.25"
+            ],
+            "TextureOffset": [
+              "511.999,63.99976",
+              "511.999,63.99976",
+              "0.0006103516,0.01245117",
+              "511.9983,0.01245117",
+              "511.9999,0.01245117",
+              "0.00006103516,0.01245117"
+            ],
+            "MaterialIndex": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat",
+              "materials/painterly/bricks/bricks01.vmat",
+              "materials/generic/wall_brick_e.vmat",
+              "materials/walls/wall_1.vmat",
+              "materials/dev/orange/dev_orange_12.vmat",
+              "materials/brick wall 02.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": true
+        }
+      ]
+    },
+    {
+      "__guid": "ba8f5cf8-db27-4c6e-82ae-217b37222bcd",
+      "Flags": 0,
+      "Name": "Box",
+      "Position": "-48,132,96.00003",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "e5951161-24ab-4889-b1c7-79fdbe795c3a",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-39.99981,-4.000015,32",
+              "0.0001831055,-3.999969,32",
+              "0.0002059937,12.00002,32",
+              "-39.99979,11.99997,32",
+              "-39.99979,11.99997,-12.00003",
+              "0.0002059937,12.00002,-12.00003",
+              "0.0001831055,-3.999969,-12.00003",
+              "-39.99981,-4.000015,-12.00003"
+            ],
+            "TextureCoord": [
+              "-0.3749986,0.1249996",
+              "-0.6874985,0",
+              "-0.3749984,-0.0000002384186",
+              "1,0",
+              "-0.6874983,0.0000001192093",
+              "0.3749984,0",
+              "-0.6874985,0.125",
+              "-1.125,0",
+              "-0.3749984,-0.0000002384186",
+              "0.6874983,0.3437502",
+              "-0.3749986,0.1249996",
+              "1.125,0.3437502",
+              "-0.6874985,0.125",
+              "-0.3749986,0.3437502",
+              "-0.6874983,0.0000001192093",
+              "-0.9999999,0.3437502",
+              "-0.9999999,0",
+              "-0.6874985,0.3437502",
+              "-1.125,0.3437502",
+              "0.6874983,0",
+              "1,0.3437502",
+              "-0.3749986,0",
+              "1.125,0",
+              "0.3749984,0.3437502"
+            ],
+            "TextureUAxis": [
+              "1,0.0000004768378,0",
+              "1,0.000000476838,0",
+              "-0.000001430513,-1,0",
+              "0.000001430513,1,0",
+              "-1,-0.000001144409,0",
+              "1,0.000001144409,0"
+            ],
+            "TextureVAxis": [
+              "-0.0000001430511,-1,-0",
+              "-0.0000000000001818991,-1,-0",
+              "0,0,-1",
+              "-0,0,-1",
+              "0,0,-1",
+              "-0,0,-1"
+            ],
+            "TextureScale": [
+              "0.25,0.25",
+              "0.2500001,0.25",
+              "0.2499996,0.25",
+              "0.2499998,0.25",
+              "0.2500001,0.25",
+              "0.25,0.25"
+            ],
+            "TextureOffset": [
+              "511.9997,63.99994",
+              "511.9997,63.99994",
+              "0.0004272461,0.00006103516",
+              "511.9996,0.00006103516",
+              "0.0007019043,0.0001220703",
+              "511.9994,0.00006103516"
+            ],
+            "MaterialIndex": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat",
+              "materials/painterly/bricks/bricks01.vmat",
+              "materials/generic/wall_brick_e.vmat",
+              "materials/walls/wall_1.vmat",
+              "materials/dev/orange/dev_orange_12.vmat",
+              "materials/brick wall 02.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": true
+        }
+      ]
+    },
+    {
+      "__guid": "351817ac-6536-4957-8b41-24be046ff286",
+      "Flags": 0,
+      "Name": "Door",
+      "Position": "-48,128,56",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "188d29ca-439f-4081-82a2-c7b2149e6d73",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": true,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-39.99792,7.999863,32",
+              "0.002334595,8.000122,32",
+              "0.002403259,12.00012,32",
+              "-39.99786,11.99986,32",
+              "-39.99786,11.99986,-56",
+              "0.002403259,12.00012,-56",
+              "0.002334595,8.000122,-56",
+              "-39.99792,7.999863,-56"
+            ],
+            "TextureCoord": [
+              "0.4197563,0.1023053",
+              "0.04773003,0.04092258",
+              "0.4197569,0.06510282",
+              "2.131043,0.04092258",
+              "0.04773062,0.06510532",
+              "0.5535492,0.04092258",
+              "0.04773003,0.1023077",
+              "-0.4359151,0.04092258",
+              "0.4197569,0.06510282",
+              "0.9255755,0.8593749",
+              "0.4197563,0.1023053",
+              "2.168245,0.859375",
+              "0.04773003,0.1023077",
+              "0.4197563,0.859375",
+              "0.04773062,0.06510532",
+              "-0.3987128,0.8593749",
+              "-0.3987128,0.04092258",
+              "0.04773003,0.8593749",
+              "-0.4359151,0.8593749",
+              "0.9255755,0.04092258",
+              "2.131043,0.859375",
+              "0.4197563,0.04092258",
+              "2.168245,0.04092258",
+              "0.5535492,0.859375"
+            ],
+            "TextureUAxis": [
+              "1,0.0000006628048,0",
+              "1,0.0000006628048,0",
+              "-0.00001525879,-1,0",
+              "0.00001716614,1,0",
+              "-1,-0.000006484942,0",
+              "1,0.000006484944,0"
+            ],
+            "TextureVAxis": [
+              "-0.0000002241123,-1,-0",
+              "-0.0000002241123,-1,-0",
+              "0,0,-1",
+              "-0,0,-1",
+              "0.0000003204324,0.000000000002077986,-1",
+              "-0,0,-1"
+            ],
+            "TextureScale": [
+              "0.21,0.21",
+              "0.21,0.21",
+              "0.2100004,0.21",
+              "0.2100015,0.21",
+              "0.21,0.21",
+              "0.21,0.21"
+            ],
+            "TextureOffset": [
+              "443.4751,187.9999",
+              "443.4751,187.9999",
+              "443.4697,439.9999",
+              "443.4828,440.0001",
+              "54.8615,440.0001",
+              "443.4714,440"
+            ],
+            "MaterialIndex": [
+              5,
+              5,
+              6,
+              5,
+              6,
+              6
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat",
+              "materials/painterly/bricks/bricks01.vmat",
+              "materials/generic/wall_brick_e.vmat",
+              "materials/walls/wall_1.vmat",
+              "materials/dev/orange/dev_orange_12.vmat",
+              "materials/brick wall 02.vmat",
+              "materials/buildings/door_01a.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": true
+        },
+        {
+          "__type": "FuncButton",
+          "__guid": "009ae048-62ff-412e-8718-9b61c3bf9335",
+          "AutoReset": true,
+          "CloseDuration": 1,
+          "CloseMovementCurve": [
+            {},
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "Move": false,
+          "MoveDelta": "-40,0,0",
+          "OnOpenEnd": {
+            "__version": 8,
+            "__guid": "bbd2bdc7-0ed2-4798-ad4c-d1220eb5e0ec",
+            "__changeId": 4,
+            "UserData": {
+              "Title": "On Open End"
+            },
+            "Variables": [],
+            "Nodes": [
+              {
+                "Id": 0,
+                "Type": "input"
+              },
+              {
+                "Id": 1,
+                "Type": "call",
+                "Properties": {
+                  "_isStatic": false,
+                  "_name": "StopAllSounds",
+                  "_type": "Sandbox.GameObject"
+                },
+                "UserData": {
+                  "Position": "204,108"
+                }
+              }
+            ],
+            "Links": [
+              {
+                "SrcId": 0,
+                "SrcName": "_signal",
+                "DstId": 1,
+                "DstName": "_signal"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "_target",
+                "DstId": 1,
+                "DstName": "_target"
+              }
+            ]
+          },
+          "OnOpenStart": {
+            "__version": 8,
+            "__guid": "cb4a76c7-7e31-4314-bc6f-aa2a4b4244b9",
+            "__changeId": 12,
+            "UserData": {
+              "Title": "On Open Start",
+              "ReferencedComponentTypes": []
+            },
+            "Variables": [],
+            "Nodes": [
+              {
+                "Id": 0,
+                "Type": "input"
+              },
+              {
+                "Id": 3,
+                "Type": "call",
+                "Properties": {
+                  "_isStatic": false,
+                  "_name": "PlaySound",
+                  "_type": "Sandbox.GameObject"
+                },
+                "UserData": {
+                  "Position": "192,60"
+                }
+              }
+            ],
+            "Links": [
+              {
+                "SrcId": 0,
+                "SrcName": "_signal",
+                "DstId": 3,
+                "DstName": "_signal"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "_target",
+                "DstId": 3,
+                "DstName": "_target"
+              },
+              {
+                "Id": 4,
+                "Value": "sounds/elevator_door_closing.sound",
+                "DstId": 3,
+                "DstName": "sound"
+              }
+            ]
+          },
+          "OpenDuration": 10,
+          "OpenMovementCurve": [
+            {},
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "ResetTime": 2
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "badbcda1-4bf7-4fe4-8a49-0623071a32e9",
+          "Flags": 0,
+          "Name": "door_big_window",
+          "Position": "-19.62574,8.708374,-55.99997",
+          "Rotation": "0,0,-0.7071067,0.7071068",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "cb6af09b-ff1e-4cf2-9fb5-4ea448925654",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/door_big_window/door_big_window.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -1389,8 +2219,16 @@
   "Description": "",
   "ResourceVersion": 1,
   "__references": [
+    "apetavern.door_01a",
+    "audiotrope.painterlybricks1",
+    "exorealms.1c4e365b78f25368",
     "facepunch.concrete_barrier",
-    "facepunch.fire_particle_fast"
+    "facepunch.fire_particle_fast",
+    "facepunch.wall_brick_e",
+    "fish.door_big_window",
+    "gbonn.brickwall02",
+    "oleshkus.wall_1",
+    "tiowevolve.dev_orange_12"
   ],
   "IsValid": true,
   "__version": 1

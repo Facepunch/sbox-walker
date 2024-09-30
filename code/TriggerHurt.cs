@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Deals damage to objects inside
 /// </summary>
-[Category( "Gameplay" ), Icon( "medical_services" ), EditorHandle( "medical_services" )]
+[Category( "Gameplay" ), Icon( "medical_services" ), EditorHandle( Icon = "🤕" )]
 public sealed class TriggerHurt : Component
 {
 	public delegate Task TriggerDelegate( Collider collider, GameObject gameobject );

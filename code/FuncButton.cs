@@ -1,4 +1,4 @@
-[Alias( "Button" )]
+﻿[Alias( "Button" ), EditorHandle( Icon = "touch_app" )]
 public sealed class FuncButton : Component, Component.IPressable
 {
 	public delegate Task ButtonDelegate( GameObject presser );
@@ -8,21 +8,23 @@ public sealed class FuncButton : Component, Component.IPressable
 	[Property] public ButtonDelegate OnButtonPressed { get; set; }
 	[Property] public ButtonDelegate OnButtonReleased { get; set; }
 
+	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenStart { get; set; }
+	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenEnd { get; set; }
+	[Property, Group( "Opening" ), Order( 1 )] public float OpenDuration { get; set; } = 1.0f;
+	[Property, Group( "Opening" ), Order( 1 )] public Curve OpenMovementCurve { get; set; } = new Curve( new Curve.Frame( 0, 0 ), new Curve.Frame( 1, 1 ) );
 
-	[Property] public SoundEvent PressSound { get; set; }
-	[Property] public SoundEvent ReleaseSound { get; set; }
+	[Property, Group( "Closing" ), Order( 2 )] public Action OnCloseStart { get; set; }
+	[Property, Group( "Closing" )] public Action OnCloseEnd { get; set; }
+	[Property, Group( "Closing" )] public float CloseDuration { get; set; } = 1.0f;
+	[Property, Group( "Closing" )] public Curve CloseMovementCurve { get; set; } = new Curve( new Curve.Frame( 0, 0 ), new Curve.Frame( 1, 1 ) );
 
-	[Property] public float ResetTime { get; set; } = 1.0f;
+	[Property] public bool AutoReset { get; set; } = false;
+	[Property, ShowIf( "AutoReset", false )] public float ResetTime { get; set; } = 1.0f;
 
-	[Property] public bool Move { get; set; }
-	[Property] public Vector3 MoveDelta { get; set; }
-	[Property] public Curve PressCurve { get; set; } = new Curve( new Curve.Frame( 0, 0 ), new Curve.Frame( 1, 1 ) );
-	[Property] public float PressTime { get; set; } = 0.3f;
-	[Property] public Curve ReleaseCurve { get; set; } = new Curve( new Curve.Frame( 0, 0 ), new Curve.Frame( 1, 1 ) );
-	[Property] public float ReleaseTime { get; set; } = 0.3f;
+	[Property, Group( "Movement" ), Order( 0 )] public bool Move { get; set; }
+	[Property, Group( "Movement" )] public Vector3 MoveDelta { get; set; }
 
 	TimeUntil timeUntilPressable = 0;
-
 	Vector3 initialPos;
 
 	protected override void OnStart()
@@ -43,22 +45,38 @@ public sealed class FuncButton : Component, Component.IPressable
 
 		OnButtonPressed?.Invoke( presser );
 		timeUntilPressable = ResetTime;
-		Sound.Play( PressSound, Transform.Position );
 
 		if ( IsProxy )
 			return;
 
-		Invoke( ResetTime, ResetButton );
-
-		AnimatePositionTo( initialPos + Transform.LocalRotation * MoveDelta, PressCurve, PressTime );
+		Open();
 	}
 
-	public void ResetButton()
+	async void Open()
 	{
-		AnimatePositionTo( initialPos, ReleaseCurve, ReleaseTime );
+		OnOpenStart?.Invoke();
+
+		await AnimatePositionTo( initialPos + Transform.LocalRotation * MoveDelta, OpenMovementCurve, OpenDuration );
+
+		OnOpenEnd?.Invoke();
+
+		if ( AutoReset && ResetTime >= 0.0f )
+		{
+			await Task.DelaySeconds( ResetTime );
+			Close();
+		}
 	}
 
-	async void AnimatePositionTo( Vector3 pos, Curve curve, float time )
+	async void Close()
+	{
+		OnCloseStart?.Invoke();
+
+		await AnimatePositionTo( initialPos, CloseMovementCurve, CloseDuration );
+
+		OnCloseEnd?.Invoke();
+	}
+
+	async Task AnimatePositionTo( Vector3 pos, Curve curve, float time )
 	{
 		float d = 0;
 		Vector3 start = Transform.LocalPosition;
@@ -84,7 +102,6 @@ public sealed class FuncButton : Component, Component.IPressable
 			return;
 
 		OnButtonReleased?.Invoke( presser );
-		Sound.Play( ReleaseSound, Transform.Position );
 
 		if ( IsProxy )
 			return;
