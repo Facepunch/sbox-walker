@@ -2184,7 +2184,7 @@
                 "DstName": "_target"
               },
               {
-                "Id": 20,
+                "Id": 9,
                 "Value": "sounds/elevator_door_closing.sound",
                 "DstId": 3,
                 "DstName": "sound"
@@ -2517,7 +2517,7 @@
                 "DstName": "_target"
               },
               {
-                "Id": 29,
+                "Id": 7,
                 "Value": "sounds/water/water_bullet_impact.sound",
                 "DstId": 1,
                 "DstName": "sound"
@@ -2537,6 +2537,1248 @@
       "Name": "TeleportTarget",
       "Position": "4,200,4",
       "Enabled": true
+    },
+    {
+      "__guid": "e6d59c3a-77ba-455d-85f4-908ec79c9eb8",
+      "Flags": 0,
+      "Name": "coin01",
+      "Position": "55.99998,-160,4.548832",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "c0a4560b-398b-4b91-809f-954b6a927a43",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "8ca6946a-2f97-47b5-b49a-130ac893d90b",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "ebb3d68a-cd69-4b09-9051-f83043b6aec3",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "50ddb336-b563-453a-a081-4926763dff33",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "fa2852ec-0e89-491d-abab-a2041c3ef569",
+      "Flags": 0,
+      "Name": "coin01 (1)",
+      "Position": "51.14896,-218.1089,4.142139",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "523999be-94a0-4667-9c5a-4cdcc15838cf",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "9e10dd09-5ede-4686-9a11-c26db6816561",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "39be3b29-1c17-4788-bc13-af8565df4425",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "fff8e5b3-b88a-4705-bfc5-9b17c0726926",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "ce332c13-5777-4e48-87bb-5897b5b53a93",
+      "Flags": 0,
+      "Name": "coin01 (2)",
+      "Position": "-53.89161,-164.4549,4.502572",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "2eda85dd-d8c2-4e43-b8e2-b4ee5a1e51ef",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "4295ce0e-0032-4c36-a79e-61becf4c0477",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "2b2f2578-c4ec-4992-9f99-cba206500982",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "c7baacd1-1f0c-4888-bddb-36977facc7f6",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "369a7887-a902-4c3f-8d64-58e2947fe45d",
+      "Flags": 0,
+      "Name": "coin01 (3)",
+      "Position": "-87.99995,-164.4549,4.502562",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "6cfb0e1f-b29d-4fe8-803f-a36a0aec38e2",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "372d21c2-6876-4af2-9b6d-2484e3d70c5b",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "6bd1effe-1abf-495e-b778-76290ffedb17",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "dde76a8d-51a8-4949-988b-5a675be4615e",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "87f3f61c-2927-4daf-a684-3c5dad18f0e7",
+      "Flags": 0,
+      "Name": "coin01 (10)",
+      "Position": "-87.99995,-128,4.502562",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "a880adb5-2891-42b9-9a16-fd09ccfd90b1",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "e0782381-e342-4fd5-9d3a-d6cb30f99453",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "66b8c6f2-5287-4958-9597-aef6a5e63ed2",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "b4dcd24f-f777-4168-b99c-6f92572853cc",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "f712190d-a8ee-4a1c-9680-c11d2dee3a0a",
+      "Flags": 0,
+      "Name": "coin01 (14)",
+      "Position": "-87.99995,-88,4.502562",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "7e811e93-9570-4388-b785-43970e1919da",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "aa6d03fa-5bd6-40ef-b23b-df7afea5fb8c",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "2fe9e98d-7083-46f9-a2ea-e97945ac906c",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "bd8729c8-026b-4521-81ae-364275963c66",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "11630d5c-deff-4778-9c97-14b7b43393a7",
+      "Flags": 0,
+      "Name": "coin01 (18)",
+      "Position": "-87.99995,-48,4.502562",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "466c9f6d-c2d3-418f-93e1-9f47bada4c4a",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "4861135c-0aee-4648-9a09-a63879c2f821",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "b70658ac-9e95-4da9-aefc-3baa025a9ae0",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "3a442589-d3f4-4a2e-9b66-8253a5392b7e",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "fe94ad97-c5b5-4cfe-ad5d-d5699296fff0",
+      "Flags": 0,
+      "Name": "coin01 (22)",
+      "Position": "-87.99995,-16,4.502562",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "14122d4e-dc90-4e3c-8849-466e1cd9831a",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "d8a12272-4a91-4dd2-a4f9-c16882f1bbd7",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "a4f84e80-3744-4f05-bae0-a830f325ea0e",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "ae80811d-b838-492a-9d78-45a42164abb4",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "ad826fc9-fae8-4572-8da9-599271c1f05c",
+      "Flags": 0,
+      "Name": "coin01 (26)",
+      "Position": "-87.99995,-200,4.502562",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "14f8ba5f-c9e3-48f5-8778-816e9685f2ae",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "49be6543-e4a5-448b-a524-84e77d0179aa",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "b752af2d-1b37-453a-a4d8-743243654521",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "72483969-dd73-4e34-bfa8-916587a53f95",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "cbe76a40-4620-4245-9159-5f2dec7383fb",
+      "Flags": 0,
+      "Name": "coin01 (4)",
+      "Position": "-119.9999,-164.4549,4.502553",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "e14c4b9e-29dc-42db-bcfb-0862d0a699cb",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "6177508a-dc6b-4317-89ca-64152d6daa65",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "a1af90fa-5c2a-4d48-8429-1ae63b14117e",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "fd597c47-3f35-4446-8561-8ad26a1dc431",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "29da483a-c7d0-4a5b-8832-7c6366f6739d",
+      "Flags": 0,
+      "Name": "coin01 (9)",
+      "Position": "-119.9999,-128,4.502553",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "a2cb77ba-1a46-4303-9204-042a4cc9c7c4",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "58230400-8010-4c75-952d-2fd84e0f2c5a",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "14133acf-7bf4-41e9-85a8-65ae89ce9626",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "013bcd3e-f968-4775-9bac-6ac75b991e8d",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "6f341640-206d-464f-97c3-46b0e1ec381f",
+      "Flags": 0,
+      "Name": "coin01 (13)",
+      "Position": "-119.9999,-88,4.502553",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "2d8e4181-a217-4368-8ca2-8ae16aa84c32",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "6d07b492-1cab-4e24-9e70-a6068d45474c",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "d493f952-6f1a-4a3f-958f-e88e2689818c",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "62efe2f5-5377-405b-bcd7-0f41f3ff9fd2",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "b3b67fce-4460-48fd-ade0-a7adf04b7763",
+      "Flags": 0,
+      "Name": "coin01 (17)",
+      "Position": "-119.9999,-48,4.502553",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "1a8af22d-9a0b-4b2f-b07f-3367c90adaff",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "20369c40-0438-4e8c-8d39-843d98651ccd",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "a3055b2d-7ef2-4836-aeac-d250ccbc68b8",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "482b5b7a-82ef-49c2-b235-9a1fbd081e51",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "48f7d189-11b0-4abc-b979-d051f67ccc3f",
+      "Flags": 0,
+      "Name": "coin01 (21)",
+      "Position": "-119.9999,-16,4.502553",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "5d786eb6-c416-4a7c-b586-10772c1c347c",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "685bf274-979e-4d59-84fa-9c68d34f8103",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "1f350df8-7284-4947-97be-12e0fa7732de",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "a20a29eb-385a-4356-a423-3d5961d81399",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "4ecb9f6e-538d-45fc-bcf6-b3c1b2341a0e",
+      "Flags": 0,
+      "Name": "coin01 (25)",
+      "Position": "-119.9999,-200,4.502553",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "489f20d7-83d8-4adc-bd35-4181d01c0d97",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "e8489f46-1872-4d33-a72a-7f4d6fa132ef",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "9f88626d-0949-4969-aeb3-5d0a7ed070c1",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "7aaef7bc-2489-42d5-9e0e-d3738779c65a",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "b4ecb983-19a9-470e-8aa9-0669157a284d",
+      "Flags": 0,
+      "Name": "coin01 (5)",
+      "Position": "-151.9999,-164.4549,4.502543",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "19702eab-0c28-4b82-88a4-a5d011fc1885",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "327de7e7-0cfc-4f0d-84ea-398e7301eb57",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "4cfd4273-2789-46ae-b6c9-d2f0e5791048",
+          "GroupName": "collectable",
+          "Icon": "\uD83C\uDF4E"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "653b01e6-bd86-4298-86f9-56d4494f2ec9",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "473eb881-690e-4ea4-a27f-c59d645a232e",
+      "Flags": 0,
+      "Name": "coin01 (8)",
+      "Position": "-151.9999,-128,4.502543",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "a771a210-63c2-4ec6-b983-a3ff6ef78da4",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "6ecb88aa-8093-4f4d-a1ef-c743149c6d96",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "035e4b83-6cbd-4746-b977-28f655d56bfa",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "a7f4c731-b7e9-4265-a557-c56b6734c16b",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "97d4a48b-c012-42ad-b0f9-8a1477ee7e1c",
+      "Flags": 0,
+      "Name": "coin01 (12)",
+      "Position": "-151.9999,-88,4.502543",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "4a0de7f2-343d-43bd-ae33-afbe478091bb",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "9a8c41e3-a300-4d36-b9ff-b97d9ed4e710",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "53e66b58-0c72-4dfd-a527-26a2739773e2",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "0c3287c9-20cd-4e8a-b5d2-61719446f41e",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "77edce3c-48cf-45f3-8da7-21f23ed4ee99",
+      "Flags": 0,
+      "Name": "coin01 (16)",
+      "Position": "-151.9999,-48,4.502543",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "8781638b-2172-4d2d-b142-dfa9c0e078a9",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "5f8ff699-471c-4662-ad8a-59bd3321c2bf",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "ae5438ba-ff57-4122-b14e-95f9e4b24004",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "4b018999-94c2-4ee2-8865-322c63ce0e0f",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "a9a69fc3-38cc-4cda-94e3-c16b5462edc3",
+      "Flags": 0,
+      "Name": "coin01 (20)",
+      "Position": "-151.9999,-16,4.502543",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "69766a0e-83c9-461a-bfa1-bb0b71b7f10e",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "e3fbb009-4327-4766-ae20-2e8f4581e744",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "18b097f8-e9b6-4171-adc4-4a21e55ec5d3",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "9c5ccff4-7cac-4a99-bb88-43154c0750ae",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "f02aed26-647c-45d8-9908-aae172c0aa2a",
+      "Flags": 0,
+      "Name": "coin01 (24)",
+      "Position": "-151.9999,-200,4.502543",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "6907df17-6992-426d-81e0-df62ca33d2fa",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "a0c1db7e-272e-44e5-af49-0ad56ffddfec",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "611dc564-d7f5-499b-8071-699028aeea4d",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "941d8564-d863-4531-8d22-5d641b2693f2",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "5f8989db-5ab4-4e0a-8498-7b16cdb8f6bf",
+      "Flags": 0,
+      "Name": "coin01 (6)",
+      "Position": "-191.9999,-164.4549,4.502531",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "ca320d5d-5d04-43ef-95b9-528b3ac71209",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "062e8a6f-187f-413d-a8ef-b7860a7e006d",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "a07c166d-d036-491b-afb5-8ff032785146",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "ee05bc98-79c6-42ec-8148-7dfd21f5523b",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "9ed46eff-636a-4299-87c8-5951fcb73902",
+      "Flags": 0,
+      "Name": "coin01 (7)",
+      "Position": "-191.9999,-128,4.502531",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "4926f0b6-2c29-492a-8d1c-15e9ff87bf75",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "e78faef6-08c0-4921-b089-9f9667137906",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "b9d1db5d-0d6b-44ed-a08d-fd46c3f4a571",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "e2a2d9fe-dc13-4082-9056-2946c1974bd7",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "0b197b0b-a0f5-4d20-91ed-72f3ea0d335f",
+      "Flags": 0,
+      "Name": "coin01 (11)",
+      "Position": "-191.9999,-88,4.502531",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "093c8f83-f71f-415e-8be0-9d06e5b0c7ea",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "11508788-9633-42d4-8b1e-25e2405e30fc",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "bd53af3c-5d60-4a1a-a66d-39a25fac3ae9",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "869d0c57-567a-444c-becf-15bf219f241f",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "3d2c1234-84ce-405f-875b-2eb78e11e781",
+      "Flags": 0,
+      "Name": "coin01 (15)",
+      "Position": "-191.9999,-48,4.502531",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "9b489fad-eb3a-407d-aae8-337899cd6a32",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "6c49f6bb-282d-4084-a528-5645b1428b1c",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "e97beab9-0995-4572-922c-ea882144605f",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "33c8a00d-2970-4a6b-8542-b5cf8d484a6f",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "9c33d7e7-f3f4-4cc9-bfa3-e6da98100565",
+      "Flags": 0,
+      "Name": "coin01 (19)",
+      "Position": "-191.9999,-16,4.502531",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "a360d5cb-b0d5-4a6a-86e0-bdc26384d787",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "40e46b98-6ebf-45a2-aa4e-e01e42ae3527",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "5a06a5f3-3141-43c1-b8be-a83900b6a74b",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "b2e9007c-8900-43eb-b01a-5f5920737c52",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
+    },
+    {
+      "__guid": "be1483c1-0134-4396-8493-d9faa73e0624",
+      "Flags": 0,
+      "Name": "coin01 (23)",
+      "Position": "-191.9999,-200,4.502531",
+      "Rotation": "0,0.9999999,0,0.0000001490116",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkOrphaned": 3,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "f9d11b03-967a-46e5-942f-ed2eb72a5192",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/citizen_props/coin01.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "d3474343-2342-4dcf-a6bf-4bab63d1ff19",
+          "Center": "-14.19999,0.5333328,1.933336",
+          "IsTrigger": false,
+          "Radius": 16.800005,
+          "Static": false
+        },
+        {
+          "__type": "CollectableItem",
+          "__guid": "4d8ee60b-f6a1-4c66-b2e8-0f570e7e8b95",
+          "GroupName": "collectable",
+          "Icon": "\uD83E\uDE99"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "bc4825f3-c07a-49b5-9c91-b312ecfe920c",
+          "Icon": "\uD83E\uDE99",
+          "Text": "Collect"
+        }
+      ]
     }
   ],
   "SceneProperties": {

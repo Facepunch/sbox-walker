@@ -171,8 +171,19 @@
               "Components": [
                 {
                   "__type": "Sandbox.CrosshairTooltip",
-                  "__guid": "e9e06e7d-8c10-42fe-a737-b9736ff32210",
-                  "MyStringValue": "Hello World!"
+                  "__guid": "e9e06e7d-8c10-42fe-a737-b9736ff32210"
+                }
+              ]
+            },
+            {
+              "__guid": "9198aa42-df9f-4ac9-98c8-49fa0ffab8f7",
+              "Flags": 0,
+              "Name": "Collectables",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.Collectables",
+                  "__guid": "3d8db16f-fdb8-4a31-a318-3ec538b066b3"
                 }
               ]
             }

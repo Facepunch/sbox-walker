@@ -1,0 +1,40 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    @foreach ( var item in items )
+    {
+        bool active = item.Active;
+        string clss = active ? "uncollected" : "";
+
+        <div class="icon @clss">@item.Icon</div>
+    }
+</root>
+
+@code
+{
+
+    public string Icon { get; set; }
+    public string Tooltip { get; set; }
+
+    CollectableItem[] items;
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine(items.Count( x => x.Active ));
+
+    protected override void OnEnabled()
+    {
+        items = Scene.Components.GetAll<CollectableItem>( FindMode.EverythingInSelfAndDescendants ).ToArray();
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        SetClass("complete", items.All( x => !x.Active ) );
+    }
+}
