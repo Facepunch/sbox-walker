@@ -16,3 +16,4 @@ code/Properties/*
 *.los
 *.vpk
 *.sln
+/.sbox
