@@ -16,6 +16,7 @@ public sealed class PlayerController : Component
 
 	[Sync] public bool Crouching { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
+	public Vector3 EyePosition => Transform.Position + Vector3.Up * EyeHeight;
 	[Sync] public Vector3 WishVelocity { get; set; }
 
 	public bool WishCrouch;

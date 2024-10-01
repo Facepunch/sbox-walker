@@ -18,7 +18,7 @@ public sealed class FuncButton : Component, Component.IPressable
 	[Property, Group( "Closing" )] public float CloseDuration { get; set; } = 1.0f;
 	[Property, Group( "Closing" )] public Curve CloseMovementCurve { get; set; } = new Curve( new Curve.Frame( 0, 0 ), new Curve.Frame( 1, 1 ) );
 
-	[Property] public bool AutoReset { get; set; } = false;
+	[Property] public bool AutoReset { get; set; } = true;
 	[Property, ShowIf( "AutoReset", false )] public float ResetTime { get; set; } = 1.0f;
 
 	[Property, Group( "Movement" ), Order( 0 )] public bool Move { get; set; }

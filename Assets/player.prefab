@@ -443,7 +443,6 @@
                                         "__guid": "44d276f3-50ad-4830-8b54-1e402b8d70cb",
                                         "Flags": 4,
                                         "Name": "arm_lower_L_twist0",
-                                        "Position": "0,0,0",
                                         "Enabled": true
                                       },
                                       {
@@ -457,7 +456,6 @@
                                         "__guid": "367a0ba8-87d0-4dbd-b9ec-e03af2672fde",
                                         "Flags": 4,
                                         "Name": "arm_elbow_helper_L",
-                                        "Position": "0,0,0",
                                         "Rotation": "0.0000003075731,0.000000002854507,-0.7577645,0.6525282",
                                         "Enabled": true
                                       }
@@ -467,7 +465,6 @@
                                     "__guid": "fa6f869b-a113-4268-b61c-50f4d87ba59c",
                                     "Flags": 4,
                                     "Name": "arm_upper_L_twist0",
-                                    "Position": "0,0,0",
                                     "Enabled": true
                                   },
                                   {
@@ -684,14 +681,12 @@
                                         "__guid": "f779071d-c6fe-4a0b-9245-f9253d204512",
                                         "Flags": 4,
                                         "Name": "arm_lower_R_twist0",
-                                        "Position": "0,0,0",
                                         "Enabled": true,
                                         "Children": [
                                           {
                                             "__guid": "a4877134-51eb-49c3-8faa-546c6d53cedf",
                                             "Flags": 4,
                                             "Name": "arm_elbow_helper_R",
-                                            "Position": "0,0,0",
                                             "Rotation": "0.0000007692941,-0.0000002412072,-0.7577677,0.6525243",
                                             "Enabled": true
                                           }
@@ -703,7 +698,6 @@
                                     "__guid": "8ae5ee82-569d-4299-8bda-bb5cd13eba76",
                                     "Flags": 4,
                                     "Name": "arm_upper_R_twist0",
-                                    "Position": "0,0,0",
                                     "Enabled": true
                                   },
                                   {
@@ -776,14 +770,12 @@
                         "__guid": "a1c0d29e-8935-4958-a470-527b1c913037",
                         "Flags": 4,
                         "Name": "leg_lower_R_twist0",
-                        "Position": "0,0,0",
                         "Enabled": true
                       },
                       {
                         "__guid": "09fba86f-30ea-4db2-910d-644597c0ace4",
                         "Flags": 4,
                         "Name": "leg_knee_helper_R",
-                        "Position": "0,0,0",
                         "Rotation": "0.000000905889,-0.000001318489,0.7135269,0.7006279",
                         "Enabled": true
                       }
@@ -800,7 +792,6 @@
                     "__guid": "2912a86c-bcf1-4f93-9ab4-0b14fe294816",
                     "Flags": 4,
                     "Name": "leg_upper_R_twist0",
-                    "Position": "0,0,0",
                     "Rotation": "-0.00000008940732,-0.000000029802,0.000003069638,1",
                     "Enabled": true
                   },
@@ -808,7 +799,6 @@
                     "__guid": "b8783b2f-3e8d-459b-b73d-01226673da04",
                     "Flags": 4,
                     "Name": "leg_glute_helper_R",
-                    "Position": "0,0,0",
                     "Rotation": "-0.000001221895,-0.0000006515999,-0.7071052,0.7071083",
                     "Enabled": true
                   }
@@ -859,14 +849,12 @@
                         "__guid": "6e28605f-4009-48be-94f5-13f2f506ac27",
                         "Flags": 4,
                         "Name": "leg_lower_L_twist0",
-                        "Position": "0,0,0",
                         "Enabled": true
                       },
                       {
                         "__guid": "fd6a5f6c-6ffa-4699-9e8c-ef087cb94d03",
                         "Flags": 4,
                         "Name": "leg_knee_helper_L",
-                        "Position": "0,0,0",
                         "Rotation": "-0.000002973302,-0.000001705918,0.7135277,0.7006271",
                         "Enabled": true
                       }
@@ -883,14 +871,12 @@
                     "__guid": "e61e3daf-812e-4e3d-8ec0-672c114e4a52",
                     "Flags": 4,
                     "Name": "leg_upper_L_twist0",
-                    "Position": "0,0,0",
                     "Enabled": true
                   },
                   {
                     "__guid": "91ff23b2-40c7-42ff-9c7a-c4bf9e30cb25",
                     "Flags": 4,
                     "Name": "leg_glute_helper_L",
-                    "Position": "0,0,0",
                     "Rotation": "-0.000001102686,-0.0000007682514,-0.7071056,0.707108",
                     "Enabled": true
                   }

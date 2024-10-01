@@ -5,7 +5,8 @@
       "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-11.05377,-0.4116774,64.03128",
+      "Position": "-117.5462,-17.32553,64.03128",
+      "Rotation": "-0.03728334,0.06217941,0.5128959,0.8553838",
       "Enabled": true,
       "Components": [
         {
@@ -114,7 +115,6 @@
           "__guid": "5c673de9-a7fd-43fa-98e2-dd28a882bd68",
           "Flags": 0,
           "Name": "Chat",
-          "Position": "0,0,0",
           "Enabled": true,
           "NetworkMode": 1,
           "Components": [
@@ -128,7 +128,6 @@
           "__guid": "de8144e0-9097-4d00-8cff-f13b67233318",
           "Flags": 0,
           "Name": "Scoreboard",
-          "Position": "0,0,0",
           "Enabled": true,
           "Components": [
             {
@@ -141,7 +140,6 @@
           "__guid": "9ca25d97-bab9-4eb9-8622-fc4111cb8adf",
           "Flags": 0,
           "Name": "Hud",
-          "Position": "0,0,0",
           "Enabled": true,
           "Components": [
             {
@@ -154,7 +152,6 @@
               "__guid": "941e6cbd-c42d-41a1-9cdb-e6bbbbcc30f8",
               "Flags": 0,
               "Name": "Inventory",
-              "Position": "0,0,0",
               "Enabled": true,
               "Components": [
                 {

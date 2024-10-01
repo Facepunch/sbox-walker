@@ -21,6 +21,16 @@ public sealed class Player : Component, IDamageable
 
 	public bool IsDead => Health <= 0;
 
+	public Transform EyeTransform
+	{
+		get
+		{
+			var tx = new Transform( PlayerController.EyePosition );
+			tx.Rotation = PlayerController.EyeAngles;
+			return tx;
+		}
+	}
+
 	/// <summary>
 	/// Creates a ragdoll but it isn't enabled
 	/// </summary>
