@@ -10,6 +10,10 @@ public sealed class PlayerUse : Component
 	Transform carryTransform;
 	Transform carryOriginalTransform;
 
+	public bool Interative;
+	public string TooltipIcon;
+	public string Tooltip;
+
 	protected override void OnUpdate()
 	{
 		if ( !Player.Network.IsOwner )
@@ -40,12 +44,48 @@ public sealed class PlayerUse : Component
 			if ( pressed is not null )
 			{
 				pressed.Release( new IPressable.Event( this ) );
+				pressed = default;
 			}
 
 			if ( carrying is not null )
 			{
 				StopCarrying();
 			}
+		}
+
+		if ( pressed is not null || carrying.IsValid() )
+		{
+			Interative = false;
+			return;
+		}
+
+		if ( lookingAt is IPressable btn )
+		{
+			var c = (Component)btn;
+			var tt = c.GetComponent<Tooltip>();
+			if ( tt is not null )
+			{
+				Tooltip = tt.Text;
+				TooltipIcon = tt.Icon;
+			}
+			else
+			{
+				Tooltip = $"Use";
+				TooltipIcon = "pan_tool_alt";
+			}
+
+			Interative = true;
+		}
+		else if ( lookingAt is Rigidbody rbb && CanCarry( rbb ) )
+		{
+			Tooltip = "Pick Up";
+			TooltipIcon = "back_hand";
+			Interative = true;
+		}
+		else
+		{
+			Tooltip = null;
+			Interative = false;
 		}
 	}
 
@@ -123,7 +163,7 @@ public sealed class PlayerUse : Component
 		if ( !eyeTrace.GameObject.IsValid() ) return default;
 
 		var button = eyeTrace.GameObject.Components.Get<IPressable>();
-		if ( button is not null ) return button;
+		if ( button is not null && button.CanPress( new IPressable.Event( this ) ) ) return button;
 
 		var rigidbody = eyeTrace.GameObject.Components.Get<Rigidbody>();
 		if ( CanCarry( rigidbody ) ) return rigidbody;
@@ -131,4 +171,11 @@ public sealed class PlayerUse : Component
 		return default;
 	}
 
+}
+
+
+public class Tooltip : Component
+{
+	[Property] public string Text { get; set; }
+	[Property] public string Icon { get; set; }
 }

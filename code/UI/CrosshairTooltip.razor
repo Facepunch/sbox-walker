@@ -1,0 +1,48 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    <div class="inner">
+        <div class="icon">@Icon</div>
+        <div class="title">@Tooltip</div>
+    </div>
+</root>
+
+@code
+{
+
+    public string Icon { get; set; }
+    public string Tooltip { get; set; }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine( Tooltip, Icon );
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        if (!Panel.IsValid) return;
+
+        Panel.Style.Left = (Screen.Width / 2) * Panel.ScaleFromScreen;
+        Panel.Style.Top = (Screen.Height / 2) * Panel.ScaleFromScreen;
+
+        var use = Scene.GetAll<PlayerUse>().Where(x => !x.IsProxy).FirstOrDefault();
+        if (use is null )
+        {
+            SetClass("active", false);
+            return;
+        }
+
+        SetClass("active", use.Interative);
+
+        if (use.Interative)
+        {
+            Tooltip = use.Tooltip;
+            Icon = use.TooltipIcon;
+        }
+    }
+}

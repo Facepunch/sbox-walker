@@ -162,6 +162,19 @@
                   "SwitchSound": "audio/ui/inventory-switch.sound"
                 }
               ]
+            },
+            {
+              "__guid": "550829a6-d1e5-4b13-85d5-bb0b465a7532",
+              "Flags": 0,
+              "Name": "CrosshairTooltip",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CrosshairTooltip",
+                  "__guid": "e9e06e7d-8c10-42fe-a737-b9736ff32210",
+                  "MyStringValue": "Hello World!"
+                }
+              ]
             }
           ]
         }
@@ -173,6 +186,7 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 60,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
