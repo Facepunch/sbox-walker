@@ -2,11 +2,13 @@
 public sealed class FuncButton : Component, Component.IPressable
 {
 	public delegate Task ButtonDelegate( GameObject presser );
+	public delegate Task ButtonToggleDelegate( bool state );
 
 	[Sync] public bool State { get; set; }
 
 	[Property] public ButtonDelegate OnButtonPressed { get; set; }
 	[Property] public ButtonDelegate OnButtonReleased { get; set; }
+	[Property] public ButtonToggleDelegate OnStateChanged { get; set; }
 
 	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenStart { get; set; }
 	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenEnd { get; set; }
@@ -19,13 +21,14 @@ public sealed class FuncButton : Component, Component.IPressable
 	[Property, Group( "Closing" )] public Curve CloseMovementCurve { get; set; } = new Curve( new Curve.Frame( 0, 0 ), new Curve.Frame( 1, 1 ) );
 
 	[Property] public bool AutoReset { get; set; } = true;
-	[Property, ShowIf( "AutoReset", false )] public float ResetTime { get; set; } = 1.0f;
+	[Property, ShowIf( "AutoReset", true )] public float ResetTime { get; set; } = 1.0f;
 
 	[Property, Group( "Movement" ), Order( 0 )] public bool Move { get; set; }
 	[Property, Group( "Movement" )] public Vector3 MoveDelta { get; set; }
 
-	TimeUntil timeUntilPressable = 0;
 	Vector3 initialPos;
+
+	[Sync] public bool IsMoving { get; set; }
 
 	protected override void OnStart()
 	{
@@ -40,11 +43,10 @@ public sealed class FuncButton : Component, Component.IPressable
 		if ( presser.Network.Owner != Rpc.Caller )
 			return;
 
-		if ( timeUntilPressable > 0 )
+		if ( IsMoving )
 			return;
 
 		OnButtonPressed?.Invoke( presser );
-		timeUntilPressable = ResetTime;
 
 		if ( IsProxy )
 			return;
@@ -52,12 +54,20 @@ public sealed class FuncButton : Component, Component.IPressable
 		Open();
 	}
 
+	[Broadcast]
+	void StateChanged( bool state )
+	{
+		OnStateChanged?.Invoke( state );
+	}
+
 	async void Open()
 	{
 		OnOpenStart?.Invoke();
+		IsMoving = true;
 
 		await AnimatePositionTo( initialPos + Transform.LocalRotation * MoveDelta, OpenMovementCurve, OpenDuration );
 
+		StateChanged( true );
 		OnOpenEnd?.Invoke();
 
 		if ( AutoReset && ResetTime >= 0.0f )
@@ -65,13 +75,20 @@ public sealed class FuncButton : Component, Component.IPressable
 			await Task.DelaySeconds( ResetTime );
 			Close();
 		}
+
+		IsMoving = false;
 	}
 
 	async void Close()
 	{
 		OnCloseStart?.Invoke();
 
+		IsMoving = true;
+
 		await AnimatePositionTo( initialPos, CloseMovementCurve, CloseDuration );
+
+		StateChanged( false );
+		IsMoving = false;
 
 		OnCloseEnd?.Invoke();
 	}
@@ -122,7 +139,7 @@ public sealed class FuncButton : Component, Component.IPressable
 
 	bool IPressable.Press( IPressable.Event e )
 	{
-		if ( timeUntilPressable > 0 )
+		if ( IsMoving )
 			return false;
 
 		Press( e.Source.GameObject );
@@ -132,5 +149,11 @@ public sealed class FuncButton : Component, Component.IPressable
 	void IPressable.Release( IPressable.Event e )
 	{
 		Release( e.Source.GameObject );
+	}
+
+	bool IPressable.CanPress( Sandbox.Component.IPressable.Event e )
+	{
+		if ( IsMoving ) return false;
+		return true;
 	}
 }
