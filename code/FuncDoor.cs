@@ -1,5 +1,5 @@
-﻿[Alias( "Button" ), EditorHandle( Icon = "touch_app" )]
-public sealed class FuncButton : Component, Component.IPressable
+﻿[EditorHandle( Icon = "touch_app" )]
+public sealed class FuncDoor : Component, Component.IPressable
 {
 	public delegate Task ButtonDelegate( GameObject presser );
 	public delegate Task ButtonToggleDelegate( bool state );
@@ -23,10 +23,10 @@ public sealed class FuncButton : Component, Component.IPressable
 	[Property] public bool AutoReset { get; set; } = true;
 	[Property, ShowIf( "AutoReset", true )] public float ResetTime { get; set; } = 1.0f;
 
-	[Property, Group( "Movement" ), Order( 0 )] public bool Move { get; set; }
-	[Property, Group( "Movement" )] public Vector3 MoveDelta { get; set; }
+	[Property, Group( "Movement" )] public Vector3 Pivot { get; set; }
+	[Property, Group( "Movement" )] public Angles TargetRotation { get; set; } = new Angles( 0, 90, 0 );
 
-	Vector3 initialPos;
+	Transform initialTransform;
 
 	[Sync] public bool IsMoving { get; set; }
 
@@ -34,7 +34,21 @@ public sealed class FuncButton : Component, Component.IPressable
 	{
 		base.OnStart();
 
-		initialPos = Transform.LocalPosition;
+		initialTransform = LocalTransform;
+	}
+
+	protected override void DrawGizmos()
+	{
+		base.DrawGizmos();
+
+		using ( Gizmo.Scope( "Tool", new Transform( Pivot ) ) )
+		{
+			if ( Gizmo.Control.Position( "pivot", 0, out var newPivot ) )
+			{
+				Pivot += newPivot;
+			}
+		}
+
 	}
 
 	[Broadcast]
@@ -72,7 +86,7 @@ public sealed class FuncButton : Component, Component.IPressable
 		OnOpenStart?.Invoke();
 		IsMoving = true;
 
-		await AnimatePositionTo( initialPos + Transform.LocalRotation * MoveDelta, OpenMovementCurve, OpenDuration );
+		await AnimateRotationTo( TargetRotation, OpenMovementCurve, OpenDuration );
 
 		StateChanged( true );
 		OnOpenEnd?.Invoke();
@@ -92,7 +106,7 @@ public sealed class FuncButton : Component, Component.IPressable
 
 		IsMoving = true;
 
-		await AnimatePositionTo( initialPos, CloseMovementCurve, CloseDuration );
+		await AnimateRotationTo( Rotation.Identity, CloseMovementCurve, CloseDuration );
 
 		StateChanged( false );
 		IsMoving = false;
@@ -100,23 +114,36 @@ public sealed class FuncButton : Component, Component.IPressable
 		OnCloseEnd?.Invoke();
 	}
 
-	async Task AnimatePositionTo( Vector3 pos, Curve curve, float time )
+	async Task AnimateRotationTo( Rotation rot, Curve curve, float time )
 	{
 		float d = 0;
-		Vector3 start = Transform.LocalPosition;
+		var start = LocalTransform;
+		var localPivot = start.PointToWorld( Pivot );
+
+		var targetTx = initialTransform.RotateAround( LocalTransform.PointToWorld( Pivot ), rot );
+
+		var targetRot = initialTransform.Rotation * rot;
+
+		//rot = rot * start.Rotation.Inverse;
 
 		while ( time > d )
 		{
 			var delta = d.Remap( 0, time );
 
-			Transform.LocalPosition = Vector3.Lerp( start, pos, curve.Evaluate( delta ) );
+			var t = curve.Evaluate( delta );
+
+			var rotDelta = Rotation.Lerp( start.Rotation, targetRot, t );
+
+			var tx = start.RotateAround( localPivot, rotDelta * start.Rotation.Inverse );
+
+			LocalTransform = tx;
 
 			d += Time.Delta;
 
 			await Task.FrameEnd();
 		}
 
-		Transform.LocalPosition = pos;
+		LocalTransform = targetTx;
 	}
 
 	[Broadcast]
