@@ -757,7 +757,8 @@
               "y": 1
             }
           ],
-          "ResetTime": 5
+          "ResetTime": 5,
+          "State": true
         },
         {
           "__type": "Tooltip",
@@ -1145,6 +1146,7 @@
         {
           "__type": "Sandbox.ParticleBoxEmitter",
           "__guid": "fd7898b5-b552-41ad-bc1b-3bee76beb250",
+          "__enabled": false,
           "Burst": 0,
           "Delay": 0,
           "DestroyOnEnd": false,
@@ -1162,7 +1164,6 @@
       "Flags": 0,
       "Name": "Trigger",
       "Position": "224,-64,24",
-      "Enabled": true,
       "NetworkMode": 1,
       "Components": [
         {
@@ -1961,7 +1962,7 @@
       "__guid": "351817ac-6536-4957-8b41-24be046ff286",
       "Flags": 0,
       "Name": "Door",
-      "Position": "-48,128,56",
+      "Position": "-69.19093,138,44.62893",
       "Enabled": true,
       "Components": [
         {
@@ -1974,14 +1975,14 @@
           "Mesh": {
             "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
             "Positions": [
-              "-39.99792,7.999863,32",
-              "0.002334595,8.000122,32",
-              "0.002403259,12.00012,32",
-              "-39.99786,11.99986,32",
-              "-39.99786,11.99986,-56",
-              "0.002403259,12.00012,-56",
-              "0.002334595,8.000122,-56",
-              "-39.99792,7.999863,-56"
+              "-20.00016,-2.000137,44",
+              "20.00009,-1.999878,44",
+              "20.00016,2.00012,44",
+              "-20.0001,1.99986,44",
+              "-20.0001,1.99986,-44",
+              "20.00016,2.00012,-44",
+              "20.00009,-1.999878,-44",
+              "-20.00016,-2.000137,-44"
             ],
             "TextureCoord": [
               "0.4197563,0.1023053",
@@ -2010,11 +2011,11 @@
               "0.5535492,0.859375"
             ],
             "TextureUAxis": [
-              "1,0.0000006628048,0",
-              "1,0.0000006628048,0",
+              "1,0.0000006628013,0",
+              "1,0.0000006628013,0",
               "-0.00001525879,-1,0",
               "0.00001716614,1,0",
-              "-1,-0.000006484942,0",
+              "-1,-0.000006484944,0",
               "1,0.000006484944,0"
             ],
             "TextureVAxis": [
@@ -2022,7 +2023,7 @@
               "-0.0000002241123,-1,-0",
               "0,0,-1",
               "-0,0,-1",
-              "0.0000003204324,0.000000000002077986,-1",
+              "0.0000003204325,0.000000000002077987,-1",
               "-0,0,-1"
             ],
             "TextureScale": [
@@ -2030,16 +2031,16 @@
               "0.21,0.21",
               "0.2100004,0.21",
               "0.2100015,0.21",
-              "0.21,0.21",
-              "0.21,0.21"
+              "0.2099999,0.21",
+              "0.4199999,0.42"
             ],
             "TextureOffset": [
-              "443.4751,187.9999",
-              "443.4751,187.9999",
-              "443.4697,439.9999",
-              "443.4828,440.0001",
-              "54.8615,440.0001",
-              "443.4714,440"
+              "449.1569,187.9999",
+              "449.1569,187.9999",
+              "443.4696,442.9948",
+              "443.4828,442.995",
+              "49.17963,442.995",
+              "224.5766,221.4975"
             ],
             "MaterialIndex": [
               5,
@@ -2047,7 +2048,7 @@
               6,
               5,
               6,
-              6
+              7
             ],
             "EdgeFlags": [
               0,
@@ -2082,7 +2083,8 @@
               "materials/walls/wall_1.vmat",
               "materials/dev/orange/dev_orange_12.vmat",
               "materials/brick wall 02.vmat",
-              "materials/buildings/door_01a.vmat"
+              "materials/buildings/door_01a.vmat",
+              "materials/tools/toolstrigger.vmat"
             ]
           },
           "SmoothingAngle": 40,
@@ -2100,7 +2102,7 @@
               "y": 1
             }
           ],
-          "Move": false,
+          "Move": true,
           "MoveDelta": "-40,0,0",
           "OnOpenEnd": {
             "__version": 8,
@@ -2184,7 +2186,7 @@
                 "DstName": "_target"
               },
               {
-                "Id": 9,
+                "Id": 4,
                 "Value": "sounds/elevator_door_closing.sound",
                 "DstId": 3,
                 "DstName": "sound"
@@ -2215,7 +2217,8 @@
               "out": 5.045046
             }
           ],
-          "ResetTime": 2
+          "ResetTime": 2,
+          "State": false
         }
       ],
       "Children": [
@@ -2223,7 +2226,7 @@
           "__guid": "badbcda1-4bf7-4fe4-8a49-0623071a32e9",
           "Flags": 0,
           "Name": "door_big_window",
-          "Position": "-19.62574,8.708374,-55.99997",
+          "Position": "1.053406,-1.843124,-44.25622",
           "Rotation": "0,0,-0.7071067,0.7071068",
           "Enabled": true,
           "Components": [
@@ -2296,8 +2299,8 @@
       "__guid": "f06755c6-4241-4d2a-9289-082044449227",
       "Flags": 0,
       "Name": "door_big_window",
-      "Position": "-148,136.7082,0.00003051758",
-      "Rotation": "0,0,-0.7071067,0.7071068",
+      "Position": "-147.2546,134.1664,-0.00005611124",
+      "Rotation": "0,0,-0.7071066,0.7071068",
       "Enabled": true,
       "Components": [
         {
@@ -2342,8 +2345,9 @@
               "y": 1
             }
           ],
-          "Pivot": "-0.000000000000008874845,-19.81373,84.15511",
+          "Pivot": "1.104187,-18.78826,42.3349",
           "ResetTime": 1,
+          "State": true,
           "TargetRotation": "0,87,0"
         }
       ]
@@ -2517,7 +2521,7 @@
                 "DstName": "_target"
               },
               {
-                "Id": 7,
+                "Id": 2,
                 "Value": "sounds/water/water_bullet_impact.sound",
                 "DstId": 1,
                 "DstName": "sound"

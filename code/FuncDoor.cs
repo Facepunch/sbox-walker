@@ -1,14 +1,10 @@
 ﻿[EditorHandle( Icon = "touch_app" )]
-public sealed class FuncDoor : Component, Component.IPressable
+public sealed class FuncDoor : BaseToggle, Component.IPressable
 {
 	public delegate Task ButtonDelegate( GameObject presser );
-	public delegate Task ButtonToggleDelegate( bool state );
-
-	[Sync] public bool State { get; set; }
 
 	[Property] public ButtonDelegate OnButtonPressed { get; set; }
 	[Property] public ButtonDelegate OnButtonReleased { get; set; }
-	[Property] public ButtonToggleDelegate OnStateChanged { get; set; }
 
 	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenStart { get; set; }
 	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenEnd { get; set; }
@@ -35,20 +31,57 @@ public sealed class FuncDoor : Component, Component.IPressable
 		base.OnStart();
 
 		initialTransform = LocalTransform;
-	}
 
+		// initial state pos
+		if ( State ) LocalTransform = initialTransform.RotateAround( initialTransform.PointToWorld( Pivot ), TargetRotation );
+		else LocalTransform = initialTransform;
+	}
 	protected override void DrawGizmos()
 	{
 		base.DrawGizmos();
 
+		if ( !Gizmo.IsSelected )
+			return;
+
 		using ( Gizmo.Scope( "Tool", new Transform( Pivot ) ) )
 		{
+			Gizmo.Hitbox.DepthBias = 0.1f;
+
 			if ( Gizmo.Control.Position( "pivot", 0, out var newPivot ) )
 			{
 				Pivot += newPivot;
 			}
 		}
 
+		var delta = MathF.Sin( RealTime.Now * 2.0f ).Remap( -1, 1 );
+		DrawAt( delta );
+		DrawAt( 0 );
+		DrawAt( 1 );
+	}
+
+	void DrawAt( float f )
+	{
+		var tt = Transform.World;
+		var bbox = GameObject.GetBounds();
+
+		// 
+		bbox = bbox.Transform( new Transform( tt.Position * -1 ) );
+
+
+
+		Gizmo.Transform = Transform.World.RotateAround( Transform.World.PointToWorld( Pivot ), TargetRotation * f );
+
+		//bbox = bbox.Transform( tx );
+
+		Gizmo.Draw.IgnoreDepth = false;
+		Gizmo.Draw.Color = Color.Yellow;
+		Gizmo.Draw.LineThickness = 3;
+		Gizmo.Draw.LineBBox( bbox );
+		Gizmo.Draw.IgnoreDepth = true;
+
+		Gizmo.Draw.LineThickness = 1;
+		Gizmo.Draw.Color = Gizmo.Draw.Color.WithAlpha( 0.3f );
+		Gizmo.Draw.LineBBox( bbox );
 	}
 
 	[Broadcast]
@@ -74,13 +107,6 @@ public sealed class FuncDoor : Component, Component.IPressable
 		Open();
 	}
 
-	[Broadcast]
-	void StateChanged( bool state )
-	{
-		OnStateChanged?.Invoke( state );
-		State = state;
-	}
-
 	async void Open()
 	{
 		OnOpenStart?.Invoke();
@@ -88,7 +114,7 @@ public sealed class FuncDoor : Component, Component.IPressable
 
 		await AnimateRotationTo( TargetRotation, OpenMovementCurve, OpenDuration );
 
-		StateChanged( true );
+		State = true;
 		OnOpenEnd?.Invoke();
 
 		if ( AutoReset && ResetTime >= 0.0f )
@@ -108,7 +134,7 @@ public sealed class FuncDoor : Component, Component.IPressable
 
 		await AnimateRotationTo( Rotation.Identity, CloseMovementCurve, CloseDuration );
 
-		StateChanged( false );
+		State = false;
 		IsMoving = false;
 
 		OnCloseEnd?.Invoke();

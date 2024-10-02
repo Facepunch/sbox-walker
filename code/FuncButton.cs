@@ -1,14 +1,10 @@
 ﻿[Alias( "Button" ), EditorHandle( Icon = "touch_app" )]
-public sealed class FuncButton : Component, Component.IPressable
+public sealed class FuncButton : BaseToggle, Component.IPressable
 {
 	public delegate Task ButtonDelegate( GameObject presser );
-	public delegate Task ButtonToggleDelegate( bool state );
-
-	[Sync] public bool State { get; set; }
 
 	[Property] public ButtonDelegate OnButtonPressed { get; set; }
 	[Property] public ButtonDelegate OnButtonReleased { get; set; }
-	[Property] public ButtonToggleDelegate OnStateChanged { get; set; }
 
 	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenStart { get; set; }
 	[Property, Group( "Opening" ), Order( 1 )] public Action OnOpenEnd { get; set; }
@@ -30,11 +26,40 @@ public sealed class FuncButton : Component, Component.IPressable
 
 	[Sync] public bool IsMoving { get; set; }
 
-	protected override void OnStart()
+	protected override void DrawGizmos()
 	{
-		base.OnStart();
+		base.DrawGizmos();
+
+		if ( !Gizmo.IsSelected )
+			return;
+
+		if ( !Move )
+			return;
+
+		Gizmo.Transform = global::Transform.Zero;
+
+		var bbox = GameObject.GetBounds();
+		bbox = bbox.Translate( MoveDelta * MathF.Sin( RealTime.Now * 2.0f ).Remap( -1, 1 ) );
+
+		Gizmo.Draw.Color = Color.Yellow;
+		Gizmo.Draw.LineThickness = 3;
+		Gizmo.Draw.LineBBox( bbox );
+		Gizmo.Draw.IgnoreDepth = true;
+
+		Gizmo.Draw.LineThickness = 1;
+		Gizmo.Draw.Color = Gizmo.Draw.Color.WithAlpha( 0.3f );
+		Gizmo.Draw.LineBBox( bbox );
+	}
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
 
 		initialPos = Transform.LocalPosition;
+
+		// initial state pos
+		if ( State ) Transform.LocalPosition = initialPos + Transform.LocalRotation * MoveDelta;
+		else Transform.LocalPosition = initialPos;
 	}
 
 	[Broadcast]
@@ -60,13 +85,6 @@ public sealed class FuncButton : Component, Component.IPressable
 		Open();
 	}
 
-	[Broadcast]
-	void StateChanged( bool state )
-	{
-		OnStateChanged?.Invoke( state );
-		State = state;
-	}
-
 	async void Open()
 	{
 		OnOpenStart?.Invoke();
@@ -74,7 +92,7 @@ public sealed class FuncButton : Component, Component.IPressable
 
 		await AnimatePositionTo( initialPos + Transform.LocalRotation * MoveDelta, OpenMovementCurve, OpenDuration );
 
-		StateChanged( true );
+		State = true;
 		OnOpenEnd?.Invoke();
 
 		if ( AutoReset && ResetTime >= 0.0f )
@@ -94,7 +112,7 @@ public sealed class FuncButton : Component, Component.IPressable
 
 		await AnimatePositionTo( initialPos, CloseMovementCurve, CloseDuration );
 
-		StateChanged( false );
+		State = false;
 		IsMoving = false;
 
 		OnCloseEnd?.Invoke();
