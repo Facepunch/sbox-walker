@@ -1,6 +1,13 @@
 ﻿public sealed class CollectableItem : Component, Component.IPressable
 {
+	/// <summary>
+	/// This is only used for the stat name.
+	/// </summary>
 	[Property] public string GroupName = "collectable";
+
+	/// <summary>
+	/// What icon to show on the HUD for this collectable
+	/// </summary>
 	[Property] public string Icon = "🤼";
 
 	[Broadcast]
@@ -14,7 +21,7 @@
 		// set a stat if they collected them all
 		if ( c == 0 )
 		{
-			Sandbox.Services.Stats.Map.SetValue( $"collect.{GroupName}.all", 1 );
+			Sandbox.Services.Stats.Map.SetValue( $"collectall", 1 );
 		}
 
 	}
