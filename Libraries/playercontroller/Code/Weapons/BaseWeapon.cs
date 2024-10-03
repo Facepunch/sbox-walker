@@ -24,7 +24,7 @@ public class BaseWeapon : Component
 		if ( obj is not null )
 		{
 			GameObject.Parent = obj;
-			GameObject.Transform.Local = BoneOffset.WithScale( 1 );
+			GameObject.LocalTransform = BoneOffset.WithScale( 1 );
 		}
 
 		if ( IsProxy )

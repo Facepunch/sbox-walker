@@ -18,10 +18,13 @@
 		// how many are left
 		var c = Scene.GetAll<CollectableItem>().Where( x => x != this && x.GroupName == GroupName ).Count();
 
+		Log.Info( $"Collectables remaining: {c}" );
+
 		// set a stat if they collected them all
 		if ( c == 0 )
 		{
-			Sandbox.Services.Stats.Map.SetValue( $"collectall", 1 );
+
+			Sandbox.Services.Stats.Map.SetValue( "collectall", 1 );
 		}
 
 	}

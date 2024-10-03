@@ -14,7 +14,7 @@ public sealed class TriggerTeleport : Component, Component.ITriggerListener
 
 		if ( !IsValidTarget( ref go ) ) return;
 
-		go.Transform.Position = Target.Transform.Position;
+		go.WorldPosition = Target.WorldPosition;
 		go.Transform.ClearInterpolation();
 
 		DoTeleportedEvent( go );

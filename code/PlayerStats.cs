@@ -13,8 +13,8 @@ public sealed class PlayerStats : Component, IPlayerEvent
 	{
 		if ( IsProxy ) return;
 
-		var delta = Transform.Position - lastPosition;
-		lastPosition = Transform.Position;
+		var delta = WorldPosition - lastPosition;
+		lastPosition = WorldPosition;
 
 		if ( !PlayerController.CharacterController.IsOnGround )
 		{

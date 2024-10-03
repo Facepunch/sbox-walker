@@ -47,7 +47,7 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 		if ( !player.Network.IsOwner || !Network.IsOwner ) return;
 
 		camera.FieldOfView = fov;
-		camera.Transform.Rotation = camera.Transform.Rotation * new Angles( 0, 0, roll );
+		camera.WorldRotation = camera.WorldRotation * new Angles( 0, 0, roll );
 
 		var t = 20.0f;
 		var s = 1.0f;
@@ -55,7 +55,7 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 		var x = Noise.Perlin( Time.Now * t, 3, 5 ).Remap( 0, 1, -1, 1 ) * s;
 		var y = Noise.Perlin( Time.Now * t * 0.8f, 3, 4 ).Remap( 0, 1, -1, 1 ) * s;
 
-		camera.Transform.Rotation *= new Angles( x, y, 0 );
+		camera.WorldRotation *= new Angles( x, y, 0 );
 
 	}
 
@@ -110,7 +110,7 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 			focusPoint = tr.EndPosition;
 		}
 
-		dof.FocalDistance = Scene.Camera.Transform.Position.Distance( focusPoint ) + 32;
+		dof.FocalDistance = Scene.Camera.WorldPosition.Distance( focusPoint ) + 32;
 
 	}
 }

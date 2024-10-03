@@ -16,7 +16,7 @@ public sealed class PlayerController : Component
 
 	[Sync] public bool Crouching { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
-	public Vector3 EyePosition => Transform.Position + Vector3.Up * EyeHeight;
+	public Vector3 EyePosition => WorldPosition + Vector3.Up * EyeHeight;
 	[Sync] public Vector3 WishVelocity { get; set; }
 
 	public bool WishCrouch;
@@ -27,7 +27,7 @@ public sealed class PlayerController : Component
 		if ( !IsProxy )
 		{
 			MouseInput();
-			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
+			WorldRotation = new Angles( 0, EyeAngles.yaw, 0 );
 		}
 
 		UpdateAnimation();
@@ -90,7 +90,7 @@ public sealed class PlayerController : Component
 
 		var cc = CharacterController;
 
-		Vector3 startPosition = Transform.Position;
+		Vector3 startPosition = WorldPosition;
 		Vector3 startVelocity = cc.Velocity;
 
 		Vector3 halfGravity = Scene.PhysicsWorld.Gravity * Time.Delta * 0.5f;
@@ -134,7 +134,7 @@ public sealed class PlayerController : Component
 		//
 		// Don't walk through other players, let them push you out of the way
 		//
-		var pushVelocity = PlayerPusher.GetPushVector( Transform.Position + Vector3.Up * 40.0f, Scene, GameObject );
+		var pushVelocity = PlayerPusher.GetPushVector( WorldPosition + Vector3.Up * 40.0f, Scene, GameObject );
 		if ( !pushVelocity.IsNearlyZero() )
 		{
 			var travelDot = cc.Velocity.Dot( pushVelocity.Normal );
@@ -148,7 +148,7 @@ public sealed class PlayerController : Component
 
 		cc.Move();
 
-		Vector3 delta = startPosition - Transform.Position;
+		Vector3 delta = startPosition - WorldPosition;
 
 		if ( !cc.IsOnGround )
 		{
@@ -207,7 +207,7 @@ public sealed class PlayerController : Component
 			// places by crouch jumping that we couldn't.
 			if ( !CharacterController.IsOnGround )
 			{
-				CharacterController.MoveTo( Transform.Position += Vector3.Up * DuckHeight, false );
+				CharacterController.MoveTo( WorldPosition += Vector3.Up * DuckHeight, false );
 				Transform.ClearInterpolation();
 				EyeHeight -= DuckHeight;
 			}
@@ -235,18 +235,18 @@ public sealed class PlayerController : Component
 		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 10.0f );
 
 		//var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
-		var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
+		var targetCameraPos = WorldPosition + new Vector3( 0, 0, EyeHeight );
 
 		//	targetCameraPos += EyeAngles.Forward * -100;
 
 		// smooth view z, so when going up and down stairs or ducking, it's smooth af
 		if ( lastUngrounded > 0.1f )
 		{
-			targetCameraPos.z = camera.Transform.Position.z.LerpTo( targetCameraPos.z, RealTime.Delta * 25.0f );
+			targetCameraPos.z = camera.WorldPosition.z.LerpTo( targetCameraPos.z, RealTime.Delta * 25.0f );
 		}
 
-		camera.Transform.Position = targetCameraPos;
-		camera.Transform.Rotation = EyeAngles;
+		camera.WorldPosition = targetCameraPos;
+		camera.WorldRotation = EyeAngles;
 		camera.FieldOfView = Preferences.FieldOfView;
 
 		// allow hooks

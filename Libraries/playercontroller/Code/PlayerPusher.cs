@@ -30,7 +30,7 @@ public sealed class PlayerPusher : Component
 
 	private void Collect( Vector3 position, ref Vector3 output )
 	{
-		var delta = (position - Transform.Position);
+		var delta = (position - WorldPosition);
 		if ( delta.Length > Radius ) return;
 
 		delta.z = 0; // ignore z

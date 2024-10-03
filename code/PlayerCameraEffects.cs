@@ -55,10 +55,10 @@
 		//camera.Transform.Position += Vector3.Up * scaler * MathF.Sin( distance * 0.06f ) * 0.2f;
 
 		// side movement
-		var r = pc.WishVelocity.Dot( pc.Transform.Rotation.Left ) / -100.0f;
+		var r = pc.WishVelocity.Dot( pc.WorldRotation.Left ) / -100.0f;
 		roll = MathX.Lerp( roll, r, Time.Delta * 8.0f, true );
 
-		camera.Transform.Rotation *= new Angles( 0, 0, roll );
+		camera.WorldRotation *= new Angles( 0, 0, roll );
 	}
 
 	abstract class BaseCameraShake
@@ -100,7 +100,7 @@
 		{
 			var amount = lifeTime.Remap( 0, 0.3f, 0, 1 );
 
-			cc.Transform.Rotation *= new Angles( damping.Current * amount );
+			cc.WorldRotation *= new Angles( damping.Current * amount );
 		}
 	}
 

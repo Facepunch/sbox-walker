@@ -55,11 +55,11 @@ public sealed class FuncButton : BaseToggle, Component.IPressable
 	{
 		base.OnEnabled();
 
-		initialPos = Transform.LocalPosition;
+		initialPos = LocalPosition;
 
 		// initial state pos
-		if ( State ) Transform.LocalPosition = initialPos + Transform.LocalRotation * MoveDelta;
-		else Transform.LocalPosition = initialPos;
+		if ( State ) LocalPosition = initialPos + LocalRotation * MoveDelta;
+		else LocalPosition = initialPos;
 	}
 
 	[Broadcast]
@@ -90,7 +90,7 @@ public sealed class FuncButton : BaseToggle, Component.IPressable
 		OnOpenStart?.Invoke();
 		IsMoving = true;
 
-		await AnimatePositionTo( initialPos + Transform.LocalRotation * MoveDelta, OpenMovementCurve, OpenDuration );
+		await AnimatePositionTo( initialPos + LocalRotation * MoveDelta, OpenMovementCurve, OpenDuration );
 
 		State = true;
 		OnOpenEnd?.Invoke();
@@ -121,20 +121,20 @@ public sealed class FuncButton : BaseToggle, Component.IPressable
 	async Task AnimatePositionTo( Vector3 pos, Curve curve, float time )
 	{
 		float d = 0;
-		Vector3 start = Transform.LocalPosition;
+		Vector3 start = LocalPosition;
 
 		while ( time > d )
 		{
 			var delta = d.Remap( 0, time );
 
-			Transform.LocalPosition = Vector3.Lerp( start, pos, curve.Evaluate( delta ) );
+			LocalPosition = Vector3.Lerp( start, pos, curve.Evaluate( delta ) );
 
 			d += Time.Delta;
 
 			await Task.FrameEnd();
 		}
 
-		Transform.LocalPosition = pos;
+		LocalPosition = pos;
 	}
 
 	[Broadcast]

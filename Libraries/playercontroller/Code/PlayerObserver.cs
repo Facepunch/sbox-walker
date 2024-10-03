@@ -10,7 +10,7 @@ public sealed class PlayerObserver : Component
 	{
 		base.OnEnabled();
 
-		EyeAngles = Scene.Camera.Transform.Rotation;
+		EyeAngles = Scene.Camera.WorldRotation;
 		timeSinceStarted = 0;
 	}
 
@@ -69,8 +69,8 @@ public sealed class PlayerObserver : Component
 		var tr = Scene.Trace.FromTo( center, targetPos ).Radius( 1.0f ).WithoutTags( "ragdoll" ).Run();
 
 
-		Scene.Camera.Transform.Position = Vector3.Lerp( Scene.Camera.Transform.Position, tr.EndPosition, timeSinceStarted, true );
+		Scene.Camera.WorldPosition = Vector3.Lerp( Scene.Camera.WorldPosition, tr.EndPosition, timeSinceStarted, true );
 
-		Scene.Camera.Transform.Rotation = EyeAngles;
+		Scene.Camera.WorldRotation = EyeAngles;
 	}
 }

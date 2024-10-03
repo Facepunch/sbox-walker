@@ -37,11 +37,11 @@ public sealed class MapPlayerSpawner : Component
 			var randomSpawnPoint = Random.Shared.FromArray( spawnPoints );
 			if ( randomSpawnPoint is null ) continue;
 
-			player.Transform.Position = randomSpawnPoint.Transform.Position;
+			player.WorldPosition = randomSpawnPoint.WorldPosition;
 
 			if ( player.Components.TryGet<PlayerController>( out var pc ) )
 			{
-				pc.EyeAngles = randomSpawnPoint.Transform.Rotation.Angles();
+				pc.EyeAngles = randomSpawnPoint.WorldRotation.Angles();
 			}
 
 		}

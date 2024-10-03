@@ -118,7 +118,7 @@ public sealed class PlayerUse : Component
 			var targetTransform = Player.EyeTransform.ToWorld( carryTransform );
 			targetTransform.Rotation = carryOriginalTransform.Rotation.Angles().WithYaw( targetTransform.Rotation.Angles().yaw );
 
-			var distance = Vector3.DistanceBetween( targetTransform.Position, carrying.Transform.Position );
+			var distance = Vector3.DistanceBetween( targetTransform.Position, carrying.WorldPosition );
 
 			if ( distance > 50.0f )
 			{
