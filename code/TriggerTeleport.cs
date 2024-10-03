@@ -5,7 +5,10 @@ public sealed class TriggerTeleport : Component, Component.ITriggerListener
 
 	protected override void DrawGizmos()
 	{
-		Gizmo.Draw.Arrow( 0, Transform.World.PointToLocal( Target.Transform.Position ) );
+		if ( !Target.IsValid() )
+			return;
+
+		Gizmo.Draw.Arrow( 0, WorldTransform.PointToLocal( Target.WorldPosition ) );
 	}
 
 	void ITriggerListener.OnTriggerEnter( Collider other )
