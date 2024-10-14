@@ -113,7 +113,7 @@ public sealed class PlayerUse : Component
 	{
 		base.OnFixedUpdate();
 
-		if ( carrying.IsValid() )
+		if ( carrying.IsValid() && !carrying.IsProxy )
 		{
 			var targetTransform = Player.EyeTransform.ToWorld( carryTransform );
 			targetTransform.Rotation = carryOriginalTransform.Rotation.Angles().WithYaw( targetTransform.Rotation.Angles().yaw );
