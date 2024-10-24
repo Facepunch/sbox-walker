@@ -137,6 +137,7 @@ public sealed class PlayerUse : Component
 	{
 		if ( !rb.IsValid() ) return false;
 		if ( !rb.Network.Active ) return false;
+		if ( rb.Network.OwnerTransfer != OwnerTransfer.Takeover ) return false;
 
 		return true;
 	}
