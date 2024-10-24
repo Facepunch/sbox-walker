@@ -8,6 +8,11 @@ public sealed partial class BodyController : Component
 	[Sync]
 	public Angles EyeAngles { get; set; }
 
+	/// <summary>
+	/// The player's eye position, in first person mode
+	/// </summary>
+	public Vector3 EyePosition => WorldPosition + Vector3.Up * (BodyHeight - EyeDistanceFromTop);
+
 
 	[Sync]
 	public bool IsDucking { get; set; }
@@ -22,6 +27,7 @@ public sealed partial class BodyController : Component
 
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float WalkSpeed { get; set; } = 110;
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float RunSpeed { get; set; } = 320;
+	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float DuckedSpeed { get; set; } = 70;
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float JumpSpeed { get; set; } = 300;
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float DuckedHeight { get; set; } = 40;
 
@@ -139,7 +145,10 @@ public sealed partial class BodyController : Component
 		if ( !string.IsNullOrWhiteSpace( ToggleCameraModeButton ) )
 		{
 			if ( Input.Pressed( ToggleCameraModeButton ) )
+			{
 				ThirdPerson = !ThirdPerson;
+				_cameraDistance = 20;
+			}
 		}
 
 		var rot = EyeAngles.ToRotation();
@@ -152,7 +161,10 @@ public sealed partial class BodyController : Component
 
 		_eyez = eyePosition.z;
 
-
+		if ( !cam.RenderExcludeTags.Contains( "viewer" ) )
+		{
+			cam.RenderExcludeTags.Add( "viewer" );
+		}
 
 		if ( ThirdPerson )
 		{
@@ -191,10 +203,9 @@ public sealed partial class BodyController : Component
 
 	protected override void OnFixedUpdate()
 	{
-
 		if ( Scene.IsEditor ) return;
 
-
+		// head height
 		{
 			var tr = TraceBody( WorldPosition, WorldPosition + Vector3.Up * 100, 0.75f );
 			headHeight = tr.Distance;
@@ -232,8 +243,11 @@ public sealed partial class BodyController : Component
 		}
 		else
 		{
-			if ( Input.Down( "Run" ) ) WishVelocity *= RunSpeed;
-			else WishVelocity *= WalkSpeed;
+			var velocity = WalkSpeed;
+			if ( Input.Down( "Run" ) ) velocity = RunSpeed;
+			if ( IsDucking ) velocity = DuckedSpeed;
+
+			WishVelocity *= velocity;
 		}
 	}
 
