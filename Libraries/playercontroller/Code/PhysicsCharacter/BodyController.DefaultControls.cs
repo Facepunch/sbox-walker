@@ -74,6 +74,7 @@ public sealed partial class BodyController : Component
 			}
 		}
 
+		UpdateVisibility();
 		UpdateAnimation();
 	}
 
@@ -107,6 +108,29 @@ public sealed partial class BodyController : Component
 	float _eyez;
 	float _cameraDistance = 100;
 
+	void UpdateVisibility()
+	{
+		if ( !UseCameraControls ) return;
+		if ( Scene.Camera is not CameraComponent cam ) return;
+
+		// we we looking through this GameObject?
+		bool viewer = !ThirdPerson;
+		viewer = viewer && HideBodyInFirstPerson;
+		viewer = viewer && !IsProxy;
+
+		if ( !IsProxy && _cameraDistance < 20 )
+		{
+			viewer = true;
+		}
+
+		if ( IsProxy )
+		{
+			viewer = false;
+		}
+
+		GameObject.Tags.Set( "viewer", viewer );
+	}
+
 	void UpdateCameraPosition()
 	{
 		if ( !UseCameraControls ) return;
@@ -128,10 +152,7 @@ public sealed partial class BodyController : Component
 
 		_eyez = eyePosition.z;
 
-		if ( !cam.RenderExcludeTags.Contains( "viewer" ) )
-		{
-			cam.RenderExcludeTags.Add( "viewer" );
-		}
+
 
 		if ( ThirdPerson )
 		{
