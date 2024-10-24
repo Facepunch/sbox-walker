@@ -32,10 +32,6 @@ public sealed class GameManager : GameObjectSystem<GameManager>, IPlayerEvent, C
 
 	void Component.INetworkListener.OnActive( Connection channel )
 	{
-		// TODO: We can probably make this easier.
-		if ( Application.IsHeadless && Connection.Local == channel )
-			return;
-		
 		SpawnPlayerForConnection( channel );
 	}
 
