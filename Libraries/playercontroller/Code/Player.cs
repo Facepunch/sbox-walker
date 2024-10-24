@@ -25,9 +25,11 @@ public sealed class Player : Component, IDamageable
 	{
 		get
 		{
-			var tx = new Transform( PlayerController.EyePosition );
-			tx.Rotation = PlayerController.EyeAngles;
-			return tx;
+			return Scene.Camera.WorldTransform;
+
+			//var tx = new Transform( PlayerController.EyePosition );
+			//tx.Rotation = PlayerController.EyeAngles;
+			//	return tx;
 		}
 	}
 

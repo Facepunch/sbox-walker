@@ -16,7 +16,8 @@ public sealed class PlayerStats : Component, IPlayerEvent
 		var delta = WorldPosition - lastPosition;
 		lastPosition = WorldPosition;
 
-		if ( !PlayerController.CharacterController.IsOnGround )
+
+		if ( !PlayerController.BodyController.IsOnGround )
 		{
 			return;
 		}
@@ -31,6 +32,7 @@ public sealed class PlayerStats : Component, IPlayerEvent
 			Sandbox.Services.Stats.Increment( "meters_walked", metersTravelled );
 			metersTravelled = 0;
 		}
+
 	}
 
 	void IPlayerEvent.OnJump( Player player )

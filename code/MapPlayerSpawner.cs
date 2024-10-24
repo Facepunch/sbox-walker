@@ -39,9 +39,10 @@ public sealed class MapPlayerSpawner : Component
 
 			player.WorldPosition = randomSpawnPoint.WorldPosition;
 
+
 			if ( player.Components.TryGet<PlayerController>( out var pc ) )
 			{
-				pc.EyeAngles = randomSpawnPoint.WorldRotation.Angles();
+				pc.BodyController.EyeAngles = randomSpawnPoint.WorldRotation.Angles();
 			}
 
 		}

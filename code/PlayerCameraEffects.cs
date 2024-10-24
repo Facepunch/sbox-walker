@@ -38,17 +38,16 @@
 		MovementEffects( pc, camera );
 	}
 
-	float distance;
 	float roll;
 
 	private void MovementEffects( PlayerController pc, CameraComponent camera )
 	{
-		if ( pc.CharacterController.IsOnGround )
-		{
-			distance += pc.WishVelocity.Length * Time.Delta;
-		}
+		//if ( pc.BodyController.IsOnGround )
+		//{
+		//	distance += pc.BodyController.Velocity.Length * Time.Delta;
+		//}
 
-		var scaler = pc.WishVelocity.Length.Remap( 0, pc.RunMoveSpeed, 0, 1 );
+		var scaler = pc.WishVelocity.Length.Remap( 0, pc.BodyController.RunSpeed, 0, 1 );
 
 		// bob
 		// undone: made me feel sick
