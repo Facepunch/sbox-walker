@@ -89,7 +89,11 @@ public sealed partial class BodyController : Component
 		}
 
 		UpdateVisibility();
-		UpdateAnimation();
+
+		if ( UseAnimatorControls && Renderer.IsValid() )
+		{
+			UpdateAnimation( Renderer );
+		}
 	}
 
 	public interface IEvents : ISceneEvent<IEvents>
@@ -225,7 +229,7 @@ public sealed partial class BodyController : Component
 		if ( !UseInputControls ) return;
 
 		InputMove();
-		UpdateDucking();
+		UpdateDucking( Input.Down( "duck" ) );
 		InputJump();
 	}
 
@@ -304,9 +308,12 @@ public sealed partial class BodyController : Component
 	float unduckedHeight = -1;
 	Vector3 bodyDuckOffset = 0;
 
-	void UpdateDucking()
+	/// <summary>
+	/// Called during FixedUpdate when UseInputControls is enmabled. Will duck if requested.
+	/// If not, and we're ducked, will unduck if there is room
+	/// </summary>
+	public void UpdateDucking( bool wantsDuck )
 	{
-		var wantsDuck = Input.Down( "duck" );
 		if ( wantsDuck == IsDucking ) return;
 
 		unduckedHeight = MathF.Max( unduckedHeight, BodyHeight );
@@ -362,24 +369,25 @@ public sealed partial class BodyController : Component
 		}
 	}
 
-	void UpdateAnimation()
+	/// <summary>
+	/// Update the animation for this renderer. This will update the body rotation etc too.
+	/// </summary>
+	public void UpdateAnimation( SkinnedModelRenderer renderer )
 	{
-		if ( !UseAnimatorControls ) return;
-		if ( !Renderer.IsValid() ) return;
-		if ( Scene.IsEditor ) return;
+		if ( !renderer.IsValid() ) return;
 
-		Renderer.LocalPosition = bodyDuckOffset;
+		renderer.LocalPosition = bodyDuckOffset;
 		bodyDuckOffset = bodyDuckOffset.LerpTo( 0, Time.Delta * 5.0f );
 
-		UpdateAnimationParameters();
-		RotateRenderBody();
+		UpdateAnimationParameters( renderer );
+		RotateRenderBody( renderer );
 	}
 
 	float _animRotationSpeed;
 
-	void UpdateAnimationParameters()
+	void UpdateAnimationParameters( SkinnedModelRenderer renderer )
 	{
-		var rot = Renderer.WorldRotation;
+		var rot = renderer.WorldRotation;
 
 		var skidding = 0.0f;
 
@@ -393,24 +401,24 @@ public sealed partial class BodyController : Component
 
 			var angle = MathF.Atan2( sideward, forward ).RadianToDegree().NormalizeDegrees();
 
-			Renderer.Set( "move_direction", angle );
-			Renderer.Set( "move_speed", Velocity.Length );
-			Renderer.Set( "move_groundspeed", Velocity.WithZ( 0 ).Length );
-			Renderer.Set( "move_y", sideward );
-			Renderer.Set( "move_x", forward );
-			Renderer.Set( "move_z", Velocity.z );
+			renderer.Set( "move_direction", angle );
+			renderer.Set( "move_speed", Velocity.Length );
+			renderer.Set( "move_groundspeed", Velocity.WithZ( 0 ).Length );
+			renderer.Set( "move_y", sideward );
+			renderer.Set( "move_x", forward );
+			renderer.Set( "move_z", Velocity.z );
 		}
 
-		Renderer.SetLookDirection( "aim_eyes", EyeAngles.Forward, 1 );
-		Renderer.SetLookDirection( "aim_head", EyeAngles.Forward, 1 );
-		Renderer.SetLookDirection( "aim_body", EyeAngles.Forward, 1 );
+		renderer.SetLookDirection( "aim_eyes", EyeAngles.Forward, 1 );
+		renderer.SetLookDirection( "aim_head", EyeAngles.Forward, 1 );
+		renderer.SetLookDirection( "aim_body", EyeAngles.Forward, 1 );
 
-		Renderer.Set( "b_swim", IsSwimming );
-		Renderer.Set( "b_grounded", IsOnGround || IsClimbing );
-		Renderer.Set( "b_climbing", IsClimbing );
-		Renderer.Set( "move_rotationspeed", _animRotationSpeed );
-		Renderer.Set( "skid", skidding );
-		Renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed ? 2 : 1 );
+		renderer.Set( "b_swim", IsSwimming );
+		renderer.Set( "b_grounded", IsOnGround || IsClimbing );
+		renderer.Set( "b_climbing", IsClimbing );
+		renderer.Set( "move_rotationspeed", _animRotationSpeed );
+		renderer.Set( "skid", skidding );
+		renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed ? 2 : 1 );
 
 		float duck = Headroom.Remap( 50, 0, 0, 0.5f, true );
 		if ( IsDucking )
@@ -419,17 +427,17 @@ public sealed partial class BodyController : Component
 			duck += 1.0f;
 		}
 
-		Renderer.Set( "duck", duck );
+		renderer.Set( "duck", duck );
 	}
 
-	void RotateRenderBody()
+	void RotateRenderBody( SkinnedModelRenderer renderer )
 	{
 		_animRotationSpeed = 0;
 
 		// ladder likes to have us facing it
 		if ( Mode is Sandbox.Movement.MoveModeLadder ladderMode )
 		{
-			Renderer.WorldRotation = Rotation.Lerp( Renderer.WorldRotation, ladderMode.ClimbingRotation, Time.Delta * 5.0f );
+			renderer.WorldRotation = Rotation.Lerp( renderer.WorldRotation, ladderMode.ClimbingRotation, Time.Delta * 5.0f );
 			return;
 		}
 
@@ -442,17 +450,17 @@ public sealed partial class BodyController : Component
 			targetAngle = Rotation.LookAt( velocity, Vector3.Up );
 		}
 
-		float rotateDifference = Renderer.WorldRotation.Distance( targetAngle );
+		float rotateDifference = renderer.WorldRotation.Distance( targetAngle );
 
 		if ( rotateDifference > RotationAngleLimit || velocity.Length > 50.0f )
 		{
-			var newRotation = Rotation.Lerp( Renderer.WorldRotation, targetAngle, Time.Delta * 4.0f * RotationSpeed );
+			var newRotation = Rotation.Lerp( renderer.WorldRotation, targetAngle, Time.Delta * 4.0f * RotationSpeed );
 
 			// We won't end up actually moving to the targetAngle, so calculate how much we're actually moving
-			var angleDiff = Renderer.WorldRotation.Angles() - newRotation.Angles(); // Rotation.Distance is unsigned
+			var angleDiff = renderer.WorldRotation.Angles() - newRotation.Angles(); // Rotation.Distance is unsigned
 			_animRotationSpeed = angleDiff.yaw / Time.Delta;
 
-			Renderer.WorldRotation = newRotation;
+			renderer.WorldRotation = newRotation;
 		}
 	}
 
