@@ -2,6 +2,21 @@
   "__guid": "cd285893-d0ab-4423-9b5f-9a94f46ce96c",
   "GameObjects": [
     {
+      "__guid": "73f72866-200a-46df-b519-c7d099f389f5",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "49a6e898-c19d-46f8-8c8e-ac2d1ecd875a",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "minimal"
+        }
+      ]
+    },
+    {
       "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
       "Flags": 2048,
       "Name": "Camera",
@@ -124,9 +139,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 60,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "minimal"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -140,10 +159,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "minimal",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "IsValid": true,
-  "__version": 1
+  "__version": 2
 }

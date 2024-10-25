@@ -37,7 +37,7 @@ public sealed partial class BodyController : Component
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float RunSpeed { get; set; } = 320;
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float DuckedSpeed { get; set; } = 70;
 	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float JumpSpeed { get; set; } = 300;
-	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float DuckedHeight { get; set; } = 40;
+	[Property, Group( "🕹️ Input" ), ShowIf( "UseInputControls", true ), Order( 4000 )] public float DuckedHeight { get; set; } = 36;
 
 	[Property, Group( "📷 Camera" ), ShowIf( "UseCameraControls", true ), Order( 5000 )] public float EyeDistanceFromTop { get; set; } = 8;
 	[Property, Group( "📷 Camera" ), ShowIf( "UseCameraControls", true ), Order( 5000 )] public bool ThirdPerson { get; set; } = true;
