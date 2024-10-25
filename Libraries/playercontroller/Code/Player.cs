@@ -39,33 +39,10 @@ public sealed class Player : Component, IDamageable
 	[Broadcast]
 	void CreateRagdoll()
 	{
-		var originalBody = Body.Components.Get<SkinnedModelRenderer>();
+		var ragdoll = GetComponent<BodyController>().CreateRagdoll();
+		if ( !ragdoll.IsValid() ) return;
 
-		var go = new GameObject( true, "Ragdoll" );
-		go.Tags.Add( "ragdoll" );
-		go.Transform.World = Transform.World;
-
-		var mainBody = go.Components.Create<SkinnedModelRenderer>();
-		mainBody.CopyFrom( originalBody );
-		mainBody.UseAnimGraph = false;
-
-		// copy the clothes
-		foreach ( var clothing in originalBody.GameObject.Children.SelectMany( x => x.Components.GetAll<SkinnedModelRenderer>() ) )
-		{
-			var newClothing = new GameObject( true, clothing.GameObject.Name );
-			newClothing.Parent = go;
-
-			var item = newClothing.Components.Create<SkinnedModelRenderer>();
-			item.CopyFrom( clothing );
-			item.BoneMergeTarget = mainBody;
-		}
-
-		var physics = go.Components.Create<ModelPhysics>();
-		physics.Model = mainBody.Model;
-		physics.Renderer = mainBody;
-		physics.CopyBonesFrom( originalBody, true );
-
-		var corpse = go.Components.Create<PlayerCorpse>();
+		var corpse = ragdoll.AddComponent<PlayerCorpse>();
 		corpse.Connection = Network.Owner;
 		corpse.Created = DateTime.Now;
 	}
