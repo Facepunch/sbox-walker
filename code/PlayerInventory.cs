@@ -3,7 +3,6 @@ using Sandbox.Diagnostics;
 
 public sealed class PlayerInventory : Component, IPlayerEvent
 {
-	[RequireComponent] public PlayerController PlayerController { get; set; }
 	[RequireComponent] public Player Player { get; set; }
 
 

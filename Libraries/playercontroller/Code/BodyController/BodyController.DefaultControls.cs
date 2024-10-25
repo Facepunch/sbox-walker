@@ -13,6 +13,11 @@ public sealed partial class BodyController : Component
 	/// </summary>
 	public Vector3 EyePosition => WorldPosition + Vector3.Up * (BodyHeight - EyeDistanceFromTop);
 
+	/// <summary>
+	/// The player's eye position, in first person mode
+	/// </summary>
+	public Transform EyeTransform => new Transform( EyePosition, EyeAngles, 1 );
+
 
 	[Sync]
 	public bool IsDucking { get; set; }

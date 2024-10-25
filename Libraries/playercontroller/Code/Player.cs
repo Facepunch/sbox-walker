@@ -3,7 +3,7 @@ using static Sandbox.Component;
 /// <summary>
 /// Holds player information like health
 /// </summary>
-public sealed class Player : Component, IDamageable
+public sealed class Player : Component, IDamageable, BodyController.IEvents
 {
 	public static Player FindLocalPlayer()
 	{
@@ -11,7 +11,7 @@ public sealed class Player : Component, IDamageable
 	}
 
 	[RequireComponent]
-	public PlayerController PlayerController { get; set; }
+	public BodyController Controller { get; set; }
 
 	[Property]
 	public GameObject Body { get; set; }
@@ -21,17 +21,7 @@ public sealed class Player : Component, IDamageable
 
 	public bool IsDead => Health <= 0;
 
-	public Transform EyeTransform
-	{
-		get
-		{
-			return Scene.Camera.WorldTransform;
-
-			//var tx = new Transform( PlayerController.EyePosition );
-			//tx.Rotation = PlayerController.EyeAngles;
-			//	return tx;
-		}
-	}
+	public Transform EyeTransform => Controller.EyeTransform;
 
 	/// <summary>
 	/// Creates a ragdoll but it isn't enabled
@@ -39,7 +29,7 @@ public sealed class Player : Component, IDamageable
 	[Broadcast]
 	void CreateRagdoll()
 	{
-		var ragdoll = GetComponent<BodyController>().CreateRagdoll();
+		var ragdoll = Controller.CreateRagdoll();
 		if ( !ragdoll.IsValid() ) return;
 
 		var corpse = ragdoll.AddComponent<PlayerCorpse>();
@@ -104,5 +94,26 @@ public sealed class Player : Component, IDamageable
 	void IDamageable.OnDamage( in DamageInfo damage )
 	{
 		TakeDamage( damage.Damage );
+	}
+
+	void BodyController.IEvents.OnEyeAngles( ref Angles ang )
+	{
+		var player = Components.Get<Player>();
+		var angles = ang;
+		Scene.RunEvent<IPlayerEvent>( x => x.OnCameraMove( player, ref angles ) );
+		ang = angles;
+	}
+
+	void BodyController.IEvents.PostCameraSetup( CameraComponent camera )
+	{
+		var player = Components.Get<Player>();
+		IPlayerEvent.Post( x => x.OnCameraSetup( player, camera ) );
+		IPlayerEvent.Post( x => x.OnCameraPostSetup( player, camera ) );
+	}
+
+	void BodyController.IEvents.OnLanded( float distance, Vector3 impactVelocity )
+	{
+		var player = Components.Get<Player>();
+		IPlayerEvent.Post( x => x.OnLand( player, distance, impactVelocity ) );
 	}
 }

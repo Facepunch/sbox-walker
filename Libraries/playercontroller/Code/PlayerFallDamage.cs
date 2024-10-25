@@ -3,7 +3,6 @@
 /// </summary>
 public class PlayerFallDamage : Component, IPlayerEvent
 {
-	[RequireComponent] public PlayerController PlayerController { get; set; }
 	[RequireComponent] public Player Player { get; set; }
 
 	/// <summary>

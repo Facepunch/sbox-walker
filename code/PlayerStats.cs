@@ -3,7 +3,6 @@
 /// </summary>
 public sealed class PlayerStats : Component, IPlayerEvent
 {
-	[RequireComponent] public PlayerController PlayerController { get; set; }
 	[RequireComponent] public Player Player { get; set; }
 
 	float metersTravelled;
@@ -17,7 +16,7 @@ public sealed class PlayerStats : Component, IPlayerEvent
 		lastPosition = WorldPosition;
 
 
-		if ( !PlayerController.BodyController.IsOnGround )
+		if ( !Player.Controller.IsOnGround )
 		{
 			return;
 		}

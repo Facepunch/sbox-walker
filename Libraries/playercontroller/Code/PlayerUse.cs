@@ -2,7 +2,6 @@
 
 public sealed class PlayerUse : Component
 {
-	[RequireComponent] public PlayerController PlayerController { get; set; }
 	[RequireComponent] public Player Player { get; set; }
 
 	IPressable pressed;
