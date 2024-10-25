@@ -17,7 +17,10 @@ public sealed partial class BodyController : Component
 	[Sync]
 	public bool IsDucking { get; set; }
 
-	float headHeight;
+	/// <summary>
+	/// The distance from the top of the head to to closest ceiling
+	/// </summary>
+	public float Headroom { get; set; }
 
 	TimeSince timeSinceJump = 0;
 
@@ -95,6 +98,11 @@ public sealed partial class BodyController : Component
 		/// Called after we've set the camera up
 		/// </summary>
 		void PostCameraSetup( CameraComponent cam ) { }
+
+		/// <summary>
+		/// The player has landed on the ground, after falling this distance.
+		/// </summary>
+		void OnLanded( float distance, Vector3 impactVelocity ) { }
 	}
 
 	void UpdateEyeAngles()
@@ -205,11 +213,8 @@ public sealed partial class BodyController : Component
 	{
 		if ( Scene.IsEditor ) return;
 
-		// head height
-		{
-			var tr = TraceBody( WorldPosition, WorldPosition + Vector3.Up * 100, 0.75f );
-			headHeight = tr.Distance;
-		}
+		UpdateHeadroom();
+		UpdateFalling();
 
 		if ( IsProxy ) return;
 		if ( !UseInputControls ) return;
@@ -217,6 +222,46 @@ public sealed partial class BodyController : Component
 		InputMove();
 		UpdateDucking();
 		InputJump();
+	}
+
+	void UpdateHeadroom()
+	{
+		var tr = TraceBody( WorldPosition, WorldPosition + Vector3.Up * 100, 0.75f );
+		Headroom = tr.Distance;
+	}
+
+	bool _wasFalling = false;
+	float fallDistance = 0;
+	Vector3 fallVelocity = 0;
+
+	void UpdateFalling()
+	{
+		if ( !Mode.AllowFalling )
+		{
+			_wasFalling = false;
+			fallDistance = 0;
+			fallVelocity = default;
+			return;
+		}
+
+		if ( IsOnGround )
+		{
+			if ( _wasFalling )
+			{
+				IEvents.PostToGameObject( GameObject, x => x.OnLanded( fallDistance, fallVelocity ) );
+			}
+
+			_wasFalling = false;
+			fallDistance = 0;
+			return;
+		}
+
+		_wasFalling = true;
+		fallVelocity = Velocity;
+		fallDistance += fallVelocity.z * -1 * Time.Delta;
+
+		if ( fallDistance < 0 )
+			fallDistance = 0;
 	}
 
 	void InputMove()
@@ -268,7 +313,7 @@ public sealed partial class BodyController : Component
 			if ( !IsOnGround )
 				return;
 
-			if ( headHeight < unduckDelta )
+			if ( Headroom < unduckDelta )
 				return;
 		}
 
@@ -362,7 +407,7 @@ public sealed partial class BodyController : Component
 		Renderer.Set( "skid", skidding );
 		Renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed ? 2 : 1 );
 
-		float duck = headHeight.Remap( 50, 0, 0, 0.5f, true );
+		float duck = Headroom.Remap( 50, 0, 0, 0.5f, true );
 		if ( IsDucking )
 		{
 			duck *= 3.0f;

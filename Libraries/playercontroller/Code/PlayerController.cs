@@ -28,4 +28,10 @@ public sealed class PlayerController : Component, BodyController.IEvents
 		IPlayerEvent.Post( x => x.OnCameraSetup( player, camera ) );
 		IPlayerEvent.Post( x => x.OnCameraPostSetup( player, camera ) );
 	}
+
+	void BodyController.IEvents.OnLanded( float distance, Vector3 impactVelocity )
+	{
+		var player = Components.Get<Player>();
+		IPlayerEvent.Post( x => x.OnLand( player, distance, impactVelocity ) );
+	}
 }
