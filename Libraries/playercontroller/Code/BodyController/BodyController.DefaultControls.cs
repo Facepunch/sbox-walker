@@ -39,22 +39,22 @@ public sealed partial class BodyController : Component
 	[Property, Feature( "Input" )] public float JumpSpeed { get; set; } = 300;
 	[Property, Feature( "Input" )] public float DuckedHeight { get; set; } = 36;
 
-	[Property, Feature( "Camera" ), Order( 5000 )] public float EyeDistanceFromTop { get; set; } = 8;
-	[Property, Feature( "Camera" ), Order( 5000 )] public bool ThirdPerson { get; set; } = true;
-	[Property, Feature( "Camera" ), Order( 5000 )] public bool HideBodyInFirstPerson { get; set; } = true;
-	[Property, Feature( "Camera" ), Order( 5000 )] public bool RotateWithGround { get; set; } = true;
-	[Property, Feature( "Camera" ), Order( 5000 )] public Vector3 CameraOffset { get; set; } = new Vector3( 256, 0, 12 );
-	[Property, Feature( "Camera" ), Order( 5000 ), InputAction] public string ToggleCameraModeButton { get; set; } = "view";
+	[Property, Feature( "Camera" )] public float EyeDistanceFromTop { get; set; } = 8;
+	[Property, Feature( "Camera" )] public bool ThirdPerson { get; set; } = true;
+	[Property, Feature( "Camera" )] public bool HideBodyInFirstPerson { get; set; } = true;
+	[Property, Feature( "Camera" )] public bool RotateWithGround { get; set; } = true;
+	[Property, Feature( "Camera" )] public Vector3 CameraOffset { get; set; } = new Vector3( 256, 0, 12 );
+	[Property, Feature( "Camera" ), InputAction] public string ToggleCameraModeButton { get; set; } = "view";
 
 	/// <summary>
 	/// The body will usually be a child object with SkinnedModelRenderer
 	/// </summary>
-	[Property, Feature( "Animator" ), Order( 5000 )] public SkinnedModelRenderer Renderer { get; set; }
+	[Property, Feature( "Animator" )] public SkinnedModelRenderer Renderer { get; set; }
 
 	bool ShowCreateBodyRenderer => UseAnimatorControls && Renderer is null;
 
-	[Button( icon: "🪄" )]
-	[Property, Feature( "Animator" ), ShowIf( nameof( ShowCreateBodyRenderer ), true ), Order( 5000 )]
+	[Button( icon: "add" )]
+	[Property, Feature( "Animator" ), Tint( EditorTint.Green ), ShowIf( "ShowCreateBodyRenderer", true )]
 	public void CreateBodyRenderer()
 	{
 		var body = new GameObject( true, "Body" );
@@ -64,8 +64,8 @@ public sealed partial class BodyController : Component
 		Renderer.Model = Model.Load( "models/citizen/citizen.vmdl" );
 	}
 
-	[Property, Feature( "Animator" ), ShowIf( "UseAnimatorControls", true ), Order( 5000 )] public float RotationAngleLimit { get; set; } = 45.0f;
-	[Property, Feature( "Animator" ), ShowIf( "UseAnimatorControls", true ), Order( 5000 )] public float RotationSpeed { get; set; } = 1.0f;
+	[Property, Feature( "Animator" )] public float RotationAngleLimit { get; set; } = 45.0f;
+	[Property, Feature( "Animator" )] public float RotationSpeed { get; set; } = 1.0f;
 
 
 	protected override void OnUpdate()
