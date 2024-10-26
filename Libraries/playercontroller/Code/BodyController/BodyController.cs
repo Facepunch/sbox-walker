@@ -110,6 +110,13 @@ public sealed partial class BodyController : Component, IScenePhysicsEvents, Com
 		}
 	}
 
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+
+		DisableAnimationEvents();
+	}
+
 	protected override void OnValidate()
 	{
 		EnsureComponentsCreated();

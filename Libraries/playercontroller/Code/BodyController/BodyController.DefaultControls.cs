@@ -1,4 +1,6 @@
-﻿namespace Sandbox;
+﻿using Sandbox.Audio;
+
+namespace Sandbox;
 
 public sealed partial class BodyController : Component
 {
@@ -46,10 +48,27 @@ public sealed partial class BodyController : Component
 	[Property, Feature( "Camera" )] public Vector3 CameraOffset { get; set; } = new Vector3( 256, 0, 12 );
 	[Property, Feature( "Camera" ), InputAction] public string ToggleCameraModeButton { get; set; } = "view";
 
+
+	SkinnedModelRenderer _renderer;
+
 	/// <summary>
 	/// The body will usually be a child object with SkinnedModelRenderer
 	/// </summary>
-	[Property, Feature( "Animator" )] public SkinnedModelRenderer Renderer { get; set; }
+	[Property, Feature( "Animator" )]
+	public SkinnedModelRenderer Renderer
+	{
+		get => _renderer;
+		set
+		{
+			if ( _renderer == value ) return;
+
+			DisableAnimationEvents();
+
+			_renderer = value;
+
+			EnableAnimationEvents();
+		}
+	}
 
 	bool ShowCreateBodyRenderer => UseAnimatorControls && Renderer is null;
 
@@ -66,6 +85,16 @@ public sealed partial class BodyController : Component
 
 	[Property, Feature( "Animator" )] public float RotationAngleLimit { get; set; } = 45.0f;
 	[Property, Feature( "Animator" )] public float RotationSpeed { get; set; } = 1.0f;
+
+	[Property, Feature( "Animator" )] public bool EnableFootstepSounds { get; set; } = true;
+	[Property, Feature( "Animator" )] public float FootstepVolume { get; set; } = 1;
+	[Property, Feature( "Animator" )] public MixerHandle FootstepMixer { get; set; }
+
+
+	/// <summary>
+	/// Draw debug overlay on footsteps
+	/// </summary>
+	public bool DebugFootsteps;
 
 
 	protected override void OnUpdate()
@@ -258,6 +287,16 @@ public sealed partial class BodyController : Component
 			if ( _wasFalling )
 			{
 				IEvents.PostToGameObject( GameObject, x => x.OnLanded( fallDistance, fallVelocity ) );
+
+				// play land sounds
+				if ( EnableFootstepSounds )
+				{
+					var volume = fallVelocity.Length.Remap( 50, 800, 0.5f, 5 );
+					var vel = fallVelocity.Length;
+
+					PlayFootstepSound( WorldPosition, volume, 0 );
+					PlayFootstepSound( WorldPosition, volume, 1 );
+				}
 			}
 
 			_wasFalling = false;
@@ -418,7 +457,7 @@ public sealed partial class BodyController : Component
 		renderer.Set( "b_climbing", IsClimbing );
 		renderer.Set( "move_rotationspeed", _animRotationSpeed );
 		renderer.Set( "skid", skidding );
-		renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed ? 2 : 1 );
+		renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed + 20 ? 2 : 1 );
 
 		float duck = Headroom.Remap( 50, 0, 0, 0.5f, true );
 		if ( IsDucking )
@@ -510,5 +549,71 @@ public sealed partial class BodyController : Component
 		// Keep for next frame
 		groundHash = hash;
 		localGroundTransform = localTransform;
+	}
+
+	void EnableAnimationEvents()
+	{
+		if ( Renderer is null ) return;
+		Renderer.OnFootstepEvent += OnFootstepEvent;
+	}
+
+	void DisableAnimationEvents()
+	{
+		if ( Renderer is null ) return;
+		Renderer.OnFootstepEvent -= OnFootstepEvent;
+	}
+
+	TimeSince _timeSinceStep;
+
+	private void OnFootstepEvent( SceneModel.FootstepEvent e )
+	{
+		if ( !IsOnGround ) return;
+		if ( _timeSinceStep < 0.2f ) return;
+
+		_timeSinceStep = 0;
+
+		PlayFootstepSound( e.Transform.Position, e.Volume, e.FootId );
+	}
+
+	public void PlayFootstepSound( Vector3 worldPosition, float volume, int foot )
+	{
+		var tr = Scene.Trace
+			.Ray( worldPosition + Vector3.Up * 10, worldPosition + Vector3.Down * 20 )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.Run();
+
+
+
+		if ( !tr.Hit || tr.Surface is null )
+		{
+			if ( DebugFootsteps )
+			{
+				DebugOverlay.Sphere( new Sphere( worldPosition, volume ), duration: 10, color: Color.Red, overlay: true );
+			}
+
+			return;
+		}
+
+		var sound = foot == 0 ? tr.Surface.Sounds.FootLeft : tr.Surface.Sounds.FootRight;
+		var soundEvent = ResourceLibrary.Get<SoundEvent>( sound );
+		if ( soundEvent is null )
+		{
+			if ( DebugFootsteps )
+			{
+				DebugOverlay.Sphere( new Sphere( worldPosition, volume ), duration: 10, color: Color.Orange, overlay: true );
+			}
+
+			return;
+		}
+
+		var handle = GameObject.PlaySound( soundEvent, 0 );
+		handle.TargetMixer = FootstepMixer.GetOrDefault();
+		handle.Volume *= volume * FootstepVolume;
+
+		if ( DebugFootsteps )
+		{
+			DebugOverlay.Sphere( new Sphere( worldPosition, volume ), duration: 10, overlay: true );
+			DebugOverlay.Text( worldPosition, $"{soundEvent.ResourceName}", size: 14, flags: TextFlag.LeftTop, duration: 10, overlay: true );
+		}
 	}
 }
