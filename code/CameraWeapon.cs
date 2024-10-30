@@ -100,8 +100,9 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 	{
 		if ( !focusing )
 		{
-			dof.BlurSize = 200;
-			dof.FrontBlur = true;
+			dof.BlurSize = Scene.Camera.FieldOfView.Remap( 20, 80, 50, 10 );
+			dof.FocusRange = 256;
+			dof.FrontBlur = false;
 
 			var tr = Scene.Trace.Ray( Scene.Camera.Transform.World.ForwardRay, 5000 )
 								.IgnoreGameObjectHierarchy( GameObject.Root )
@@ -110,7 +111,9 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 			focusPoint = tr.EndPosition;
 		}
 
-		dof.FocalDistance = Scene.Camera.WorldPosition.Distance( focusPoint ) + 32;
+		var target = Scene.Camera.WorldPosition.Distance( focusPoint ) + 32;
+
+		dof.FocalDistance = dof.FocalDistance.LerpTo( target, Time.Delta * 10.0f );
 
 	}
 }
