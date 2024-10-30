@@ -5,7 +5,7 @@ namespace Sandbox;
 [EditorHandle( Icon = "directions_walk" )]
 [Title( "Player Controller" )]
 [Category( "Physics" )]
-[Alias( "PhysicsCharacter", "Sandbox.PhysicsCharacter", "BodyController" )]
+[Alias( "PhysicsCharacter", "Sandbox.PhysicsCharacter", "Sandbox.BodyController" )]
 [Tint( EditorTint.Green )]
 public sealed partial class PlayerController : Component, IScenePhysicsEvents, Component.ExecuteInEditor
 {
