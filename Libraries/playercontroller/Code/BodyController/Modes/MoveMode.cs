@@ -125,4 +125,22 @@ public abstract partial class MoveMode : Component
 	{
 
 	}
+
+	/// <summary>
+	/// Read inputs, return WishVelocity
+	/// </summary>
+	public virtual Vector3 UpdateMove( Rotation eyes, Vector3 input )
+	{
+		// don't normalize, because analog input might want to go slow
+		input = input.ClampLength( 1 );
+
+		var vel = eyes * input;
+		if ( vel.IsNearZeroLength ) return default;
+
+		var velocity = Controller.WalkSpeed;
+		if ( Input.Down( "Run" ) ) velocity = Controller.RunSpeed;
+		if ( Controller.IsDucking ) velocity = Controller.DuckedSpeed;
+
+		return vel * velocity;
+	}
 }

@@ -69,4 +69,14 @@ public partial class MoveModeSwim : MoveMode
 			WaterLevel = waterLevel;
 		}
 	}
+
+	public override Vector3 UpdateMove( Rotation eyes, Vector3 input )
+	{
+		if ( Input.Down( "jump" ) )
+		{
+			input += Vector3.Up;
+		}
+
+		return base.UpdateMove( eyes, input );
+	}
 }

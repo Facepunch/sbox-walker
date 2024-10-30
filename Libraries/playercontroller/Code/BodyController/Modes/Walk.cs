@@ -53,4 +53,12 @@ public partial class MoveModeWalk : MoveMode
 
 		return true;
 	}
+
+	public override Vector3 UpdateMove( Rotation eyes, Vector3 input )
+	{
+		// ignore pitch when walking
+		eyes = eyes.Angles() with { pitch = 0 };
+
+		return base.UpdateMove( eyes, input );
+	}
 }

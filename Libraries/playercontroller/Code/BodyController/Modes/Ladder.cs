@@ -134,4 +134,19 @@ public partial class MoveModeLadder : MoveMode
 			}
 		}
 	}
+
+	public override Vector3 UpdateMove( Rotation eyes, Vector3 input )
+	{
+		var wishVelocity = new Vector3( 0, 0, Input.AnalogMove.x );
+
+		wishVelocity *= 340.0f;
+
+		if ( Input.Down( "jump" ) )
+		{
+			// Jump away from ladder
+			Controller.Jump( ClimbingRotation.Backward * 200 );
+		}
+
+		return wishVelocity;
+	}
 }
