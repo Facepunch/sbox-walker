@@ -11,6 +11,9 @@ public sealed partial class PlayerController : Component
 	[Property, Feature( "Camera" )] public Vector3 CameraOffset { get; set; } = new Vector3( 256, 0, 12 );
 	[Property, Feature( "Camera" ), InputAction] public string ToggleCameraModeButton { get; set; } = "view";
 
+	float _cameraDistance = 100;
+	float _eyez;
+
 	void UpdateCameraPosition()
 	{
 		if ( !UseCameraControls ) return;
