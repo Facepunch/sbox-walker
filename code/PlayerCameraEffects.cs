@@ -17,6 +17,7 @@ public class PlayerCameraEffects : Component, IPlayerEvent
 	void IPlayerEvent.OnJump( Player player )
 	{
 		if ( player.IsProxy ) return;
+		if ( player.Controller.ThirdPerson ) return;
 
 		var punch = new CameraPunch( new Vector3( -20, 0, 0 ), 0.5f, 2.0f, 1.0f );
 		effects.Add( punch );
@@ -25,8 +26,9 @@ public class PlayerCameraEffects : Component, IPlayerEvent
 	void IPlayerEvent.OnLand( Player player, float distance, Vector3 velocity )
 	{
 		if ( player.IsProxy ) return;
+		if ( player.Controller.ThirdPerson ) return;
 
-		var punch = new CameraPunch( new Vector3( 0.3f * distance, Random.Shared.Float( -10, 10 ), Random.Shared.Float( -10, 10 ) ), 1.0f, 1.5f, 0.7f );
+		var punch = new CameraPunch( new Vector3( 0.3f * distance, Random.Shared.Float( -1, 1 ), Random.Shared.Float( -1, 1 ) ), 1.0f, 1.5f, 0.7f );
 		effects.Add( punch );
 	}
 
@@ -46,6 +48,8 @@ public class PlayerCameraEffects : Component, IPlayerEvent
 
 	private void MovementEffects( Player player, CameraComponent camera )
 	{
+		if ( player.Controller.ThirdPerson ) return;
+
 		Assert.NotNull( player );
 		Assert.NotNull( player.Controller );
 
