@@ -40,7 +40,7 @@ public partial class MoveModeLadder : MoveMode
 		body.AngularDamping = 1f;
 	}
 
-	public override int Score( BodyController controller )
+	public override int Score( PlayerController controller )
 	{
 		if ( ClimbingObject.IsValid() ) return Priority;
 		return -100;

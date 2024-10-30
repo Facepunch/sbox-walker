@@ -2,7 +2,7 @@
 
 namespace Sandbox;
 
-public sealed partial class BodyController : Component
+public sealed partial class PlayerController : Component
 {
 	/// <summary>
 	/// The direction we're looking.

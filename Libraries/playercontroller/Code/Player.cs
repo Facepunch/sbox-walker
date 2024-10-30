@@ -3,7 +3,7 @@ using static Sandbox.Component;
 /// <summary>
 /// Holds player information like health
 /// </summary>
-public sealed class Player : Component, IDamageable, BodyController.IEvents
+public sealed class Player : Component, IDamageable, PlayerController.IEvents
 {
 	public static Player FindLocalPlayer()
 	{
@@ -11,7 +11,7 @@ public sealed class Player : Component, IDamageable, BodyController.IEvents
 	}
 
 	[RequireComponent]
-	public BodyController Controller { get; set; }
+	public PlayerController Controller { get; set; }
 
 	[Property]
 	public GameObject Body { get; set; }
@@ -96,7 +96,7 @@ public sealed class Player : Component, IDamageable, BodyController.IEvents
 		TakeDamage( damage.Damage );
 	}
 
-	void BodyController.IEvents.OnEyeAngles( ref Angles ang )
+	void PlayerController.IEvents.OnEyeAngles( ref Angles ang )
 	{
 		var player = Components.Get<Player>();
 		var angles = ang;
@@ -104,14 +104,14 @@ public sealed class Player : Component, IDamageable, BodyController.IEvents
 		ang = angles;
 	}
 
-	void BodyController.IEvents.PostCameraSetup( CameraComponent camera )
+	void PlayerController.IEvents.PostCameraSetup( CameraComponent camera )
 	{
 		var player = Components.Get<Player>();
 		IPlayerEvent.Post( x => x.OnCameraSetup( player, camera ) );
 		IPlayerEvent.Post( x => x.OnCameraPostSetup( player, camera ) );
 	}
 
-	void BodyController.IEvents.OnLanded( float distance, Vector3 impactVelocity )
+	void PlayerController.IEvents.OnLanded( float distance, Vector3 impactVelocity )
 	{
 		var player = Components.Get<Player>();
 		IPlayerEvent.Post( x => x.OnLand( player, distance, impactVelocity ) );

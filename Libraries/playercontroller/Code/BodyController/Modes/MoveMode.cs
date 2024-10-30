@@ -10,9 +10,12 @@ public abstract partial class MoveMode : Component
 	public virtual bool AllowFalling => false;
 
 	[RequireComponent]
-	public BodyController Controller { get; set; }
+	public PlayerController Controller { get; set; }
 
-	public virtual int Score( BodyController controller ) => 0;
+	/// <summary>
+	/// Highest number becomes the new control mode
+	/// </summary>
+	public virtual int Score( PlayerController controller ) => 0;
 
 	/// <summary>
 	/// Called before the physics step is run
@@ -118,7 +121,7 @@ public abstract partial class MoveMode : Component
 	/// <summary>
 	/// Update the animator which is available at Controller.Renderer 
 	/// </summary>
-	public virtual void UpdateAnimator()
+	public virtual void UpdateAnimator( SkinnedModelRenderer renderer )
 	{
 
 	}

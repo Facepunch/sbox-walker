@@ -3,11 +3,11 @@ namespace Sandbox;
 
 [Icon( "directions_walk" )]
 [EditorHandle( Icon = "directions_walk" )]
-[Title( "Body Controller" )]
+[Title( "Player Controller" )]
 [Category( "Physics" )]
-[Alias( "PhysicsCharacter", "Sandbox.PhysicsCharacter" )]
+[Alias( "PhysicsCharacter", "Sandbox.PhysicsCharacter", "BodyController" )]
 [Tint( EditorTint.Green )]
-public sealed partial class BodyController : Component, IScenePhysicsEvents, Component.ExecuteInEditor
+public sealed partial class PlayerController : Component, IScenePhysicsEvents, Component.ExecuteInEditor
 {
 	/// <summary>
 	/// This is used to keep a distance away from surfaces. For exmaple, when grounding, we'll
