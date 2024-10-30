@@ -96,7 +96,7 @@ public class PlayerCameraEffects : Component, IPlayerEvent
 
 		public override bool IsDone => deathTime <= 0;
 
-		SpringDampVector3 damping;
+		Vector3.SpringDamped damping;
 
 		public override void Update()
 		{
