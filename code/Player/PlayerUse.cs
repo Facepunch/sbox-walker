@@ -1,10 +1,9 @@
 
 
-public sealed class PlayerUse : Component
+public sealed class PlayerUse : Component, PlayerController.IEvents
 {
 	[RequireComponent] public Player Player { get; set; }
 
-	IPressable pressed;
 	Rigidbody carrying;
 	Transform carryTransform;
 	Transform carryOriginalTransform;
@@ -13,68 +12,53 @@ public sealed class PlayerUse : Component
 	public string TooltipIcon;
 	public string Tooltip;
 
-	protected override void OnUpdate()
+	/// <summary>
+	/// Hook into the PlayerController's use system and tell it we want to 
+	/// interact with RigidBodies that we can carry
+	/// </summary>
+	Component PlayerController.IEvents.GetUsableComponent( GameObject go )
 	{
-		if ( !Player.Network.IsOwner )
-			return;
-
-		var lookingAt = TryGetLookedAt( 0.0f );
-		lookingAt ??= TryGetLookedAt( 2.0f );
-		lookingAt ??= TryGetLookedAt( 4.0f );
-		lookingAt ??= TryGetLookedAt( 8.0f );
-
-		if ( Input.Pressed( "use" ) )
+		var rb = go.GetComponent<Rigidbody>();
+		if ( CanCarry( rb ) )
 		{
-			if ( lookingAt is IPressable button )
-			{
-				button.Press( new IPressable.Event( this ) );
-				pressed = button;
-			}
-
-			if ( lookingAt is Rigidbody rb )
-			{
-				StartCarry( rb );
-			}
+			return rb;
 		}
 
-		if ( Input.Released( "use" ) )
-		{
-			if ( pressed is not null )
-			{
-				pressed.Release( new IPressable.Event( this ) );
-				pressed = default;
-			}
+		return default;
+	}
 
-			if ( carrying is not null )
-			{
-				StopCarrying();
-			}
-		}
+	/// <summary>
+	/// Can carry rigidbodies that are networked and we can take ownership of
+	/// </summary>
+	private bool CanCarry( Rigidbody rb )
+	{
+		if ( !rb.IsValid() ) return false;
+		if ( !rb.Network.Active ) return false;
+		if ( rb.Network.OwnerTransfer != OwnerTransfer.Takeover ) return false;
 
-		if ( pressed is not null || carrying.IsValid() )
+		return true;
+	}
+
+	void UpdateTooltips( Component lookingAt, Component pressed )
+	{
+
+		if ( !lookingAt.IsValid() || pressed.IsValid() )
 		{
+			Tooltip = null;
 			Interative = false;
 			return;
 		}
 
-		if ( lookingAt is IPressable btn )
+		var tt = lookingAt.GetComponent<Tooltip>();
+		if ( tt is not null )
 		{
-			var c = (Component)btn;
-			var tt = c.GetComponent<Tooltip>();
-			if ( tt is not null )
-			{
-				Tooltip = tt.Text;
-				TooltipIcon = tt.Icon;
-			}
-			else
-			{
-				Tooltip = $"Use";
-				TooltipIcon = "pan_tool_alt";
-			}
-
+			Tooltip = tt.Text;
+			TooltipIcon = tt.Icon;
 			Interative = true;
+			return;
 		}
-		else if ( lookingAt is Rigidbody rbb && CanCarry( rbb ) )
+
+		if ( lookingAt is Rigidbody rbb && CanCarry( rbb ) )
 		{
 			Tooltip = "Pick Up";
 			TooltipIcon = "back_hand";
@@ -87,10 +71,34 @@ public sealed class PlayerUse : Component
 		}
 	}
 
+	void PlayerController.IEvents.StartPressing( Sandbox.Component target )
+	{
+		var rb = target.GetComponent<Rigidbody>();
+		if ( CanCarry( rb ) )
+		{
+			StartCarry( rb );
+		}
+	}
+
+	void PlayerController.IEvents.StopPressing( Sandbox.Component target )
+	{
+		StopCarrying();
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( IsProxy )
+			return;
+
+		UpdateTooltips( Player.Controller.Hovered, Player.Controller.Pressed );
+	}
+
 	private void StartCarry( Rigidbody rb )
 	{
 		if ( !rb.Network.TakeOwnership() )
 			return;
+
+		StopCarrying();
 
 		carrying = rb;
 		carryOriginalTransform = rb.Transform.World;
@@ -131,24 +139,7 @@ public sealed class PlayerUse : Component
 		}
 	}
 
-	private bool CanCarry( Rigidbody rb )
-	{
-		if ( !rb.IsValid() ) return false;
-		if ( !rb.Network.Active ) return false;
-		if ( rb.Network.OwnerTransfer != OwnerTransfer.Takeover ) return false;
 
-		return true;
-	}
-
-	protected override void OnDisabled()
-	{
-		if ( pressed is not null )
-		{
-			pressed.Release( new IPressable.Event( this ) );
-		}
-
-		base.OnDisabled();
-	}
 
 	object TryGetLookedAt( float radius )
 	{

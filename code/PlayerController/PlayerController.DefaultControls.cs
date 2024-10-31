@@ -39,6 +39,7 @@ public sealed partial class PlayerController : Component
 			if ( UseInputControls )
 			{
 				UpdateEyeAngles();
+				UpdateLookAt();
 			}
 
 			if ( UseCameraControls )

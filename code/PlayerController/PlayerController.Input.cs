@@ -9,8 +9,23 @@ public sealed partial class PlayerController : Component
 	[Property, Feature( "Input" )] public float JumpSpeed { get; set; } = 300;
 	[Property, Feature( "Input" )] public float DuckedHeight { get; set; } = 36;
 
-	TimeSince timeSinceJump = 0;
+	/// <summary>
+	/// Allows to player to interact with things by "use"ing them. 
+	/// Usually by pressing the "use" button.
+	/// </summary>
+	[Property, Feature( "Input" ), ToggleGroup( "EnablePressing", Label = "Enable Pressing" )] public bool EnablePressing { get; set; } = true;
 
+	/// <summary>
+	/// The button that the player will press to use things
+	/// </summary>
+	[Property, Feature( "Input" ), Group( "EnablePressing" ), InputAction] public string UseButton { get; set; } = "use";
+
+	/// <summary>
+	/// How far from the eye can the player reach to use things
+	/// </summary>
+	[Property, Feature( "Input" ), Group( "EnablePressing" )] public float ReachLength { get; set; } = 130;
+
+	TimeSince timeSinceJump = 0;
 
 	void UpdateEyeAngles()
 	{

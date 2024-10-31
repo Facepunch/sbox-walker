@@ -45,7 +45,7 @@ public sealed partial class PlayerController : Component
 
 		if ( ThirdPerson )
 		{
-			var cameraDelta = rot.Forward * -CameraOffset.x + rot.Up * CameraOffset.z;
+			var cameraDelta = rot.Forward * -CameraOffset.x + rot.Up * CameraOffset.z + rot.Right * CameraOffset.y;
 
 			// clip the camera
 			var tr = Scene.Trace.FromTo( eyePosition, eyePosition + cameraDelta )

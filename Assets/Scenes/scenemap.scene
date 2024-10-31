@@ -2,6 +2,21 @@
   "__guid": "80da07d5-d475-4a35-bfdb-1beb2b8e0a49",
   "GameObjects": [
     {
+      "__guid": "73043ff2-a38b-4eda-b7d4-2d9f280119dd",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "6bcca65c-2011-4032-bafa-1dfb9c75bc17",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "scenemap"
+        }
+      ]
+    },
+    {
       "__guid": "09a49cc5-5fe4-4f28-b680-5ee34278fc3c",
       "Flags": 0,
       "Name": "ScenePreviewCamera",
@@ -151,7 +166,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -278,7 +294,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -405,7 +422,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -461,11 +479,8 @@
         {
           "__type": "Sandbox.TextRenderer",
           "__guid": "d9690d19-2f77-4bb6-bc1f-080bf6062869",
+          "__version": 1,
           "BlendMode": "Lighten",
-          "Color": "1,0,0.86667,1",
-          "FontFamily": "Poppins",
-          "FontSize": 64,
-          "FontWeight": 800,
           "RenderOptions": {
             "GameLayer": true,
             "OverlayLayer": false,
@@ -473,8 +488,33 @@
             "AfterUILayer": false
           },
           "Scale": 0.16,
-          "Text": "FLAMING MOES",
-          "TextAlignment": "Center"
+          "TextAlignment": "Center",
+          "TextScope": {
+            "Text": "FLAMING MOES",
+            "TextColor": "1,0,0.86667,1",
+            "FontName": "Poppins",
+            "FontSize": 64,
+            "FontWeight": 800,
+            "LineHeight": 1,
+            "Outline": {
+              "Size": 4,
+              "Color": "0,0,1,1"
+            },
+            "Shadow": {
+              "Size": 4,
+              "Color": "0,0,0,1",
+              "Offset": "4,4"
+            },
+            "OutlineUnder": {
+              "Size": 4,
+              "Color": "0,1,0,1"
+            },
+            "ShadowUnder": {
+              "Size": 4,
+              "Color": "0,0,0,1",
+              "Offset": "4,4"
+            }
+          }
         }
       ]
     },
@@ -602,7 +642,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "FuncButton",
@@ -910,7 +951,8 @@
             "Links": []
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -1285,7 +1327,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "TriggerHurt",
@@ -1426,7 +1469,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -1558,7 +1602,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -1690,7 +1735,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -1822,7 +1868,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -1954,7 +2001,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         }
       ]
     },
@@ -2088,7 +2136,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": true
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "FuncButton",
@@ -2219,6 +2268,12 @@
           ],
           "ResetTime": 2,
           "State": false
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "af967692-522a-49c3-93c0-4fe2bfc2be6f",
+          "Icon": "\u26D3\uFE0F\u200D\uD83D\uDCA5",
+          "Text": "Open Broken Door"
         }
       ],
       "Children": [
@@ -2277,7 +2332,8 @@
           "__guid": "c8f90aae-6413-4000-8936-76f1d6cfc7e6",
           "IsTrigger": false,
           "Model": "models/citizen_props/roadcone01.vmdl",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "Sandbox.Rigidbody",
@@ -2323,7 +2379,8 @@
           "Center": "0,0,41.79999",
           "IsTrigger": false,
           "Scale": "9.066656,38.60001,84.66712",
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "FuncDoor",
@@ -2349,6 +2406,12 @@
           "ResetTime": 1,
           "State": true,
           "TargetRotation": "0,87,0"
+        },
+        {
+          "__type": "Tooltip",
+          "__guid": "83e3b0a0-8dff-448a-a587-845e0768e267",
+          "Icon": "\uD83D\uDEAA",
+          "Text": "Open Door"
         }
       ]
     },
@@ -2475,7 +2538,8 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "TriggerTeleport",
@@ -2572,7 +2636,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2618,7 +2683,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2664,7 +2730,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2710,7 +2777,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2756,7 +2824,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2802,7 +2871,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2848,7 +2918,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2894,7 +2965,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2940,7 +3012,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -2986,7 +3059,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3032,7 +3106,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3078,7 +3153,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3124,7 +3200,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3170,7 +3247,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3216,7 +3294,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3262,7 +3341,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3308,7 +3388,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3354,7 +3435,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3400,7 +3482,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3446,7 +3529,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3492,7 +3576,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3538,7 +3623,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3584,7 +3670,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3630,7 +3717,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3676,7 +3764,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3722,7 +3811,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3768,7 +3858,8 @@
           "Center": "-14.19999,0.5333328,1.933336",
           "IsTrigger": false,
           "Radius": 16.800005,
-          "Static": false
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
         },
         {
           "__type": "CollectableItem",
@@ -3794,6 +3885,9 @@
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "scenemap"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -3807,9 +3901,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "scenemap",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [
     "apetavern.door_01a#46137",
     "audiotrope.painterlybricks1#72183",
@@ -3822,6 +3916,5 @@
     "oleshkus.wall_1#57403",
     "tiowevolve.dev_orange_12#53032"
   ],
-  "IsValid": true,
-  "__version": 1
+  "__version": 2
 }

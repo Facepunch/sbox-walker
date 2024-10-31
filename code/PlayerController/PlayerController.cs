@@ -6,7 +6,6 @@ namespace Sandbox;
 [Title( "Player Controller" )]
 [Category( "Physics" )]
 [Alias( "PhysicsCharacter", "Sandbox.PhysicsCharacter", "Sandbox.BodyController" )]
-[Tint( EditorTint.Green )]
 [HelpUrl( "https://docs.facepunch.com/s/sbox-dev/doc/player-controller-G9xW4n1yAS" )]
 public sealed partial class PlayerController : Component, IScenePhysicsEvents, Component.ExecuteInEditor
 {
@@ -116,6 +115,7 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 		base.OnDisabled();
 
 		DisableAnimationEvents();
+		StopPressing();
 	}
 
 	protected override void OnValidate()
