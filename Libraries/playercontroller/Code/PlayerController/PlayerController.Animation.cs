@@ -27,7 +27,10 @@ public sealed partial class PlayerController : Component
 		}
 	}
 
-	bool ShowCreateBodyRenderer => UseAnimatorControls && Renderer is null;
+	/// <summary>
+	/// If true we'll show the "create body" button
+	/// </summary>
+	public bool ShowCreateBodyRenderer => UseAnimatorControls && Renderer is null;
 
 	[Button( icon: "add" )]
 	[Property, Feature( "Animator" ), Tint( EditorTint.Green ), ShowIf( "ShowCreateBodyRenderer", true )]
@@ -43,8 +46,11 @@ public sealed partial class PlayerController : Component
 	[Property, Feature( "Animator" )] public float RotationAngleLimit { get; set; } = 45.0f;
 	[Property, Feature( "Animator" )] public float RotationSpeed { get; set; } = 1.0f;
 
+	[Header( "Footsteps" )]
 	[Property, Feature( "Animator" )] public bool EnableFootstepSounds { get; set; } = true;
 	[Property, Feature( "Animator" )] public float FootstepVolume { get; set; } = 1;
+
+
 	[Property, Feature( "Animator" )] public MixerHandle FootstepMixer { get; set; }
 
 
