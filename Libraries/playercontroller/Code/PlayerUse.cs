@@ -23,7 +23,6 @@ public sealed class PlayerUse : Component
 		lookingAt ??= TryGetLookedAt( 4.0f );
 		lookingAt ??= TryGetLookedAt( 8.0f );
 
-
 		if ( Input.Pressed( "use" ) )
 		{
 			if ( lookingAt is IPressable button )
