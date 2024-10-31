@@ -152,11 +152,13 @@ public sealed partial class PlayerController : Component
 
 		if ( rotateDifference > RotationAngleLimit || velocity.Length > 50.0f )
 		{
-			var newRotation = Rotation.Lerp( renderer.WorldRotation, targetAngle, Time.Delta * 4.0f * RotationSpeed );
+			var newRotation = Rotation.Slerp( renderer.WorldRotation, targetAngle, Time.Delta * 2.0f * RotationSpeed );
 
 			// We won't end up actually moving to the targetAngle, so calculate how much we're actually moving
 			var angleDiff = renderer.WorldRotation.Angles() - newRotation.Angles(); // Rotation.Distance is unsigned
 			_animRotationSpeed = angleDiff.yaw / Time.Delta;
+
+			//DebugOverlay.Text( WorldPosition + Vector3.Up * 50, $"{_animRotationSpeed:0.00}", overlay: true, size: 16 );
 
 			renderer.WorldRotation = newRotation;
 		}
