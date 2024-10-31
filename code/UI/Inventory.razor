@@ -1,7 +1,7 @@
 ﻿@using Sandbox;
 @using Sandbox.UI;
 @inherits PanelComponent
-@implements IPlayerEvent
+@implements ILocalPlayerEvent
 
 <root>
     @for ( int i=0; i<5; i++ )
@@ -22,11 +22,11 @@
 
     protected override int BuildHash() => HashCode.Combine(inventory, hovered, active);
 
-    void IPlayerEvent.OnWeaponAdded(Player player, BaseWeapon weapon)
+    void ILocalPlayerEvent.OnWeaponAdded(BaseWeapon weapon)
     {
         StateHasChanged();
     }
-
+     
     protected override void OnUpdate()
     {
         inventory = Game.ActiveScene.GetAllComponents<PlayerInventory>().Where(x => x.Network.IsOwner).FirstOrDefault();

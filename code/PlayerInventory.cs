@@ -1,7 +1,7 @@
 
 using Sandbox.Diagnostics;
 
-public sealed class PlayerInventory : Component, IPlayerEvent
+public sealed class PlayerInventory : Component, IPlayerEvent, ILocalPlayerEvent
 {
 	[RequireComponent] public Player Player { get; set; }
 
@@ -24,12 +24,16 @@ public sealed class PlayerInventory : Component, IPlayerEvent
 		var weapon = prefab.Components.Get<BaseWeapon>( true );
 		Assert.NotNull( weapon );
 
-		IPlayerEvent.Post( e => e.OnWeaponAdded( Player, weapon ) );
+		IPlayerEvent.PostToGameObject( Player.GameObject, e => e.OnWeaponAdded( weapon ) );
+		ILocalPlayerEvent.Post( e => e.OnWeaponAdded( weapon ) );
 	}
 
 	protected override void OnUpdate()
 	{
-
+		if ( ActiveWeapon.IsValid() )
+		{
+			ActiveWeapon.OnPlayerUpdate( Player );
+		}
 	}
 
 	public void SwitchWeapon( BaseWeapon weapon )
@@ -47,11 +51,24 @@ public sealed class PlayerInventory : Component, IPlayerEvent
 		}
 	}
 
-	void IPlayerEvent.OnSpawned( Player player )
+	void IPlayerEvent.OnSpawned()
 	{
-		if ( player != Player )
-			return;
-
 		GiveDefaultWeapons();
+	}
+
+	void ILocalPlayerEvent.OnCameraMove( ref Angles angles )
+	{
+		if ( ActiveWeapon.IsValid() )
+		{
+			ActiveWeapon.OnCameraMove( Player, ref angles );
+		}
+	}
+
+	void ILocalPlayerEvent.OnCameraPostSetup( Sandbox.CameraComponent camera )
+	{
+		if ( ActiveWeapon.IsValid() )
+		{
+			ActiveWeapon.OnCameraSetup( Player, camera );
+		}
 	}
 }

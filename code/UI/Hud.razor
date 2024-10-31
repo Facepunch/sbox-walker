@@ -1,7 +1,7 @@
 ﻿@using Sandbox;
 @using Sandbox.UI;
 @inherits PanelComponent
-@implements IPlayerEvent
+@implements ILocalPlayerEvent
 
 <root>
 
@@ -22,25 +22,20 @@
 
     protected override int BuildHash() => HashCode.Combine( HealthValue() );
 
-    void IPlayerEvent.OnJump(Player player)
+    void ILocalPlayerEvent.OnJump()
     {
-        if (player != Player.FindLocalPlayer()) return;
-
         Panel.FlashClass("jump", 0.1f);
     }
 
-    void IPlayerEvent.OnLand(Player player, float distance, Vector3 velocity)
+    void ILocalPlayerEvent.OnLand(float distance, Vector3 velocity)
     {
-        if (player != Player.FindLocalPlayer()) return;
         if (distance < 32) return;
 
         Panel.FlashClass("land", 0.1f);
     }
 
-    void IPlayerEvent.OnTakeDamage( Player player, float damage )
+    void ILocalPlayerEvent.OnTakeDamage(float damage)
     {
-        if (player != Player.FindLocalPlayer()) return;
-
         Panel.FlashClass( "damage", 0.1f );
     }
 

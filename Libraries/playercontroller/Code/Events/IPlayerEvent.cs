@@ -1,19 +1,29 @@
 ﻿/// <summary>
-/// Holds player information like health
+/// Called only on the Player's GameObject
 /// </summary>
 public interface IPlayerEvent : ISceneEvent<IPlayerEvent>
 {
-	void OnSpawned( Player player ) { }
+	void OnSpawned() { }
 
-	void OnJump( Player player ) { }
-	void OnLand( Player player, float distance, Vector3 velocity ) { }
-	void OnTakeDamage( Player player, float damage ) { }
-	void OnDied( Player player ) { }
-	void OnSuicide( Player player ) { }
-	void OnWeaponAdded( Player player, BaseWeapon weapon ) { }
-	void OnWeaponDropped( Player player, BaseWeapon weapon ) { }
+	void OnJump() { }
+	void OnLand( float distance, Vector3 velocity ) { }
+	void OnTakeDamage( float damage ) { }
+	void OnDied() { }
+	void OnSuicide() { }
+	void OnWeaponAdded( BaseWeapon weapon ) { }
+}
 
-	void OnCameraMove( Player player, ref Angles angles ) { }
-	void OnCameraSetup( Player player, CameraComponent camera ) { }
-	void OnCameraPostSetup( Player player, CameraComponent camera ) { }
+/// <summary>
+/// Broadcasted to everything when the local player takes actions
+/// </summary>
+public interface ILocalPlayerEvent : ISceneEvent<ILocalPlayerEvent>
+{
+	void OnJump() { }
+	void OnLand( float distance, Vector3 velocity ) { }
+	void OnTakeDamage( float damage ) { }
+	void OnWeaponAdded( BaseWeapon weapon ) { }
+
+	void OnCameraMove( ref Angles angles ) { }
+	void OnCameraSetup( CameraComponent camera ) { }
+	void OnCameraPostSetup( CameraComponent camera ) { }
 }

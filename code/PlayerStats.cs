@@ -34,29 +34,31 @@ public sealed class PlayerStats : Component, IPlayerEvent
 
 	}
 
-	void IPlayerEvent.OnJump( Player player )
+	void IPlayerEvent.OnJump()
 	{
-		if ( player != Player ) return;
+		if ( IsProxy ) return;
 
 		Sandbox.Services.Stats.Increment( "jump", 1 );
 	}
 
-	void IPlayerEvent.OnTakeDamage( Player player, float damage )
+	void IPlayerEvent.OnTakeDamage( float damage )
 	{
-		if ( player != Player ) return;
+		if ( IsProxy ) return;
 
 		Sandbox.Services.Stats.Increment( "damage_taken", damage );
 	}
 
-	void IPlayerEvent.OnDied( Player player )
+	void IPlayerEvent.OnDied()
 	{
-		if ( player != Player ) return;
+		if ( IsProxy ) return;
 
 		Sandbox.Services.Stats.Increment( "deaths", 1 );
 	}
 
-	void IPlayerEvent.OnSuicide( Player player )
+	void IPlayerEvent.OnSuicide()
 	{
+		if ( IsProxy ) return;
+
 		Sandbox.Services.Stats.Increment( "suicides", 1 );
 	}
 

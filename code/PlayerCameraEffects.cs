@@ -1,7 +1,10 @@
 ﻿using Sandbox.Diagnostics;
 
-public class PlayerCameraEffects : Component, IPlayerEvent
+public class PlayerCameraEffects : Component, IPlayerEvent, ILocalPlayerEvent
 {
+	[RequireComponent]
+	public Player Player { get; set; }
+
 	List<BaseCameraShake> effects = new();
 
 	protected override void OnUpdate()
@@ -14,58 +17,57 @@ public class PlayerCameraEffects : Component, IPlayerEvent
 		effects.RemoveAll( x => x.IsDone );
 	}
 
-	void IPlayerEvent.OnJump( Player player )
+	void IPlayerEvent.OnJump()
 	{
-		if ( player.IsProxy ) return;
-		if ( player.Controller.ThirdPerson ) return;
+		if ( IsProxy ) return;
 
 		var punch = new CameraPunch( new Vector3( -20, 0, 0 ), 0.5f, 2.0f, 1.0f );
 		effects.Add( punch );
 	}
 
-	void IPlayerEvent.OnLand( Player player, float distance, Vector3 velocity )
+	void IPlayerEvent.OnLand( float distance, Vector3 velocity )
 	{
-		if ( player.IsProxy ) return;
-		if ( player.Controller.ThirdPerson ) return;
+		if ( IsProxy ) return;
+		if ( Player.Controller.ThirdPerson ) return;
 
 		var punch = new CameraPunch( new Vector3( 0.3f * distance, Random.Shared.Float( -1, 1 ), Random.Shared.Float( -1, 1 ) ), 1.0f, 1.5f, 0.7f );
 		effects.Add( punch );
 	}
 
-	void IPlayerEvent.OnCameraPostSetup( Player player, Sandbox.CameraComponent camera )
+	void ILocalPlayerEvent.OnCameraPostSetup( Sandbox.CameraComponent camera )
 	{
-		if ( player.IsProxy ) return;
+		if ( IsProxy ) return;
 
 		foreach ( var effect in effects )
 		{
 			effect.ModifyCamera( camera );
 		}
 
-		MovementEffects( player, camera );
+		MovementEffects( camera );
 	}
 
 	float roll;
 
-	private void MovementEffects( Player player, CameraComponent camera )
+	private void MovementEffects( CameraComponent camera )
 	{
-		if ( player.Controller.ThirdPerson ) return;
+		if ( Player.Controller.ThirdPerson ) return;
 
-		Assert.NotNull( player );
-		Assert.NotNull( player.Controller );
+		Assert.NotNull( Player );
+		Assert.NotNull( Player.Controller );
 
 		//if ( pc.BodyController.IsOnGround )
 		//{
 		//	distance += pc.BodyController.Velocity.Length * Time.Delta;
 		//}
 
-		var scaler = player.Controller.WishVelocity.Length.Remap( 0, player.Controller.RunSpeed, 0, 1 );
+		var scaler = Player.Controller.WishVelocity.Length.Remap( 0, Player.Controller.RunSpeed, 0, 1 );
 
 		// bob
 		// undone: made me feel sick
 		//camera.Transform.Position += Vector3.Up * scaler * MathF.Sin( distance * 0.06f ) * 0.2f;
 
 		// side movement
-		var r = player.Controller.WishVelocity.Dot( player.EyeTransform.Left ) / -100.0f;
+		var r = Player.Controller.WishVelocity.Dot( Player.EyeTransform.Left ) / -100.0f;
 		roll = MathX.Lerp( roll, r, Time.Delta * 8.0f, true );
 
 		camera.WorldRotation *= new Angles( 0, 0, roll );

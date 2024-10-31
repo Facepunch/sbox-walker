@@ -1,7 +1,7 @@
 ﻿
 using Sandbox.Utility;
 
-public class CameraWeapon : BaseWeapon, IPlayerEvent
+public class CameraWeapon : BaseWeapon
 {
 	float fov = 50;
 	float roll = 0;
@@ -41,7 +41,7 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 	/// <summary>
 	/// We want to control the camera fov
 	/// </summary>
-	void IPlayerEvent.OnCameraSetup( Player player, Sandbox.CameraComponent camera )
+	public override void OnCameraSetup( Player player, Sandbox.CameraComponent camera )
 	{
 		//Log.Info( $"{player.Network.IsOwner} {Network.IsOwner}" );
 		if ( !player.Network.IsOwner || !Network.IsOwner ) return;
@@ -59,7 +59,7 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 
 	}
 
-	void IPlayerEvent.OnCameraMove( Player player, ref Angles angles )
+	public override void OnCameraMove( Player player, ref Angles angles )
 	{
 		// We're zooming
 		if ( Input.Down( "attack2" ) )
@@ -101,10 +101,11 @@ public class CameraWeapon : BaseWeapon, IPlayerEvent
 		if ( !focusing )
 		{
 			dof.BlurSize = Scene.Camera.FieldOfView.Remap( 20, 80, 50, 10 );
-			dof.FocusRange = 256;
+			dof.FocusRange = 1024;
 			dof.FrontBlur = false;
 
 			var tr = Scene.Trace.Ray( Scene.Camera.Transform.World.ForwardRay, 5000 )
+								.Radius( 8 )
 								.IgnoreGameObjectHierarchy( GameObject.Root )
 								.Run();
 

@@ -1,4 +1,4 @@
-public sealed class GameManager : GameObjectSystem<GameManager>, IPlayerEvent, Component.INetworkListener, ISceneStartup
+public sealed class GameManager : GameObjectSystem<GameManager>, Component.INetworkListener, ISceneStartup
 {
 	public GameManager( Scene scene ) : base( scene )
 	{
@@ -45,7 +45,7 @@ public sealed class GameManager : GameObjectSystem<GameManager>, IPlayerEvent, C
 		var player = playerGo.Components.Get<Player>( true );
 		playerGo.NetworkSpawn( channel );
 
-		IPlayerEvent.Post( x => x.OnSpawned( player ) );
+		IPlayerEvent.PostToGameObject( player.GameObject, x => x.OnSpawned() );
 	}
 
 

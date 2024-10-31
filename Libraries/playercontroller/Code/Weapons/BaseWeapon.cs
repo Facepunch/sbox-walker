@@ -10,15 +10,14 @@ public class BaseWeapon : Component
 	[Property] public string ParentBone { get; set; } = "hold_r";
 	[Property] public Transform BoneOffset { get; set; } = new Transform( 0 );
 
-	protected override void OnUpdate()
+	public virtual void OnPlayerUpdate( Player player )
 	{
-		GameObject.NetworkInterpolation = false;
+		if ( player is null ) return;
 
-		var owner = GameObject.Components.GetInAncestorsOrSelf<Player>();
-		if ( owner is null ) return;
-
-		var body = owner.Body.Components.Get<SkinnedModelRenderer>();
+		var body = player.Body.Components.Get<SkinnedModelRenderer>();
 		body.Set( "holdtype", (int)HoldType );
+
+		GameObject.NetworkInterpolation = false;
 
 		var obj = body.GetBoneObject( ParentBone );
 		if ( obj is not null )
@@ -30,10 +29,18 @@ public class BaseWeapon : Component
 		if ( IsProxy )
 			return;
 
-		OnControl( owner );
+		OnControl( player );
 	}
 
 	public virtual void OnControl( Player player )
+	{
+	}
+
+	public virtual void OnCameraSetup( Player player, Sandbox.CameraComponent camera )
+	{
+	}
+
+	public virtual void OnCameraMove( Player player, ref Angles angles )
 	{
 
 	}

@@ -54,7 +54,7 @@ public sealed class Player : Component, IDamageable, PlayerController.IEvents
 
 		Health -= amount;
 
-		IPlayerEvent.Post( x => x.OnTakeDamage( this, amount ) );
+		IPlayerEvent.PostToGameObject( GameObject, x => x.OnTakeDamage( amount ) );
 
 		if ( Health < 0 )
 		{
@@ -68,7 +68,7 @@ public sealed class Player : Component, IDamageable, PlayerController.IEvents
 		CreateRagdoll();
 		CreateRagdollAndGhost();
 
-		IPlayerEvent.Post( x => x.OnDied( this ) );
+		IPlayerEvent.PostToGameObject( GameObject, x => x.OnDied() );
 
 		GameObject.Destroy();
 	}
@@ -85,7 +85,7 @@ public sealed class Player : Component, IDamageable, PlayerController.IEvents
 	{
 		if ( Input.Pressed( "die" ) )
 		{
-			IPlayerEvent.Post( x => x.OnSuicide( this ) );
+			IPlayerEvent.PostToGameObject( GameObject, x => x.OnSuicide() );
 			Health = 0;
 			Death();
 		}
@@ -100,20 +100,20 @@ public sealed class Player : Component, IDamageable, PlayerController.IEvents
 	{
 		var player = Components.Get<Player>();
 		var angles = ang;
-		Scene.RunEvent<IPlayerEvent>( x => x.OnCameraMove( player, ref angles ) );
+		ILocalPlayerEvent.Post( x => x.OnCameraMove( ref angles ) );
 		ang = angles;
 	}
 
 	void PlayerController.IEvents.PostCameraSetup( CameraComponent camera )
 	{
 		var player = Components.Get<Player>();
-		IPlayerEvent.Post( x => x.OnCameraSetup( player, camera ) );
-		IPlayerEvent.Post( x => x.OnCameraPostSetup( player, camera ) );
+		ILocalPlayerEvent.Post( x => x.OnCameraSetup( camera ) );
+		ILocalPlayerEvent.Post( x => x.OnCameraPostSetup( camera ) );
 	}
 
 	void PlayerController.IEvents.OnLanded( float distance, Vector3 impactVelocity )
 	{
 		var player = Components.Get<Player>();
-		IPlayerEvent.Post( x => x.OnLand( player, distance, impactVelocity ) );
+		IPlayerEvent.PostToGameObject( GameObject, x => x.OnLand( distance, impactVelocity ) );
 	}
 }

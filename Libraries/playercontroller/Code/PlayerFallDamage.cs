@@ -20,10 +20,9 @@ public class PlayerFallDamage : Component, IPlayerEvent
 	/// </summary>
 	[Property] public float DamageMultiplier { get; set; } = 1.0f;
 
-	void IPlayerEvent.OnLand( Player player, float distance, Vector3 velocity )
+	void IPlayerEvent.OnLand( float distance, Vector3 velocity )
 	{
 		if ( IsProxy ) return;
-		if ( player != Player ) return;
 
 		var damageScale = MathX.Remap( distance, MinimumFallDistance, DeathFallDistance, 0, 1 );
 		int damageAmount = (int)(damageScale * 100 * DamageMultiplier);
