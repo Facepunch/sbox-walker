@@ -188,7 +188,7 @@ public sealed partial class PlayerController : Component
 
 		if ( go.IsValid() )
 		{
-			go.Tags.Set( "viewer", _cameraDistance < 20 || (!ThirdPerson && HideBodyInFirstPerson) );
+			go.Tags.Set( "viewer", viewer );
 		}
 
 	}
