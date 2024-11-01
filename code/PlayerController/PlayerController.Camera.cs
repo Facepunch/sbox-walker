@@ -6,6 +6,7 @@ public sealed partial class PlayerController : Component
 
 	[Property, Feature( "Camera" )] public float EyeDistanceFromTop { get; set; } = 8;
 	[Property, Feature( "Camera" )] public bool ThirdPerson { get; set; } = true;
+	[Property, Feature( "Camera" )] public GameObject ThirdPersonBody { get; set; }
 	[Property, Feature( "Camera" )] public bool HideBodyInFirstPerson { get; set; } = true;
 	[Property, Feature( "Camera" )] public bool RotateWithGround { get; set; } = true;
 	[Property, Feature( "Camera" )] public Vector3 CameraOffset { get; set; } = new Vector3( 256, 0, 12 );
@@ -71,7 +72,15 @@ public sealed partial class PlayerController : Component
 			eyePosition = eyePosition + cameraDelta.Normal * _cameraDistance;
 		}
 
-		GameObject.Tags.Set( "viewer", _cameraDistance < 20 || (!ThirdPerson && HideBodyInFirstPerson) );
+		if ( ThirdPersonBody.IsValid() )
+		{
+			ThirdPersonBody.Tags.Set( "viewer", _cameraDistance < 20 || (!ThirdPerson && HideBodyInFirstPerson) );
+		}
+		else 
+		{
+			GameObject.Tags.Set( "viewer", _cameraDistance < 20 || (!ThirdPerson && HideBodyInFirstPerson) );
+		}
+
 		cam.WorldPosition = eyePosition;
 		cam.FieldOfView = Preferences.FieldOfView;
 
