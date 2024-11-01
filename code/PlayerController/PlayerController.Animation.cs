@@ -82,6 +82,7 @@ public sealed partial class PlayerController : Component
 
 
 	float _animRotationSpeed;
+	TimeSince timeSinceRotationSpeedUpdate;
 
 	void UpdateAnimationParameters( SkinnedModelRenderer renderer )
 	{
@@ -114,7 +115,7 @@ public sealed partial class PlayerController : Component
 		renderer.Set( "b_swim", IsSwimming );
 		renderer.Set( "b_grounded", IsOnGround || IsClimbing );
 		renderer.Set( "b_climbing", IsClimbing );
-		renderer.Set( "move_rotationspeed", _animRotationSpeed );
+		//
 		renderer.Set( "skid", skidding );
 		renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed + 20 ? 2 : 1 );
 
@@ -126,12 +127,19 @@ public sealed partial class PlayerController : Component
 		}
 
 		renderer.Set( "duck", duck );
+
+		if ( timeSinceRotationSpeedUpdate > 0.1f )
+		{
+			timeSinceRotationSpeedUpdate = 0;
+			renderer.Set( "move_rotationspeed", _animRotationSpeed * 5 );
+			_animRotationSpeed = 0;
+		}
 	}
+
+	float _rotationVelocity;
 
 	void RotateRenderBody( SkinnedModelRenderer renderer )
 	{
-		_animRotationSpeed = 0;
-
 		// ladder likes to have us facing it
 		if ( Mode is Sandbox.Movement.MoveModeLadder ladderMode )
 		{
@@ -143,22 +151,36 @@ public sealed partial class PlayerController : Component
 
 		var velocity = WishVelocity.WithZ( 0 );
 
-		if ( velocity.Length > 50.0f )
-		{
-			targetAngle = Rotation.LookAt( velocity, Vector3.Up );
-		}
-
 		float rotateDifference = renderer.WorldRotation.Distance( targetAngle );
 
-		if ( rotateDifference > RotationAngleLimit || velocity.Length > 50.0f )
+		// We're over the limit - snap it 
+		if ( rotateDifference > RotationAngleLimit )
 		{
-			var newRotation = Rotation.Slerp( renderer.WorldRotation, targetAngle, Time.Delta * 2.0f * RotationSpeed );
+			var delta = 0.999f - (RotationAngleLimit / rotateDifference);
+			var newRotation = Rotation.Lerp( renderer.WorldRotation, targetAngle, delta );
 
-			// We won't end up actually moving to the targetAngle, so calculate how much we're actually moving
-			var angleDiff = renderer.WorldRotation.Angles() - newRotation.Angles(); // Rotation.Distance is unsigned
-			_animRotationSpeed = angleDiff.yaw / Time.Delta;
+			var a = newRotation.Angles();
+			var b = renderer.WorldRotation.Angles();
 
-			//DebugOverlay.Text( WorldPosition + Vector3.Up * 50, $"{_animRotationSpeed:0.00}", overlay: true, size: 16 );
+			var yaw = MathX.DeltaDegrees( a.yaw, b.yaw );
+
+			_animRotationSpeed += yaw;
+			_animRotationSpeed = _animRotationSpeed.Clamp( -90, 90 );
+
+			renderer.WorldRotation = newRotation;
+		}
+
+		if ( velocity.Length > 10 )
+		{
+			var newRotation = Rotation.Slerp( renderer.WorldRotation, targetAngle, Time.Delta * 2.0f * RotationSpeed * velocity.Length.Remap( 0, 100 ) );
+
+			var a = newRotation.Angles();
+			var b = renderer.WorldRotation.Angles();
+
+			var yaw = MathX.DeltaDegrees( a.yaw, b.yaw );
+
+			_animRotationSpeed += yaw;
+			_animRotationSpeed = _animRotationSpeed.Clamp( -90, 90 );
 
 			renderer.WorldRotation = newRotation;
 		}
