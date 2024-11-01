@@ -6,7 +6,7 @@ public sealed class PlayerInventory : Component, IPlayerEvent, ILocalPlayerEvent
 	[RequireComponent] public Player Player { get; set; }
 
 
-	public List<BaseWeapon> Weapons => Scene.Components.GetAll<BaseWeapon>( FindMode.EverythingInSelfAndDescendants ).Where( x => x.Network.OwnerId == Network.OwnerId ).ToList();
+	public List<BaseWeapon> Weapons => Scene.Components.GetAll<BaseWeapon>( FindMode.EverythingInSelfAndDescendants ).Where( x => x.Network.OwnerId == Network.OwnerId ).OrderBy( x => x.InventorySlot ).ThenBy( x => x.InventoryOrder ).ToList();
 
 	public BaseWeapon ActiveWeapon { get; private set; }
 
