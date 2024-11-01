@@ -184,6 +184,13 @@ public sealed partial class PlayerController : Component
 			viewer = false;
 		}
 
-		GameObject.Tags.Set( "viewer", viewer );
+		if ( ThirdPersonBody.IsValid() )
+		{
+			ThirdPersonBody.Tags.Set( "viewer", viewer );
+		}
+		else 
+		{
+			GameObject.Tags.Set( "viewer", viewer );
+		}
 	}
 }
