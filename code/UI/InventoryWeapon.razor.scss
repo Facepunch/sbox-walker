@@ -36,9 +36,16 @@ InventoryWeapon .icon
 {
     font-family: Material Icons;
     font-size: 32px;
-    opacity: 0;
-    transform: scale( 0.1);
+    opacity: 1;
+    transform: scale( 0.9);
     transition: all 0.1s ease-in;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-tint: #f704;
+    background-color: white;
 }
 
 InventoryWeapon.selected
@@ -54,5 +61,6 @@ InventoryWeapon.selected
 .active InventoryWeapon.active .icon, InventoryWeapon.selected .icon
 {
     opacity: 1;
-    transform: scale( 1);
+    background-tint: #fc5;
+
 }

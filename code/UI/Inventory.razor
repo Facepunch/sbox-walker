@@ -66,7 +66,7 @@
             Sound.Play( SelectSound );
         }
 
-        if (Input.Pressed("Attack2") || timeSinceInteraction > 2)
+        if (Input.Pressed("Attack2") || timeSinceInteraction > 2000)
         {
             Input.ReleaseAction("Attack2");
             hovered = null;

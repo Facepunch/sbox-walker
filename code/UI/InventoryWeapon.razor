@@ -3,7 +3,7 @@
 @inherits Panel
 
 <root>
-    <div class="icon">@Weapon.DisplayIcon</div>
+    <div class="icon" @ref="IconPanel"></div>
 </root>
 
 @code
@@ -12,12 +12,25 @@
     public bool IsActive { get; set; }
     public bool IsHovered { get; set; }
 
+    Panel IconPanel{ get; set; }
+
+    public void ApplyIcon()
+    {
+        if ( !string.IsNullOrWhiteSpace(Weapon.DisplaySvg) )
+        {
+            var texture = Texture.CreateFromSvgSource(Weapon.DisplaySvg, null, 200, Color.White);
+            IconPanel.Style.SetBackgroundImage(texture);
+        }
+    }
+
     public override void Tick()
     {
         if (!Weapon.IsValid()) return;
 
         SetClass("active", IsHovered);
         SetClass("selected", IsActive);
+
+        ApplyIcon();
     }
 
 }

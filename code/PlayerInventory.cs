@@ -12,8 +12,10 @@ public sealed class PlayerInventory : Component, IPlayerEvent, ILocalPlayerEvent
 
 	public void GiveDefaultWeapons()
 	{
-		Pickup( "weapons/hands.prefab" );
-		Pickup( "weapons/camera.prefab" );
+		Pickup( "weapons/hands/hands.prefab" );
+		Pickup( "weapons/camera/camera.prefab" );
+		Pickup( "weapons/glock/glock.prefab" );
+		Pickup( "weapons/mp5/mp5.prefab" );
 	}
 
 	void Pickup( string prefabName )

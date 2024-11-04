@@ -1,4 +1,5 @@
 ﻿using Sandbox.Diagnostics;
+using Sandbox.Utility;
 
 public class PlayerCameraEffects : Component, IPlayerEvent, ILocalPlayerEvent
 {
@@ -22,6 +23,18 @@ public class PlayerCameraEffects : Component, IPlayerEvent, ILocalPlayerEvent
 		if ( IsProxy ) return;
 
 		var punch = new CameraPunch( new Vector3( -20, 0, 0 ), 0.5f, 2.0f, 1.0f );
+		effects.Add( punch );
+	}
+
+	public void AddPunch( Vector3 target, float time, float frequency, float damp )
+	{
+		var punch = new CameraPunch( target, time, frequency, damp );
+		effects.Add( punch );
+	}
+
+	public void AddShake( float amount, float time )
+	{
+		var punch = new CameraShake( amount, time );
 		effects.Add( punch );
 	}
 
@@ -113,6 +126,41 @@ public class PlayerCameraEffects : Component, IPlayerEvent, ILocalPlayerEvent
 			var amount = lifeTime.Remap( 0, 0.3f, 0, 1 );
 
 			cc.WorldRotation *= new Angles( damping.Current * amount );
+		}
+	}
+
+	class CameraShake : BaseCameraShake
+	{
+		float lifeTime;
+		float deathTime;
+		float amount = 0.0f;
+
+		public CameraShake( float amount, float time )
+		{
+			this.amount = amount;
+			deathTime = time;
+			lifeTime = time;
+		}
+
+		public override bool IsDone => deathTime <= 0;
+
+		Vector3.SpringDamped damping;
+
+		public override void Update()
+		{
+			deathTime -= Time.Delta;
+			damping.Update( Time.Delta );
+		}
+
+		public override void ModifyCamera( CameraComponent cc )
+		{
+			var x = Noise.Perlin( Time.Now * 1000.0f, 2345 );
+			var y = Noise.Perlin( Time.Now * 1000.0f, 21 );
+			var z = Noise.Perlin( Time.Now * 1000.0f, 865 );
+
+			var delta = MathX.Remap( deathTime, 0, lifeTime, 0, 1 );
+
+			cc.WorldRotation *= new Angles( x, y, z ) * delta * amount;
 		}
 	}
 
