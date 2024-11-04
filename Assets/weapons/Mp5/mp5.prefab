@@ -14,7 +14,15 @@
         "HoldType": "Shotgun",
         "InventoryOrder": 10,
         "InventorySlot": 1,
-        "ParentBone": "hold_r"
+        "ParentBone": "hold_r",
+        "ViewModelPrefab": {
+          "_type": "gameobject",
+          "prefab": "weapons/mp5/mp5_vm.prefab"
+        },
+        "WorldModelPrefab": {
+          "_type": "gameobject",
+          "prefab": "weapons/mp5/mp5_wm.prefab"
+        }
       }
     ],
     "Children": [],

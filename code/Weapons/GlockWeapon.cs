@@ -51,21 +51,31 @@
 
 	public void ShootBullet( Player player )
 	{
-		ShootEffects();
-
 		var tr = Scene.Trace.Ray( player.EyeTransform.ForwardRay, 4096 )
 							.IgnoreGameObjectHierarchy( player.GameObject )
 							.Run();
 
-		DebugOverlay.Line( GetTracerOrigin().Position, tr.EndPosition, duration: 30 );
+		ShootEffects( tr.EndPosition );
+
+		//DebugOverlay.Line( GetTracerOrigin().Position, tr.EndPosition, duration: 30 );
 
 		player.Controller.EyeAngles += new Angles( Random.Shared.Float( -1, -2 ), Random.Shared.Float( -1, 1 ), 0 );
+
+
+		if ( !player.Controller.ThirdPerson )
+		{
+			foreach ( var cameffect in Scene.GetAll<PlayerCameraEffects>() )
+			{
+				cameffect.AddPunch( new Vector3( Random.Shared.Float( -20, -25 ), Random.Shared.Float( -20, 0 ), 0 ), 1.0f, 3, 1.0f );
+				cameffect.AddShake( 0.5f, 1.0f );
+			}
+		}
 	}
 
 	[Broadcast]
-	public void ShootEffects()
+	public void ShootEffects( Vector3 hitpoint )
 	{
-		var ev = new IWeaponEvent.AttackEvent( ViewModel.IsValid() );
+		var ev = new IWeaponEvent.AttackEvent( ViewModel.IsValid(), hitpoint );
 		IWeaponEvent.PostToGameObject( GameObject.Root, x => x.Attack( ev ) );
 	}
 }

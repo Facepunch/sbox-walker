@@ -132,19 +132,6 @@
         }
       ],
       "Children": []
-    },
-    {
-      "__guid": "c860544b-fa10-4756-b371-0c750c662bd7",
-      "Flags": 0,
-      "Name": "Object",
-      "Position": "-18.22845,-732.6364,942.1267",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Tracer",
-          "__guid": "ae97bb77-0a96-4add-bdcd-ff74522d626f"
-        }
-      ]
     }
   ],
   "SceneProperties": {

@@ -2,7 +2,7 @@
   "RootObject": {
     "__guid": "628ec5b7-a64d-490e-a218-1cdfc17b67df",
     "Flags": 0,
-    "Name": "glock_wm",
+    "Name": "mp5_wm",
     "Enabled": true,
     "NetworkMode": 0,
     "Components": [
@@ -15,7 +15,7 @@
         },
         "EjectTransform": {
           "_type": "gameobject",
-          "go": "1d5347e0-820c-4015-96dc-4efd0679eca3"
+          "go": "8e571825-7366-47b8-a226-d8c9ae8b083f"
         },
         "MuzzleEffect": {
           "_type": "gameobject",
@@ -23,7 +23,7 @@
         },
         "MuzzleTransform": {
           "_type": "gameobject",
-          "go": "e4312b65-c2f9-4ab7-bdb5-2e6bc4b67507"
+          "go": "ed6466c4-e28c-4e9b-8446-ffa3f096176d"
         },
         "Renderer": {
           "_type": "component",
@@ -41,18 +41,18 @@
       {
         "__guid": "0645b412-29e7-4af0-ab22-6dbf084daa4d",
         "Flags": 0,
-        "Name": "w_usp",
-        "Position": "3.418695,-0.6192533,-5.397455",
+        "Name": "model",
+        "Position": "-0.5918133,0.6022096,-14.1255",
         "Scale": "2,2,2",
         "Enabled": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "5d4a8b0d-2d3a-4cc4-b43d-081f56c3ee65",
-            "BodyGroups": 9493,
+            "BodyGroups": 3,
             "CreateAttachments": true,
             "CreateBoneObjects": true,
-            "Model": "models/weapons/sbox_pistol_usp/w_usp.vmdl",
+            "Model": "models/weapons/sbox_smg_mp5/w_mp5.vmdl",
             "Morphs": {},
             "Parameters": {
               "bools": {},
@@ -74,25 +74,26 @@
         ],
         "Children": [
           {
-            "__guid": "e4312b65-c2f9-4ab7-bdb5-2e6bc4b67507",
-            "Flags": 8,
-            "Name": "muzzle",
-            "Position": "3.854532,0,4.955329",
-            "Enabled": true
-          },
-          {
-            "__guid": "1d5347e0-820c-4015-96dc-4efd0679eca3",
-            "Flags": 8,
-            "Name": "eject",
-            "Position": "-0.843271,0,5.183321",
-            "Rotation": "-0,0.7071068,-0,-0.7071069",
-            "Enabled": true
-          },
-          {
-            "__guid": "8d74fc05-f7a5-4d25-b3cd-74aaae956572",
+            "__guid": "4f949ccb-cd38-4eff-a75f-e06754d3ddc1",
             "Flags": 4,
             "Name": "hold_R",
-            "Position": "-1.848641,0,3.195872",
+            "Position": "-1.45742,0,5.464317",
+            "Enabled": true,
+            "Children": [
+              {
+                "__guid": "8e571825-7366-47b8-a226-d8c9ae8b083f",
+                "Flags": 8,
+                "Name": "eject",
+                "Position": "3.912841,-0.647761,3.410283",
+                "Enabled": true
+              }
+            ]
+          },
+          {
+            "__guid": "ed6466c4-e28c-4e9b-8446-ffa3f096176d",
+            "Flags": 8,
+            "Name": "muzzle",
+            "Position": "13.2196,0,8.088171",
             "Enabled": true
           }
         ]
@@ -129,7 +130,7 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
-    "facepunch.w_usp#33631"
+    "facepunch.w_mp5#33703"
   ],
   "__version": 1
 }
