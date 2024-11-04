@@ -28,6 +28,13 @@ public partial class BaseWeapon : Component
 		DestroyViewModel();
 	}
 
+	protected override void OnUpdate()
+	{
+		var controller = GetComponentInParent<PlayerController>();
+		if ( controller is null ) return;
+
+		controller.Renderer.Set( "holdtype", (int)HoldType );
+	}
 
 	public virtual void OnPlayerUpdate( Player player )
 	{
@@ -41,9 +48,6 @@ public partial class BaseWeapon : Component
 		{
 			DestroyViewModel();
 		}
-
-		var body = player.Body.Components.Get<SkinnedModelRenderer>();
-		body.Set( "holdtype", (int)HoldType );
 
 		GameObject.NetworkInterpolation = false;
 

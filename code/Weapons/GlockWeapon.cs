@@ -51,8 +51,7 @@
 
 	public void ShootBullet( Player player )
 	{
-		var ev = new IWeaponEvent.AttackEvent( ViewModel.IsValid() );
-		IWeaponEvent.PostToGameObject( GameObject.Root, x => x.Attack( ev ) );
+		ShootEffects();
 
 		var tr = Scene.Trace.Ray( player.EyeTransform.ForwardRay, 4096 )
 							.IgnoreGameObjectHierarchy( player.GameObject )
@@ -61,5 +60,12 @@
 		DebugOverlay.Line( GetTracerOrigin().Position, tr.EndPosition, duration: 30 );
 
 		player.Controller.EyeAngles += new Angles( Random.Shared.Float( -1, -2 ), Random.Shared.Float( -1, 1 ), 0 );
+	}
+
+	[Broadcast]
+	public void ShootEffects()
+	{
+		var ev = new IWeaponEvent.AttackEvent( ViewModel.IsValid() );
+		IWeaponEvent.PostToGameObject( GameObject.Root, x => x.Attack( ev ) );
 	}
 }

@@ -5,22 +5,23 @@
     "Name": "eject_9mm",
     "Tags": "particles,brass",
     "Enabled": true,
+    "NetworkMode": 0,
     "Components": [
       {
         "__type": "TemporaryEffect",
         "__guid": "a70cbe64-75ac-410d-9a51-4047cb408c3b",
         "DestroyAfterSeconds": 30,
-        "WaitForParticleSystems": false
+        "WaitForChildEffects": true
       },
       {
         "__type": "Sandbox.CapsuleCollider",
         "__guid": "2fe8fd18-7318-44d7-bb41-66a9226699a7",
         "End": "-1,0,0",
         "IsTrigger": false,
-        "Radius": 0.3,
+        "Radius": 0.8,
         "Start": "1,0,0",
         "Static": false,
-        "Surface": "surfaces/metal.weapon.surface",
+        "Surface": "weapons/common/effects/ejected_9mm.surface",
         "SurfaceVelocity": "0,0,0"
       },
       {
@@ -36,6 +37,17 @@
         "OverrideMassCenter": false,
         "RigidbodyFlags": "DisableCollisionSounds",
         "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "2f781ff4-8d00-4ce5-9d5e-b37afa8b481e",
+        "End": "-1,-0.1,0.1",
+        "IsTrigger": false,
+        "Radius": 0.8,
+        "Start": "1,0.1,-0.1",
+        "Static": false,
+        "Surface": "weapons/common/effects/ejected_9mm.surface",
+        "SurfaceVelocity": "0,0,0"
       }
     ],
     "Children": [
@@ -49,7 +61,7 @@
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "b9237958-8ed4-473c-98a2-20c83d75f755",
-            "BodyGroups": 1,
+            "BodyGroups": 2,
             "CreateAttachments": false,
             "Model": "models/weapons/sbox_ammo/9mm_bullet/9mm_bullet.vmdl",
             "RenderOptions": {

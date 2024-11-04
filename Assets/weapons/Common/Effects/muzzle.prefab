@@ -5,12 +5,13 @@
     "Name": "muzzle",
     "Tags": "particles",
     "Enabled": true,
+    "NetworkMode": 0,
     "Components": [
       {
         "__type": "TemporaryEffect",
         "__guid": "a70cbe64-75ac-410d-9a51-4047cb408c3b",
         "DestroyAfterSeconds": 5,
-        "WaitForParticleSystems": true
+        "WaitForChildEffects": true
       }
     ],
     "Children": [
@@ -237,20 +238,20 @@
                     "rangey": "0,0.5",
                     "frames": [
                       {
-                        "y": 0.4988603,
-                        "in": -0.09733023,
-                        "out": 0.09733023
+                        "y": 0.79225934,
+                        "in": 2.3236003,
+                        "out": -2.3236003
                       },
                       {
-                        "x": 0.5080562,
-                        "y": 0.28130698,
+                        "x": 0.50210387,
+                        "y": 0.16428575,
                         "in": 0.1290322,
                         "out": -0.1290322
                       },
                       {
                         "x": 1,
-                        "in": 0.059259344,
-                        "out": -0.059259344
+                        "in": 0.3666668,
+                        "out": -0.3666668
                       }
                     ]
                   },
@@ -275,18 +276,15 @@
                     "rangey": "0,2",
                     "frames": [
                       {
-                        "in": -3.0120494,
-                        "out": 3.0120494
-                      },
-                      {
-                        "x": 0.08004926,
-                        "y": 0.7107143,
-                        "in": -1.0333333,
-                        "out": 1.0333333
+                        "y": 0.095744684,
+                        "in": -3.2500012,
+                        "out": 3.2500012
                       },
                       {
                         "x": 1,
-                        "y": 1
+                        "y": 1,
+                        "in": -0.21390356,
+                        "out": 0.21390356
                       }
                     ]
                   },
@@ -322,15 +320,15 @@
                     ],
                     "alpha": []
                   },
-                  "ConstantA": "0.2,0.19891,0.13488,1",
-                  "ConstantB": "0.09787,0.10671,0.12093,1"
+                  "ConstantA": "0.69302,0.68873,0.43515,1",
+                  "ConstantB": "0.53218,0.62058,0.76279,1"
                 },
                 "Lifetime": {
                   "Type": "Range",
                   "Evaluation": "Particle",
                   "Constants": "2,8,0,0"
                 },
-                "MaxParticles": 5000,
+                "MaxParticles": 100,
                 "OrbitalForce": {},
                 "OrbitalPull": {},
                 "PerParticleTimeScale": {
@@ -345,24 +343,44 @@
                   "Constants": "0,360,0,0"
                 },
                 "Scale": {
-                  "Type": "Curve",
+                  "Type": "CurveRange",
                   "CurveA": {
-                    "rangey": "0,30",
+                    "rangey": "0,50",
                     "frames": [
                       {
-                        "y": 0.0035714286,
-                        "in": -11.230768,
-                        "out": 11.230768
+                        "y": 0.22326845,
+                        "in": -4.0704775,
+                        "out": 4.0704775
                       },
                       {
-                        "x": 0.16009852,
-                        "y": 0.85714287,
+                        "x": 0.04782698,
+                        "y": 0.8912338,
                         "in": -0.5348841,
                         "out": 0.5348841
                       },
                       {
                         "x": 1,
                         "y": 1
+                      }
+                    ]
+                  },
+                  "CurveB": {
+                    "rangey": "0,50",
+                    "frames": [
+                      {
+                        "x": 0.019582245,
+                        "in": -1.669422,
+                        "out": 1.669422
+                      },
+                      {
+                        "x": 0.091383815,
+                        "y": 0.5269125,
+                        "in": -0.621722,
+                        "out": 0.621722
+                      },
+                      {
+                        "x": 1,
+                        "y": 0.92424244
                       }
                     ]
                   },
@@ -396,11 +414,11 @@
                 "BlurAmount": 0.5,
                 "BlurOpacity": 0.91,
                 "BlurSpacing": 0.73,
-                "DepthFeather": 0,
+                "DepthFeather": 23.85,
                 "FaceVelocity": false,
                 "FogStrength": 1,
                 "LeadingTrail": true,
-                "Lighting": false,
+                "Lighting": true,
                 "MotionBlur": false,
                 "Opaque": false,
                 "Pivot": "0.5,0.5",
@@ -419,7 +437,7 @@
               {
                 "__type": "Sandbox.ParticleConeEmitter",
                 "__guid": "f391b377-5e9f-4a3f-8c20-d17549e0317b",
-                "Burst": 2,
+                "Burst": 8,
                 "ConeAngle": 19.39,
                 "ConeFar": 23.679735,
                 "ConeNear": 1,
@@ -477,7 +495,7 @@
                 "Brightness": {
                   "Type": "CurveRange",
                   "CurveA": {
-                    "rangey": "0,5",
+                    "rangey": "0,15",
                     "frames": [
                       {},
                       {
@@ -490,7 +508,7 @@
                     ]
                   },
                   "CurveB": {
-                    "rangey": "0,5",
+                    "rangey": "0,15",
                     "frames": [
                       {},
                       {
@@ -649,7 +667,7 @@
                 "BlurAmount": 0.5,
                 "BlurOpacity": 0.91,
                 "BlurSpacing": 0.73,
-                "DepthFeather": 0,
+                "DepthFeather": 6.76,
                 "FaceVelocity": false,
                 "FogStrength": 1,
                 "LeadingTrail": true,
@@ -660,7 +678,7 @@
                 "RenderOptions": {
                   "GameLayer": true,
                   "OverlayLayer": false,
-                  "BloomLayer": false,
+                  "BloomLayer": true,
                   "AfterUILayer": false
                 },
                 "RotationOffset": 0,
@@ -674,8 +692,8 @@
                 "__guid": "eebd05d9-e86c-4f4a-8ffd-62c90b935097",
                 "Burst": 15,
                 "ConeAngle": 0.84,
-                "ConeFar": 61.52004,
-                "ConeNear": 10.920116,
+                "ConeFar": 15.52,
+                "ConeNear": 5.92,
                 "Delay": 0,
                 "DestroyOnEnd": false,
                 "Duration": 1,
@@ -690,7 +708,7 @@
           {
             "__guid": "3f76855e-1dbc-45ea-a9e9-c0aad7a158b1",
             "Flags": 0,
-            "Name": "Muzzle",
+            "Name": "Light",
             "Position": "10.2202,0,2.028374",
             "Enabled": true,
             "Components": [
@@ -891,7 +909,7 @@
                   "Constants": "0.1,0,0,0"
                 },
                 "Brightness": {
-                  "Constants": "5,0,0,0"
+                  "Constants": "6,0,0,0"
                 },
                 "CastShadows": true,
                 "LightColor": {
@@ -972,8 +990,6 @@
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
-  "__references": [
-    "garry.muzzle#59887"
-  ],
+  "__references": [],
   "__version": 1
 }

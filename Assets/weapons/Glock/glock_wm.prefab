@@ -4,6 +4,7 @@
     "Flags": 0,
     "Name": "glock_wm",
     "Enabled": true,
+    "NetworkMode": 0,
     "Components": [
       {
         "__type": "WorldModel",
