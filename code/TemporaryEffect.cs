@@ -4,7 +4,7 @@ public sealed class TemporaryEffect : Component
 	public float DestroyAfterSeconds = 1.0f;
 
 	[Property]
-	public bool WaitForParticleSystems = true;
+	public bool WaitForChildEffects = true;
 
 	TimeSince timeAlive;
 
@@ -15,7 +15,7 @@ public sealed class TemporaryEffect : Component
 
 	protected override void OnUpdate()
 	{
-		if ( WaitForParticleSystems && HasActiveParticles() )
+		if ( WaitForChildEffects && HasActiveEffects() )
 		{
 			return;
 		}
@@ -26,11 +26,11 @@ public sealed class TemporaryEffect : Component
 		}
 	}
 
-	bool HasActiveParticles()
+	bool HasActiveEffects()
 	{
-		foreach ( var pe in GetComponentsInChildren<ParticleEffect>() )
+		foreach ( var pe in GetComponentsInChildren<ITemporaryEffect>() )
 		{
-			if ( pe.ParticleCount > 0 )
+			if ( pe.IsActive )
 				return true;
 		}
 
