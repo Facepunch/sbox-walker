@@ -13,7 +13,7 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 	/// This is used to keep a distance away from surfaces. For exmaple, when grounding, we'll
 	/// be a skin distance away from the ground.
 	/// </summary>
-	const float _skin = 0.05f;
+	const float _skin = 0.095f;
 
 	[Property, Hide, RequireComponent] public Rigidbody Body { get; set; }
 
