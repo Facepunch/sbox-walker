@@ -1,15 +1,9 @@
-﻿public class Mp5Weapon : BaseBulletWeapon
+﻿public class PythonWeapon : BaseBulletWeapon
 {
-	[Property]
-	public float TimeBetweenShots { get; set; } = 0.1f;
-
-	[Property]
-	public Vector2 AimCone { get; set; } = 0.1f;
+	TimeUntil shootAllowed = 0;
 
 	[Property]
 	public float Damage { get; set; } = 12.0f;
-
-	TimeUntil shootAllowed = 0;
 
 	public override void OnControl( Player player )
 	{
@@ -18,9 +12,9 @@
 		if ( shootAllowed > 0 )
 			return;
 
-		if ( Input.Down( "attack1" ) )
+		if ( Input.Pressed( "attack1" ) )
 		{
-			shootAllowed = TimeBetweenShots;
+			shootAllowed = 1.2f;
 			ShootBullet( player );
 		}
 	}
@@ -54,32 +48,25 @@
 
 	public void ShootBullet( Player player )
 	{
-		var forward = player.EyeTransform.Rotation.Forward;
-
-		forward += AimCone.x * player.EyeTransform.Rotation.Right * Random.Shared.Float( -1, 1 ) * 0.1f;
-		forward += AimCone.y * player.EyeTransform.Rotation.Up * Random.Shared.Float( -1, 1 ) * 0.1f;
-
-		forward = forward.Normal;
-
-		var tr = Scene.Trace.Ray( player.EyeTransform.ForwardRay with { Forward = forward }, 4096 )
+		var tr = Scene.Trace.Ray( player.EyeTransform.ForwardRay, 4096 )
 							.IgnoreGameObjectHierarchy( player.GameObject )
 							.Run();
 
 		ShootEffects( tr.EndPosition, tr.Hit, tr.Normal, tr.GameObject );
 
+		//DebugOverlay.Line( GetTracerOrigin().Position, tr.EndPosition, duration: 30 );
 
+		player.Controller.EyeAngles += new Angles( Random.Shared.Float( -2, -3 ), Random.Shared.Float( -2, 2 ), 0 );
 
-		player.Controller.EyeAngles += new Angles( Random.Shared.Float( -0.2f, -0.3f ), Random.Shared.Float( -0.1f, 0.1f ), 0 );
 
 		if ( !player.Controller.ThirdPerson )
 		{
 			foreach ( var cameffect in Scene.GetAll<PlayerCameraEffects>() )
 			{
-				cameffect.AddPunch( new Vector3( Random.Shared.Float( -10, -15 ), Random.Shared.Float( -10, 0 ), 0 ), 1.0f, 3, 0.5f );
-				cameffect.AddShake( 0.3f, 1.2f );
+				cameffect.AddPunch( new Vector3( Random.Shared.Float( -50, -65 ), Random.Shared.Float( -20, 0 ), 0 ), 4.0f, 1, 0.5f );
+				cameffect.AddShake( 1.5f, 1.0f );
 			}
 		}
 	}
-
 
 }

@@ -7,6 +7,11 @@
 	[Property] public GameObject EjectBrass { get; set; }
 	[Property] public GameObject TracerEffect { get; set; }
 
+	public void Deploy()
+	{
+		Renderer?.Set( "b_deploy", true );
+	}
+
 	public Transform GetTracerOrigin()
 	{
 		if ( MuzzleTransform.IsValid() )

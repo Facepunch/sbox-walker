@@ -1,6 +1,9 @@
-﻿public class GlockWeapon : BaseWeapon
+﻿public class GlockWeapon : BaseBulletWeapon
 {
 	TimeUntil shootAllowed = 0;
+
+	[Property]
+	public float Damage { get; set; } = 12.0f;
 
 	public override void OnControl( Player player )
 	{
@@ -55,7 +58,7 @@
 							.IgnoreGameObjectHierarchy( player.GameObject )
 							.Run();
 
-		ShootEffects( tr.EndPosition );
+		ShootEffects( tr.EndPosition, tr.Hit, tr.Normal, tr.GameObject );
 
 		//DebugOverlay.Line( GetTracerOrigin().Position, tr.EndPosition, duration: 30 );
 
@@ -72,10 +75,4 @@
 		}
 	}
 
-	[Broadcast]
-	public void ShootEffects( Vector3 hitpoint )
-	{
-		var ev = new IWeaponEvent.AttackEvent( ViewModel.IsValid(), hitpoint );
-		IWeaponEvent.PostToGameObject( GameObject.Root, x => x.Attack( ev ) );
-	}
 }

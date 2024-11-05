@@ -16,6 +16,7 @@ public sealed class PlayerInventory : Component, IPlayerEvent, ILocalPlayerEvent
 		Pickup( "weapons/camera/camera.prefab" );
 		Pickup( "weapons/glock/glock.prefab" );
 		Pickup( "weapons/mp5/mp5.prefab" );
+		Pickup( "weapons/python/python.prefab" );
 	}
 
 	void Pickup( string prefabName )

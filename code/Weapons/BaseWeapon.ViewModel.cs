@@ -16,6 +16,8 @@ public partial class BaseWeapon : Component
 		ViewModel = ViewModelPrefab.Clone( new CloneConfig { Parent = GameObject, StartEnabled = false, Transform = global::Transform.Zero } );
 		ViewModel.Flags |= GameObjectFlags.NotSaved | GameObjectFlags.NotNetworked | GameObjectFlags.Absolute;
 		ViewModel.Enabled = true;
+
+		ViewModel.GetComponent<ViewModel>().Deploy();
 	}
 
 	void DestroyViewModel()

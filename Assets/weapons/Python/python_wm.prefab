@@ -1,0 +1,151 @@
+{
+  "RootObject": {
+    "__guid": "628ec5b7-a64d-490e-a218-1cdfc17b67df",
+    "Flags": 0,
+    "Name": "python_wm",
+    "Enabled": true,
+    "NetworkMode": 0,
+    "Components": [
+      {
+        "__type": "WorldModel",
+        "__guid": "765ebd37-c91f-4058-8815-f4b7df6f24b0",
+        "EjectBrass": {
+          "_type": "gameobject",
+          "prefab": "weapons/common/effects/eject_9mm.prefab"
+        },
+        "EjectTransform": {
+          "_type": "gameobject",
+          "go": "1d5347e0-820c-4015-96dc-4efd0679eca3"
+        },
+        "MuzzleEffect": {
+          "_type": "gameobject",
+          "prefab": "weapons/common/effects/muzzle.prefab"
+        },
+        "MuzzleTransform": {
+          "_type": "gameobject",
+          "go": "e4312b65-c2f9-4ab7-bdb5-2e6bc4b67507"
+        },
+        "Renderer": {
+          "_type": "component",
+          "component_id": "5d4a8b0d-2d3a-4cc4-b43d-081f56c3ee65",
+          "go": "0645b412-29e7-4af0-ab22-6dbf084daa4d",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "TracerEffect": {
+          "_type": "gameobject",
+          "prefab": "weapons/common/effects/tracer_9mm.prefab"
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "0645b412-29e7-4af0-ab22-6dbf084daa4d",
+        "Flags": 0,
+        "Name": "w_usp",
+        "Position": "1.008405,0.4966647,-0.236174",
+        "Scale": "0.8,0.8,0.8",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "5d4a8b0d-2d3a-4cc4-b43d-081f56c3ee65",
+            "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "CreateBoneObjects": true,
+            "Model": "weapons/rust_python/w_python.vmdl",
+            "Morphs": {},
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "e4312b65-c2f9-4ab7-bdb5-2e6bc4b67507",
+            "Flags": 8,
+            "Name": "muzzle",
+            "Position": "23.37852,-0.463024,5.732734",
+            "Enabled": true
+          },
+          {
+            "__guid": "1d5347e0-820c-4015-96dc-4efd0679eca3",
+            "Flags": 0,
+            "Name": "eject",
+            "Position": "1.583623,-0.00000007450581,6.847632",
+            "Rotation": "0,0.8660256,0,0.5",
+            "Enabled": true
+          },
+          {
+            "__guid": "8d74fc05-f7a5-4d25-b3cd-74aaae956572",
+            "Flags": 0,
+            "Name": "hold_R",
+            "Position": "-1.848641,0,3.195872",
+            "Enabled": true
+          },
+          {
+            "__guid": "7a1f747e-13b2-4eb2-b6b9-b50386f45467",
+            "Flags": 4,
+            "Name": "ROOT_python",
+            "Position": "0.01631951,-0.000002432284,-4.069435",
+            "Rotation": "0.2167401,0.6730703,0.6730704,-0.2167399",
+            "Enabled": true,
+            "Children": [
+              {
+                "__guid": "ad576aee-4579-402d-a70e-9389671ea21e",
+                "Flags": 4,
+                "Name": "cylinder_arm",
+                "Position": "-2.783046,9.669063,0.1048194",
+                "Rotation": "0.8871108,0.4615563,0.00000004635799,-0.0000001420721",
+                "Enabled": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
