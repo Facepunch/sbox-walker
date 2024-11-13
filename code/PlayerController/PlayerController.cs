@@ -70,7 +70,7 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 
 	public bool IsOnGround => GroundObject.IsValid();
 
-	[Property] public bool IsRunning { get; set; }
+	public bool IsRunning { get; set; }
 
 	public Vector3 Velocity { get; private set; }
 	public Vector3 GroundVelocity { get; set; }
