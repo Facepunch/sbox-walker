@@ -69,6 +69,7 @@ public sealed partial class PlayerController : Component
 
 		InputMove();
 		UpdateDucking( Input.Down( "duck" ) );
+		IsRunning = Input.Down( "Run" );
 		InputJump();
 	}
 
