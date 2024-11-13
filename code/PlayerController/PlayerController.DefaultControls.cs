@@ -69,6 +69,8 @@ public sealed partial class PlayerController : Component
 
 		InputMove();
 		UpdateDucking( Input.Down( "duck" ) );
+		IsRunning = CheckSprint();
+		Log.Info(IsRunning);
 		InputJump();
 	}
 
@@ -173,7 +175,11 @@ public sealed partial class PlayerController : Component
 		groundHash = hash;
 		localGroundTransform = localTransform;
 	}
-
-
-
+	
+	bool CheckSprint()
+	{
+		if ( !Input.Down( "Run" ) ) return false;
+		if ( WishVelocity == Vector3.Zero ) return false;
+		return true;
+	}
 }
