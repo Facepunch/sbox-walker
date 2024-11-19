@@ -53,6 +53,23 @@ public sealed partial class PlayerController : Component
 
 	[Property, Feature( "Animator" )] public MixerHandle FootstepMixer { get; set; }
 
+	/// <summary>
+	/// How strongly to look in the eye direction with our eyes
+	/// </summary>
+	[Header( "Aim" )]
+	[Property, Feature( "Animator" ), Range( 0, 1 )] public float AimStrengthEyes { get; set; } = 1;
+
+	/// <summary>
+	/// How strongly to turn in the eye direction with our head
+	/// </summary>
+	[Property, Feature( "Animator" ), Range( 0, 1 )] public float AimStrengthHead { get; set; } = 1;
+
+
+	/// <summary>
+	/// How strongly to turn in the eye direction with our body
+	/// </summary>
+	[Property, Feature( "Animator" ), Range( 0, 1 )] public float AimStrengthBody { get; set; } = 1;
+
 
 	void EnableAnimationEvents()
 	{
@@ -88,35 +105,67 @@ public sealed partial class PlayerController : Component
 	{
 		var rot = renderer.WorldRotation;
 
-		var skidding = 0.0f;
-
-		if ( WishVelocity.IsNearlyZero( 0.1f ) ) skidding = Velocity.Length.Remap( 0, 1000, 0, 1 );
-
-		// velocity
+		// move
 		{
-			var dir = WishVelocity;
+			var dir = Velocity;
+			if ( dir.IsNearlyZero( 5.0f ) ) dir = 0;
+
 			var forward = rot.Forward.Dot( dir );
 			var sideward = rot.Right.Dot( dir );
 
 			var angle = MathF.Atan2( sideward, forward ).RadianToDegree().NormalizeDegrees();
 
 			renderer.Set( "move_direction", angle );
-			renderer.Set( "move_speed", Velocity.Length );
-			renderer.Set( "move_groundspeed", Velocity.WithZ( 0 ).Length );
+			renderer.Set( "move_speed", dir.Length );
+			renderer.Set( "move_groundspeed", dir.WithZ( 0 ).Length );
 			renderer.Set( "move_y", sideward );
 			renderer.Set( "move_x", forward );
-			renderer.Set( "move_z", Velocity.z );
+			renderer.Set( "move_z", dir.z );
 		}
 
-		renderer.SetLookDirection( "aim_eyes", EyeAngles.Forward, 1 );
-		renderer.SetLookDirection( "aim_head", EyeAngles.Forward, 1 );
-		renderer.SetLookDirection( "aim_body", EyeAngles.Forward, 1 );
+		// wish
+		{
+			var dir = WishVelocity;
+			if ( dir.IsNearlyZero( 5.0f ) ) dir = 0;
+
+			var forward = rot.Forward.Dot( dir );
+			var sideward = rot.Right.Dot( dir );
+
+			var angle = MathF.Atan2( sideward, forward ).RadianToDegree().NormalizeDegrees();
+
+			renderer.Set( "wish_direction", angle );
+			renderer.Set( "wish_speed", dir.Length );
+			renderer.Set( "wish_groundspeed", dir.WithZ( 0 ).Length );
+			renderer.Set( "wish_y", sideward );
+			renderer.Set( "wish_x", forward );
+			renderer.Set( "wish_z", dir.z );
+		}
+
+		// skid
+		{
+			var dir = Velocity.SubtractDirection( WishVelocity.Normal );
+			if ( dir.IsNearlyZero( 1.0f ) ) dir = 0;
+
+			var forward = rot.Forward.Dot( dir );
+			var sideward = rot.Right.Dot( dir );
+
+			renderer.Set( "skid_x", forward );
+			renderer.Set( "skid_y", sideward );
+
+			var skidAmount = (Velocity.Length - WishVelocity.Length).Clamp( 0, 10 ).Remap( 0, 10, 0, 0.5f );
+			renderer.Set( "skid", skidAmount );
+		}
+
+		// todo - expose
+		renderer.SetLookDirection( "aim_eyes", EyeAngles.Forward, AimStrengthEyes );
+		renderer.SetLookDirection( "aim_head", EyeAngles.Forward, AimStrengthHead );
+		renderer.SetLookDirection( "aim_body", EyeAngles.Forward, AimStrengthBody );
 
 		renderer.Set( "b_swim", IsSwimming );
 		renderer.Set( "b_grounded", IsOnGround || IsClimbing );
 		renderer.Set( "b_climbing", IsClimbing );
 		//
-		renderer.Set( "skid", skidding );
+
 		renderer.Set( "move_style", WishVelocity.WithZ( 0 ).Length > WalkSpeed + 20 ? 2 : 1 );
 
 		float duck = Headroom.Remap( 50, 0, 0, 0.5f, true );
@@ -135,8 +184,6 @@ public sealed partial class PlayerController : Component
 			_animRotationSpeed = 0;
 		}
 	}
-
-	float _rotationVelocity;
 
 	void RotateRenderBody( SkinnedModelRenderer renderer )
 	{

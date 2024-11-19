@@ -7,16 +7,25 @@ public sealed partial class PlayerController : Component
 	/// </summary>
 	void EnsureComponentsCreated()
 	{
+		if ( !ColliderObject.IsValid() )
+		{
+			ColliderObject = new GameObject( true, "PlayerController Colliders" );
+			ColliderObject.Parent = GameObject;
+			ColliderObject.LocalTransform = global::Transform.Zero;
+		}
+
+		ColliderObject.Tags.SetFrom( BodyCollisionTags );
+
 		Body.CollisionEventsEnabled = true;
 		Body.CollisionUpdateEventsEnabled = true;
 		Body.RigidbodyFlags = RigidbodyFlags.DisableCollisionSounds;
 
-		BodyCollider = Body.GameObject.GetOrAddComponent<CapsuleCollider>();
-		FeetCollider = Body.GameObject.GetOrAddComponent<BoxCollider>();
+		BodyCollider = ColliderObject.GetOrAddComponent<CapsuleCollider>();
+		FeetCollider = ColliderObject.GetOrAddComponent<BoxCollider>();
 
 		Body.Flags = Body.Flags.WithFlag( ComponentFlags.Hidden, !_showRigidBodyComponent );
-		BodyCollider.Flags = BodyCollider.Flags.WithFlag( ComponentFlags.Hidden, !_showColliderComponent );
-		FeetCollider.Flags = FeetCollider.Flags.WithFlag( ComponentFlags.Hidden, !_showColliderComponent );
+
+		ColliderObject.Flags = ColliderObject.Flags.WithFlag( GameObjectFlags.Hidden, !_showColliderComponent );
 
 		if ( Renderer is null && UseAnimatorControls )
 		{

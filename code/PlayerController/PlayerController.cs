@@ -13,12 +13,15 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 	/// This is used to keep a distance away from surfaces. For exmaple, when grounding, we'll
 	/// be a skin distance away from the ground.
 	/// </summary>
-	const float _skin = 0.05f;
+	const float _skin = 0.095f;
 
 	[Property, Hide, RequireComponent] public Rigidbody Body { get; set; }
 
 	public CapsuleCollider BodyCollider { get; private set; }
 	public BoxCollider FeetCollider { get; private set; }
+
+	[Property, Hide]
+	public GameObject ColliderObject { get; private set; }
 
 	bool _showRigidBodyComponent;
 
@@ -26,6 +29,7 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 	[Property, Group( "Body" )] public float BodyRadius { get; set; } = 16.0f;
 	[Property, Group( "Body" )] public float BodyHeight { get; set; } = 72.0f;
 	[Property, Group( "Body" )] public float BodyMass { get; set; } = 500;
+	[Property, Group( "Body" )] public TagSet BodyCollisionTags { get; set; }
 
 
 	[Property, Group( "Components" ), Title( "Show Rigidbody" )]
@@ -70,8 +74,16 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 
 	public bool IsOnGround => GroundObject.IsValid();
 
+	/// <summary>
+	/// Our actual physical velocity minus our ground velocity
+	/// </summary>
 	public Vector3 Velocity { get; private set; }
+
+	/// <summary>
+	/// The velocity that the ground underneath us is moving
+	/// </summary>
 	public Vector3 GroundVelocity { get; set; }
+
 	public float GroundYaw { get; set; }
 
 	/// <summary>
@@ -108,6 +120,17 @@ public sealed partial class PlayerController : Component, IScenePhysicsEvents, C
 
 			if ( Renderer is not null ) Renderer.WorldRotation = new Angles( 0, EyeAngles.yaw, 0 );
 		}
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		ColliderObject?.Destroy();
+		ColliderObject = default;
+
+		Body?.Destroy();
+		Body = default;
 	}
 
 	protected override void OnDisabled()
