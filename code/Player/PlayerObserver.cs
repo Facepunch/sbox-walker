@@ -36,6 +36,7 @@ public sealed class PlayerObserver : Component
 		if ( Input.Pressed( "attack1" ) || Input.Pressed( "jump" ) || timeSinceStarted > 4 )
 		{
 			Respawn();
+			GameObject.Destroy();
 		}
 	}
 
