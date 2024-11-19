@@ -3,7 +3,7 @@ using static Sandbox.Component;
 /// <summary>
 /// Holds player information like health
 /// </summary>
-public sealed class Player : Component, IDamageable, PlayerController.IEvents
+public sealed partial class Player : Component, IDamageable, PlayerController.IEvents
 {
 	public static Player FindLocalPlayer()
 	{
@@ -50,13 +50,13 @@ public sealed class Player : Component, IDamageable, PlayerController.IEvents
 	public void TakeDamage( float amount )
 	{
 		if ( IsProxy ) return;
-		if ( Health < 0 ) return;
+		if ( Health <= 0 ) return;
 
 		Health -= amount;
 
 		IPlayerEvent.PostToGameObject( GameObject, x => x.OnTakeDamage( amount ) );
 
-		if ( Health < 0 )
+		if ( Health <= 0 )
 		{
 			Health = 0;
 			Death();
