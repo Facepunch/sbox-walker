@@ -30,7 +30,7 @@ public sealed class TriggerTeleport : Component, Component.ITriggerListener
 		return true;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	void DoTeleportedEvent( GameObject obj )
 	{
 		OnTeleported?.Invoke( obj );

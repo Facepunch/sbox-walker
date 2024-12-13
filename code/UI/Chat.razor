@@ -63,7 +63,7 @@
         AddText( text );
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void AddText( string message )
     {
         message = message.Truncate( 300 );
@@ -80,7 +80,7 @@
 		StateHasChanged();
 	}
 
-    [Broadcast] // todo: only from host/owner
+    [Rpc.Broadcast] // todo: only from host/owner
     public void AddSystemText(string message)
     {
         message = message.Truncate(300);

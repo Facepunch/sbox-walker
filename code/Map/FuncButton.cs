@@ -62,7 +62,7 @@ public sealed class FuncButton : BaseToggle, Component.IPressable
 		else LocalPosition = initialPos;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Press( GameObject presser )
 	{
 		if ( presser.Network.Owner != Rpc.Caller )
@@ -137,7 +137,7 @@ public sealed class FuncButton : BaseToggle, Component.IPressable
 		LocalPosition = pos;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Release( GameObject presser )
 	{
 		if ( presser.Network.Owner != Rpc.Caller )

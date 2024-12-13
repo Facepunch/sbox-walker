@@ -26,7 +26,7 @@ public sealed partial class Player : Component, IDamageable, PlayerController.IE
 	/// <summary>
 	/// Creates a ragdoll but it isn't enabled
 	/// </summary>
-	[Broadcast]
+	[Rpc.Broadcast]
 	void CreateRagdoll()
 	{
 		var ragdoll = Controller.CreateRagdoll();
@@ -37,7 +37,7 @@ public sealed partial class Player : Component, IDamageable, PlayerController.IE
 		corpse.Created = DateTime.Now;
 	}
 
-	[Broadcast( NetPermission.OwnerOnly )]
+	[Rpc.Broadcast( NetFlags.OwnerOnly )]
 	void CreateRagdollAndGhost()
 	{
 		if ( !Networking.IsHost ) return;

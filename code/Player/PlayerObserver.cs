@@ -40,7 +40,7 @@ public sealed class PlayerObserver : Component
 		}
 	}
 
-	[Broadcast( Permission = NetPermission.OwnerOnly )]
+	[Rpc.Broadcast( NetFlags.OwnerOnly )]
 	public void Respawn()
 	{
 		if ( !Networking.IsHost ) return;

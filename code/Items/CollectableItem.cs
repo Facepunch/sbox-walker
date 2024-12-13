@@ -10,7 +10,7 @@
 	/// </summary>
 	[Property] public string Icon = "🤼";
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	void Pickup( GameObject player )
 	{
 		GameObject.Enabled = false;

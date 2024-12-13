@@ -84,7 +84,7 @@ public sealed class FuncDoor : BaseToggle, Component.IPressable
 		Gizmo.Draw.LineBBox( bbox );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Press( GameObject presser )
 	{
 		if ( presser.Network.Owner != Rpc.Caller )
@@ -172,7 +172,7 @@ public sealed class FuncDoor : BaseToggle, Component.IPressable
 		LocalTransform = targetTx;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Release( GameObject presser )
 	{
 		if ( presser.Network.Owner != Rpc.Caller )

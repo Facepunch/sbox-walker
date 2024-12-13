@@ -27,7 +27,9 @@ public sealed class GameManager : GameObjectSystem<GameManager>, Component.INetw
 
 		// If we're not hosting a lobby, start hosting one
 		// so that people can join this game.
-		Networking.CreateLobby();
+
+		var lobbyConfig = new Sandbox.Network.LobbyConfig();
+		Networking.CreateLobby( lobbyConfig );
 	}
 
 	void Component.INetworkListener.OnActive( Connection channel )
