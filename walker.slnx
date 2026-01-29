@@ -1,0 +1,16 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+  </Configurations>
+  <Project Path="Code/walker.csproj" />
+  <Folder Name="/Addons/">
+    <Project Path="C:/Facepunch/sbox2/game/addons/base/Code/Base Library.csproj" />
+  </Folder>
+  <Folder Name="/Tools/">
+    <Project Path="C:/Facepunch/sbox2/game/addons/tools/Code/Base Editor Library.csproj" />
+    <Project Path="C:/Facepunch/sbox2/game/editor/ActionGraph/Code/actiongraph.csproj" />
+    <Project Path="C:/Facepunch/sbox2/game/editor/Hammer/Code/hammer.csproj" />
+    <Project Path="C:/Facepunch/sbox2/game/editor/MovieMaker/Code/moviemaker.csproj" />
+    <Project Path="C:/Facepunch/sbox2/game/editor/ShaderGraph/Code/shadergraph.csproj" />
+  </Folder>
+</Solution>

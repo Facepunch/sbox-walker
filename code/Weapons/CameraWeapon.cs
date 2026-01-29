@@ -1,4 +1,5 @@
 ﻿
+using Sandbox.UI;
 using Sandbox.Utility;
 
 public class CameraWeapon : BaseWeapon
